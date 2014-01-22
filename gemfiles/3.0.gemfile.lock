@@ -122,6 +122,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.37)
+    yard (0.8.7.3)
 
 PLATFORMS
   ruby
@@ -145,3 +146,4 @@ DEPENDENCIES
   sqlite3
   strong_parameters
   therubyrhino
+  yard
