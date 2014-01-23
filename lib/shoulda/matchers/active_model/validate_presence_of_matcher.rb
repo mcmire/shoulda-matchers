@@ -1,25 +1,59 @@
-module Shoulda # :nodoc:
+module Shoulda
   module Matchers
-    module ActiveModel # :nodoc:
-
-      # Ensures that the model is not valid if the given attribute is not
-      # present.
+    module ActiveModel
+      # The `validate_presence_of` matcher tests usage of the
+      # `validates_presence_of` validation.
       #
-      # Options:
-      # * <tt>with_message</tt> - value the test expects to find in
-      #   <tt>errors.on(:attribute)</tt>. <tt>Regexp</tt> or <tt>String</tt>.
-      #   Defaults to the translation for <tt>:blank</tt>.
+      #     class Robot
+      #       include ActiveModel::Model
       #
-      # Examples:
-      #   it { should validate_presence_of(:name) }
-      #   it { should validate_presence_of(:name).
-      #                 with_message(/is not optional/) }
+      #       validates_presence_of :arms
+      #     end
+      #
+      #     # RSpec
+      #     describe Robot do
+      #       it { should validate_presence_of(:arms) }
+      #     end
+      #
+      #     # Test::Unit
+      #     class RobotTest < ActiveSupport::TestCase
+      #       should validate_presence_of(:arms)
+      #     end
+      #
+      # #### Qualifiers
+      #
+      # ##### with_message
+      #
+      # Use `with_message` if you are using a custom validation message.
+      #
+      #     class Robot
+      #       include ActiveModel::Model
+      #
+      #       validates_presence_of :legs, message: 'Robot has no legs'
+      #     end
+      #
+      #     # RSpec
+      #     describe Robot do
+      #       it do
+      #         should validate_presence_of(:legs).
+      #           with_message('Robot has no legs')
+      #       end
+      #     end
+      #
+      #     # Test::Unit
+      #     class RobotTest < ActiveSupport::TestCase
+      #       should validate_presence_of(:legs).
+      #         with_message('Robot has no legs')
+      #     end
+      #
+      # @return [ValidatePresenceOfMatcher]
       #
       def validate_presence_of(attr)
         ValidatePresenceOfMatcher.new(attr)
       end
 
-      class ValidatePresenceOfMatcher < ValidationMatcher # :nodoc:
+      # @private
+      class ValidatePresenceOfMatcher < ValidationMatcher
         def with_message(message)
           @expected_message = message if message
           self

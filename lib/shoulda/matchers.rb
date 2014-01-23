@@ -19,8 +19,5 @@ if defined?(ActionController)
   require 'shoulda/matchers/action_controller'
 end
 
-if defined?(RSpec)
-  require 'shoulda/matchers/integrations/rspec'
-end
+require 'shoulda/matchers/integrations'
 
-require 'shoulda/matchers/integrations/test_unit'

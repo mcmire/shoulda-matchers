@@ -1,30 +1,114 @@
-module Shoulda # :nodoc:
+module Shoulda
   module Matchers
-    module Independent # :nodoc:
-
-      # Ensure that a given method is delegated properly.
+    module Independent
+      # The `delegate_method` matcher is used for testing that methods are
+      # delegated properly.
       #
-      # Basic Syntax:
-      #   it { should delegate_method(method_name).to(delegate_name) }
+      #     class TestRunner
+      #       extend Forwardable
       #
-      # Options:
-      # * <tt>:as</tt> - The name of the delegating method. Defaults to
-      #   method_name.
-      # * <tt>:with_arguments</tt> - Tests that the delegate method is called
-      #   with certain arguments.
+      #       def_delegators :suite_runner, :configuration
       #
-      # Examples:
-      #   it { should delegate_method(:deliver_mail).to(:mailman) }
-      #   it { should delegate_method(:deliver_mail).to(:mailman).
-      #     as(:deliver_mail_via_mailman) }
-      #   it { should delegate_method(:deliver_mail).to(:mailman).
-      #     as(:deliver_mail_hastily).
-      #     with_arguments('221B Baker St.', hastily: true) }
+      #       def initialize(suite_runner)
+      #         @suite_runner = suite_runner
+      #       end
+      #
+      #       private
+      #
+      #       attr_reader :suite_runner
+      #     end
+      #
+      #     # RSpec
+      #     describe TestRunner do
+      #       it { should delegate_method(:configuration).to(:suite_runner) }
+      #     end
+      #
+      #     # Test::Unit
+      #     class TestRunnerTest < ActiveSupport::TestCase
+      #       should delegate_method(:configuration).to(:suite_runner)
+      #     end
+      #
+      # #### Qualifiers
+      #
+      # ##### as
+      #
+      # Use `as` to specify the name of the method on the delegate object.
+      #
+      #     class User
+      #       def initialize(company)
+      #         @company = company
+      #       end
+      #
+      #       def company_name
+      #         company.name
+      #       end
+      #
+      #       private
+      #
+      #       attr_reader :company
+      #     end
+      #
+      #     # RSpec
+      #     describe User do
+      #       it { should delegate(:company_name).to(:company).as(:name) }
+      #     end
+      #
+      #     # Test::Unit
+      #     class UserTest < ActiveSupport::TestCase
+      #       should delegate(:company_name).to(:company).as(:name)
+      #     end
+      #
+      # ##### with_arguments
+      #
+      # Use `with_arguments` to specify that the target method should be called
+      # with the given arguments.
+      #
+      #     class Address
+      #       def initialize(geocoding_service)
+      #         @geocoding_service = geocoding_service
+      #       end
+      #
+      #       def geocode
+      #         geocoding_service.geocode(to_s)
+      #       end
+      #
+      #       def to_s
+      #         [street, city, state, zip].join(' ')
+      #       end
+      #
+      #       private
+      #
+      #       attr_reader :geocoding_service
+      #     end
+      #
+      #     # RSpec
+      #     describe Address do
+      #       it 'delegates #geocode to the GeocodingService' do
+      #         address = Address.new(:geocoding_service)
+      #         address.stubs(:to_s).returns('the address')
+      #         expect(address).to delegate(:geocode).
+      #           to(:geocoding_service).
+      #           with_arguments('the address')
+      #       end
+      #     end
+      #
+      #     # Test::Unit
+      #     class AddressTest < ActiveSupport::TestCase
+      #       should 'delegate #geocode to the GeocodingService' do
+      #         address = Address.new(:geocoding_service)
+      #         address.stubs(:to_s).returns('the address')
+      #         matcher = delegate(:geocode).
+      #           to(:geocoding_service).
+      #           with_arguments('the address')
+      #         assert_accepts matcher, address
+      #       end
+      #     end
       #
       def delegate_method(delegating_method)
         DelegateMatcher.new(delegating_method)
       end
 
+      # @private
       class DelegateMatcher
         def initialize(delegating_method)
           @delegating_method = delegating_method
@@ -196,6 +280,7 @@ module Shoulda # :nodoc:
           string
         end
 
+        # @private
         class TargetNotDefinedError < StandardError
           def message
             'Delegation needs a target. Use the #to method to define one, e.g.

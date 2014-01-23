@@ -10,10 +10,42 @@ require 'active_support/hash_with_indifferent_access'
 module Shoulda
   module Matchers
     module ActionController
+      # The `permit` matcher tests usage of strong parameters, specifically
+      # its #permit method.
+      #
+      #     class UsersController < ApplicationController
+      #       def create
+      #         user = User.new(user_params)
+      #
+      #         if user.save
+      #           # ...
+      #         else
+      #           # ...
+      #         end
+      #       end
+      #
+      #       private
+      #
+      #       def user_params
+      #         require(:user).permit(:email, :password)
+      #       end
+      #     end
+      #
+      #     # RSpec
+      #     describe UsersController do
+      #       it { should permit(:email, :password).for(:user) }
+      #     end
+      #
+      #     # Test::Unit
+      #     class UsersControllerTest < ActionController::TestCase
+      #       should permit(:email, :password).for(:user)
+      #     end
+      #
       def permit(*params)
         StrongParametersMatcher.new(params).in_context(self)
       end
 
+      # @private
       class StrongParametersMatcher
         attr_writer :stubbed_params
 
@@ -114,12 +146,14 @@ module Shoulda
           expected_permitted_params.map(&:inspect).to_sentence
         end
 
+        # @private
         class ActionNotDefinedError < StandardError
           def message
             'You must specify the controller action using the #for method.'
           end
         end
 
+        # @private
         class VerbNotDefinedError < StandardError
           def message
             'You must specify an HTTP verb when using a non-RESTful action. For example: for(:authorize, verb: :post)'

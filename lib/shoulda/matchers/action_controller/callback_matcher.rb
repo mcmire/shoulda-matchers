@@ -1,67 +1,164 @@
-module Shoulda # :nodoc:
+module Shoulda
   module Matchers
-    module ActionController # :nodoc:
-      # Ensure a controller uses a given before_filter
+    module ActionController
+      # The `use_before_filter` matcher is used to test that a `before_filter`
+      # callback in a controller is called.
       #
-      # Example:
+      #     class TopicsController < ActionController::Base
+      #       before_filter :authenticate_user!
+      #       skip_before_filter :prevent_ssl
       #
-      #   it { should use_before_filter(:authenticate_user!) }
-      #   it { should_not use_before_filter(:prevent_ssl) }
+      #       private
+      #
+      #       def authenticate_user!; ...; end
+      #     end
+      #
+      #     # RSpec
+      #     describe TopicsController do
+      #       it { should use_before_filter(:authenticate_user!) }
+      #       it { should_not use_before_filter(:prevent_ssl) }
+      #     end
+      #
+      #     # Test::Unit
+      #     class TopicsControllerTest < ActionController::TestCase
+      #       should use_before_filter(:authenticate_user!)
+      #       should_not use_before_filter(:prevent_ssl)
+      #     end
+      #
       def use_before_filter(callback)
         CallbackMatcher.new(callback, :before, :filter)
       end
 
-      # Ensure a controller uses a given before_filter
+      # The `use_after_filter` matcher is used to test that an `after_filter`
+      # callback in a controller is called.
       #
-      # Example:
+      #     class CommentsController < ActionController::Base
+      #       after_filter :log_activity
+      #       skip_before_filter :destroy_user
       #
-      #   it { should use_after_filter(:log_activity) }
-      #   it { should_not use_after_filter(:destroy_user) }
+      #       private
+      #
+      #       def log_activity; ...; end
+      #     end
+      #
+      #     # RSpec
+      #     describe CommentsController do
+      #       it { should use_after_filter(:log_activity) }
+      #       it { should_not use_after_filter(:destroy_user) }
+      #     end
+      #
+      #     # Test::Unit
+      #     class CommentsControllerTest < ActionController::TestCase
+      #       should use_after_filter(:log_activity)
+      #       should_not use_after_filter(:destroy_user)
+      #     end
+      #
       def use_after_filter(callback)
         CallbackMatcher.new(callback, :after, :filter)
       end
 
-      # Ensure a controller uses a given before_action
+      # The `use_before_action` matcher is used to test that a `before_action`
+      # callback in a controller is called.
       #
-      # Example:
+      #     class TopicsController < ActionController::Base
+      #       before_action :authenticate_user!
+      #       skip_before_action :prevent_ssl
       #
-      #   it { should use_before_action(:authenticate_user!) }
-      #   it { should_not use_before_action(:prevent_ssl) }
+      #       private
+      #
+      #       def authenticate_user!; ...; end
+      #     end
+      #
+      #     # RSpec
+      #     describe TopicsController do
+      #       it { should use_before_action(:authenticate_user!) }
+      #       it { should_not use_before_action(:prevent_ssl) }
+      #     end
+      #
+      #     # Test::Unit
+      #     class TopicsControllerTest < ActionController::TestCase
+      #       should use_before_action(:authenticate_user!)
+      #       should_not use_before_action(:prevent_ssl)
+      #     end
+      #
       def use_before_action(callback)
         CallbackMatcher.new(callback, :before, :action)
       end
 
-      # Ensure a controller uses a given after_action
+      # The `use_after_action` matcher is used to test that an `after_action`
+      # callback in a controller is called.
       #
-      # Example:
+      #     class CommentsController < ActionController::Base
+      #       after_action :log_activity
+      #       skip_before_action :destroy_user
       #
-      #   it { should use_after_action(:log_activity) }
-      #   it { should_not use_after_action(:destroy_user) }
+      #       private
+      #
+      #       def log_activity; ...; end
+      #     end
+      #
+      #     # RSpec
+      #     describe CommentsController do
+      #       it { should use_after_action(:log_activity) }
+      #       it { should_not use_after_action(:destroy_user) }
+      #     end
+      #
+      #     # Test::Unit
+      #     class CommentsControllerTest < ActionController::TestCase
+      #       should use_after_action(:log_activity)
+      #       should_not use_after_action(:destroy_user)
+      #     end
+      #
       def use_after_action(callback)
         CallbackMatcher.new(callback, :after, :action)
       end
 
-      # Ensure a controller uses a given around_filter
+      # The `use_around_filter` matcher is used to test that an `around_filter`
+      # callback in a controller is called.
       #
-      # Example:
+      #     class CommentsController < ActionController::Base
+      #       around_action :log_activity
+      #       skip_around_action :authenticate_user!
       #
-      #   it { should use_around_filter(:log_activity) }
-      #   it { should_not use_around_filter(:destroy_user) }
+      #       private
+      #
+      #       def log_activity; ...; end
+      #     end
+      #
+      #     # RSpec
+      #     describe CommentsController do
+      #       it { should use_around_action(:log_activity) }
+      #       it { should_not use_around_action(:authenticate_user!) }
+      #     end
+      #
       def use_around_filter(callback)
         CallbackMatcher.new(callback, :around, :filter)
       end
 
-      # Ensure a controller uses a given around_action
+      # The `use_around_action` matcher is used to test that an `around_action`
+      # callback in a controller is called.
       #
-      # Example:
+      #     class CommentsController < ActionController::Base
+      #       around_action :log_activity
+      #       skip_around_action :authenticate_user!
       #
-      #   it { should use_around_action(:log_activity) }
-      #   it { should_not use_around_action(:destroy_user) }
+      #       private
+      #
+      #       def log_activity; ...; end
+      #     end
+      #
+      #     # RSpec
+      #     describe CommentsController do
+      #       it { should use_around_action(:log_activity) }
+      #       it { should_not use_around_action(:authenticate_user!) }
+      #     end
+      #
       def use_around_action(callback)
         CallbackMatcher.new(callback, :around, :action)
       end
 
-      class CallbackMatcher # :nodoc:
+      # @private
+      class CallbackMatcher
         def initialize(method_name, kind, callback_type)
           @method_name = method_name
           @kind = kind

@@ -1,20 +1,41 @@
-module Shoulda # :nodoc:
+module Shoulda
   module Matchers
-    module ActionController # :nodoc:
-
-      # Ensures that the controller rendered with the given layout.
+    module ActionController
+      # The `render_with_layout` matcher tests that an action is rendered with
+      # a certain layout.
       #
-      # Example:
+      #     class PostsController < ApplicationController
+      #       def show
+      #         render layout: 'posts'
+      #       end
+      #     end
       #
-      #   it { should render_with_layout }
-      #   it { should render_with_layout(:special) }
-      #   it { should_not render_with_layout }
+      #     # RSpec
+      #     describe PostsController do
+      #       describe 'GET #show' do
+      #         before { get :show }
+      #
+      #         it { should render_with_layout('posts') }
+      #       end
+      #     end
+      #
+      #     # Test::Unit
+      #     class PostsControllerTest < ActionController::TestCase
+      #       context 'GET #show' do
+      #         setup { get :show }
+      #
+      #         should render_with_layout('posts')
+      #       end
+      #     end
+      #
+      # @return [RenderWithLayoutMatcher]
+      #
       def render_with_layout(expected_layout = nil)
         RenderWithLayoutMatcher.new(expected_layout).in_context(self)
       end
 
-      class RenderWithLayoutMatcher # :nodoc:
-
+      # @private
+      class RenderWithLayoutMatcher
         def initialize(expected_layout)
           unless expected_layout.nil?
             @expected_layout = expected_layout.to_s
