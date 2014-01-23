@@ -12,5 +12,7 @@ module Shoulda
     else
       raise 'No unit test library available'
     end
+
+    private_constant :AssertionError
   end
 end
