@@ -12,6 +12,16 @@ module Shoulda
       end
 
       class StrongParametersMatcher
+        def self.stubbed_parameters_class
+          @stubbed_parameters_class ||= build_stubbed_parameters_class
+        end
+
+        def self.build_stubbed_parameters_class
+          Class.new(::ActionController::Parameters) do
+            include StubbedParameters
+          end
+        end
+
         def initialize(*attributes_and_context)
           @attributes = attributes_and_context[0...-1]
           @context = attributes_and_context.last
@@ -66,19 +76,13 @@ module Shoulda
         end
 
         def stubbed_model_attributes
-          @model_attrs = stubbed_parameters.new(arbitrary_attributes)
+          @model_attrs = self.class.stubbed_parameters_class.new(arbitrary_attributes)
 
           local_model_attrs = @model_attrs
           ::ActionController::Parameters.class_eval do
             define_method :[] do |*args|
               local_model_attrs
             end
-          end
-        end
-
-        def stubbed_parameters
-          Class.new(::ActionController::Parameters) do
-            include StubbedParameters
           end
         end
 
