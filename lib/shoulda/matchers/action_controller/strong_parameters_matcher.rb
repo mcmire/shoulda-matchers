@@ -49,10 +49,12 @@ module Shoulda
         def failure_message
           "Expected controller to permit #{parameters_difference.to_sentence}, but it did not."
         end
+        alias failure_message_for_should failure_message
 
-        def negative_failure_message
+        def failure_message_when_negated
           "Expected controller not to permit #{parameters_difference.to_sentence}, but it did."
         end
+        alias failure_message_for_should_not failure_message_when_negated
 
         private
 

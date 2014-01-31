@@ -90,12 +90,12 @@ describe Shoulda::Matchers::ActionController::StrongParametersMatcher do
     end
   end
 
-  describe "#negative_failure_message" do
+  describe "#failure_message_when_negated" do
     it "includes all attributes that should not have been allowed but were" do
       matcher = described_class.new(:name, :age, :city, :country, self).for(:create)
       expect(matcher.does_not_match?).to be_true
 
-      expect(matcher.negative_failure_message).to eq "Expected controller not to permit city and country, but it did."
+      expect(matcher.failure_message_when_negated).to eq "Expected controller not to permit city and country, but it did."
     end
   end
 
