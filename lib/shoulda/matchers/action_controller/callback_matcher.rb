@@ -21,7 +21,7 @@ module Shoulda # :nodoc:
         CallbackMatcher.new(callback, :after, :filter)
       end
 
-      # Ensure a controller uses a given before_filter
+      # Ensure a controller uses a given before_action
       #
       # Example:
       #
@@ -31,7 +31,7 @@ module Shoulda # :nodoc:
         CallbackMatcher.new(callback, :before, :action)
       end
 
-      # Ensure a controller uses a given before_filter
+      # Ensure a controller uses a given after_action
       #
       # Example:
       #
@@ -39,6 +39,26 @@ module Shoulda # :nodoc:
       #   it { should_not use_after_action(:destroy_user) }
       def use_after_action(callback)
         CallbackMatcher.new(callback, :after, :action)
+      end
+
+      # Ensure a controller uses a given around_filter
+      #
+      # Example:
+      #
+      #   it { should use_around_filter(:log_activity) }
+      #   it { should_not use_around_filter(:destroy_user) }
+      def use_around_filter(callback)
+        CallbackMatcher.new(callback, :around, :filter)
+      end
+
+      # Ensure a controller uses a given around_action
+      #
+      # Example:
+      #
+      #   it { should use_around_action(:log_activity) }
+      #   it { should_not use_around_action(:destroy_user) }
+      def use_around_action(callback)
+        CallbackMatcher.new(callback, :around, :action)
       end
 
       class CallbackMatcher # :nodoc:

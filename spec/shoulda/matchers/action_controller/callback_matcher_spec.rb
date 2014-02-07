@@ -80,6 +80,13 @@ describe Shoulda::Matchers::ActionController::CallbackMatcher do
     end
   end
 
+  describe '#use_around_filter' do
+    it_behaves_like 'CallbackMatcher' do
+      let(:kind) { :around }
+      let(:callback_type) { :filter }
+    end
+  end
+
   if Rails.version.to_i >= 4
     describe '#use_before_action' do
       it_behaves_like 'CallbackMatcher' do
@@ -91,6 +98,13 @@ describe Shoulda::Matchers::ActionController::CallbackMatcher do
     describe '#use_after_action' do
       it_behaves_like 'CallbackMatcher' do
         let(:kind) { :after }
+        let(:callback_type) { :action }
+      end
+    end
+
+    describe '#use_around_action' do
+      it_behaves_like 'CallbackMatcher' do
+        let(:kind) { :around }
         let(:callback_type) { :action }
       end
     end
