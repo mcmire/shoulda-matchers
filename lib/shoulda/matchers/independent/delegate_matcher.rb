@@ -31,7 +31,7 @@ module Shoulda # :nodoc:
         def matches?(_subject)
           @subject = _subject
           ensure_target_method_is_present!
-          stub_target(subject)
+          stub_target
 
           begin
             subject.send(delegating_method, *delegated_arguments)
@@ -112,11 +112,12 @@ module Shoulda # :nodoc:
           @method_on_target || delegating_method
         end
 
-        def stub_target(subject)
+        def stub_target
           local_stubbed_target = stubbed_target
           local_target_method = target_method
-          subject.class_eval do
-            define_method local_target_method do
+
+          subject.instance_eval do
+            define_singleton_method local_target_method do
               local_stubbed_target
             end
           end
