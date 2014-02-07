@@ -1261,7 +1261,7 @@ class Human < ActiveRecord::Base
   has_one :robot
   delegate :work, to: :robot
 
-  # alternatively
+  # alternatively, if you are not using Rails
   def work
     robot.work
   end

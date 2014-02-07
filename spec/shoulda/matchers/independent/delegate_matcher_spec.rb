@@ -141,6 +141,8 @@ describe Shoulda::Matchers::Independent::DelegateMatcher do
   end
 
   context 'given a method that delegates properly to a method of a different name' do
+    let(:post_office) { PostOffice.new }
+
     before do
       define_class(:mailman)
 
@@ -178,7 +180,5 @@ describe Shoulda::Matchers::Independent::DelegateMatcher do
         expect(matcher.failure_message).to eq message
       end
     end
-
-    let(:post_office) { PostOffice.new }
   end
 end
