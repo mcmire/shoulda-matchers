@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Shoulda::Matchers::Independent::DelegateMatcher::StubbedTarget do
+  subject(:target) { described_class.new(:stubbed_method) }
+
   describe '#has_received_method?' do
     it 'returns true when the method has been called on the target' do
       target.stubbed_method
@@ -38,6 +40,4 @@ describe Shoulda::Matchers::Independent::DelegateMatcher::StubbedTarget do
       end
     end
   end
-
-  subject(:target) { described_class.new(:stubbed_method) }
 end

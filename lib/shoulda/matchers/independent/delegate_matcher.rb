@@ -72,12 +72,14 @@ module Shoulda # :nodoc:
 
         private
 
+        attr_reader :delegated_arguments, :delegating_method, :method, :subject, :target_method, :method_on_target
+
         def add_clarifications_to(message)
           if delegated_arguments.present?
             message << " with arguments: #{delegated_arguments.inspect}"
           end
 
-          if @method_on_target.present?
+          if method_on_target.present?
             message << " as ##{method_on_target}"
           end
 
@@ -108,8 +110,8 @@ module Shoulda # :nodoc:
           stubbed_target.has_received_arguments?(*delegated_arguments)
         end
 
-        def method_on_target
-          @method_on_target || delegating_method
+        def stubbed_method
+          method_on_target || delegating_method
         end
 
         def stub_target
@@ -124,7 +126,7 @@ module Shoulda # :nodoc:
         end
 
         def stubbed_target
-          @stubbed_target ||= StubbedTarget.new(method_on_target)
+          @stubbed_target ||= StubbedTarget.new(stubbed_method)
         end
 
         def ensure_target_method_is_present!
@@ -132,8 +134,6 @@ module Shoulda # :nodoc:
             raise TargetNotDefinedError
           end
         end
-
-        attr_reader :delegated_arguments, :delegating_method, :method, :subject, :target_method
       end
 
       class DelegateMatcher::TargetNotDefinedError < StandardError
