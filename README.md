@@ -1260,6 +1260,11 @@ Matchers to test non-Rails-dependent code:
 class Human < ActiveRecord::Base
   has_one :robot
   delegate :work, to: :robot
+
+  # alternatively
+  def work
+    robot.work
+  end
 end
 
 # RSpec

@@ -28,13 +28,14 @@ module Shoulda # :nodoc:
           @delegated_arguments = []
         end
 
-        def matches?(subject)
-          @subject = subject
+        def matches?(_subject)
+          @subject = _subject
           ensure_target_method_is_present!
           stub_target(subject)
+
           begin
             subject.send(delegating_method, *delegated_arguments)
-            delegated_method? && delegated_arguments?
+            target_has_received_delegated_method? && target_has_received_arguments?
           rescue NoMethodError
             false
           end
@@ -84,11 +85,11 @@ module Shoulda # :nodoc:
         end
 
         def delegating_method_name
-          method_name_with_class(@delegating_method)
+          method_name_with_class(delegating_method)
         end
 
         def target_method_name
-          method_name_with_class(@target_method)
+          method_name_with_class(target_method)
         end
 
         def method_name_with_class(method)
@@ -99,11 +100,11 @@ module Shoulda # :nodoc:
           end
         end
 
-        def delegated_method?
+        def target_has_received_delegated_method?
           stubbed_target.has_received_method?
         end
 
-        def delegated_arguments?
+        def target_has_received_arguments?
           stubbed_target.has_received_arguments?(*delegated_arguments)
         end
 
@@ -144,35 +145,6 @@ module Shoulda # :nodoc:
         def message
           '#delegate_to does not support #should_not syntax.'
         end
-      end
-
-      class DelegateMatcher::StubbedTarget
-        def initialize(method)
-          @received_method = false
-          @received_arguments = []
-          stub_method(method)
-        end
-
-        def has_received_method?
-          received_method
-        end
-
-        def has_received_arguments?(*args)
-          args == received_arguments
-        end
-
-        private
-
-        def stub_method(method)
-          class_eval do
-            define_method method do |*args|
-              @received_method = true
-              @received_arguments = args
-            end
-          end
-        end
-
-        attr_reader :received_method, :received_arguments
       end
     end
   end

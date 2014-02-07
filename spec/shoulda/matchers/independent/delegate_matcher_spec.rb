@@ -29,35 +29,15 @@ describe Shoulda::Matchers::Independent::DelegateMatcher do
     end
   end
 
-  it 'supports chaining on #to' do
-    matcher = delegate_method(:method)
-
-    expect(matcher.to(:another_method)).to eq matcher
-  end
-
-  it 'supports chaining on #with_arguments' do
-    matcher = delegate_method(:method)
-
-    expect(matcher.with_arguments(1,2,3)).to eq matcher
-  end
-
-  it 'supports chaining on #as' do
-    matcher = delegate_method(:method)
-
-    expect(matcher.as(:some_other_method)).to eq matcher
-  end
-
   it 'raises an error if no delegation target is defined' do
     expect {
-      matcher = delegate_method(:name)
-      matcher.matches?(Object.new)
+      delegate_method(:name).matches?(Object.new)
     }.to raise_exception described_class::TargetNotDefinedError
   end
 
   it 'raises an error if called with #should_not' do
     expect {
-      matcher = delegate_method(:name).to(:anyone)
-      matcher.does_not_match?(Object.new)
+      delegate_method(:name).to(:anyone).does_not_match?(Object.new)
     }.to raise_exception described_class::InvalidDelegateMatcher
   end
 
@@ -100,6 +80,7 @@ describe Shoulda::Matchers::Independent::DelegateMatcher do
   context 'given a method that delegates properly' do
     it 'accepts' do
       define_class(:mailman)
+
       define_class(:post_office) do
         def deliver_mail
           mailman.deliver_mail
@@ -116,9 +97,12 @@ describe Shoulda::Matchers::Independent::DelegateMatcher do
     end
   end
 
-  context 'given a method that delegates properly with certain arguments' do
+  context 'given a method that delegates properly with arguments' do
+    let(:post_office) { PostOffice.new }
+
     before do
       define_class(:mailman)
+
       define_class(:post_office) do
         def deliver_mail(*args)
           mailman.deliver_mail('221B Baker St.', :hastily => true)
@@ -154,13 +138,12 @@ describe Shoulda::Matchers::Independent::DelegateMatcher do
         expect(matcher.failure_message).to eq message
       end
     end
-
-    let(:post_office) { PostOffice.new }
   end
 
   context 'given a method that delegates properly to a method of a different name' do
     before do
       define_class(:mailman)
+
       define_class(:post_office) do
         def deliver_mail
           mailman.deliver_mail_and_avoid_dogs
@@ -198,60 +181,4 @@ describe Shoulda::Matchers::Independent::DelegateMatcher do
 
     let(:post_office) { PostOffice.new }
   end
-end
-
-describe Shoulda::Matchers::Independent::DelegateMatcher::TargetNotDefinedError do
-  it 'has a useful message' do
-    error = Shoulda::Matchers::Independent::DelegateMatcher::TargetNotDefinedError.new
-    expect(error.message).to include 'Delegation needs a target'
-  end
-end
-
-describe Shoulda::Matchers::Independent::DelegateMatcher::InvalidDelegateMatcher do
-  it 'has a useful message' do
-    error = Shoulda::Matchers::Independent::DelegateMatcher::InvalidDelegateMatcher.new
-    expect(error.message).to include 'does not support #should_not'
-  end
-end
-
-describe Shoulda::Matchers::Independent::DelegateMatcher::StubbedTarget do
-  describe '#has_received_method?' do
-    it 'returns true when the method has been called on the target' do
-      target.stubbed_method
-
-      expect(target).to have_received_method
-    end
-
-    it 'returns false when the method has not been called on the target' do
-      expect(target).not_to have_received_method
-    end
-  end
-
-  describe '#has_received_arguments?' do
-    context 'method is called with specified arguments' do
-      it 'returns true' do
-        target.stubbed_method(:arg1, :arg2)
-
-        expect(target).to have_received_arguments(:arg1, :arg2)
-      end
-    end
-
-    context 'method is not called with specified arguments' do
-      it 'returns false' do
-        target.stubbed_method
-
-        expect(target).not_to have_received_arguments(:arg1)
-      end
-    end
-
-    context 'method is called with arguments in incorrect order' do
-      it 'returns false' do
-        target.stubbed_method(:arg2, :arg1)
-
-        expect(target).not_to have_received_arguments(:arg1, :arg2)
-      end
-    end
-  end
-
-  subject(:target) { Shoulda::Matchers::Independent::DelegateMatcher::StubbedTarget.new(:stubbed_method) }
 end
