@@ -1285,6 +1285,8 @@ end
 # Test::Unit
 class HumanTest < ActiveSupport::TestCase
   should delegate_method(:work).to(:robot)
+  should delegate_method(:protect).to(:robot).with_arguments('Sarah Connor')
+  should delegate_method(:beep_boop).to(:robot).as(:speak)
 end
 ```
 
