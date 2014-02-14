@@ -29,13 +29,13 @@ describe Shoulda::Matchers::ActionController do
 end
 
 describe Shoulda::Matchers::ActionController::StrongParametersMatcher do
-  before do
-    controller_for_resource_with_strong_parameters do
-      params.require(:user).permit(:name, :age)
-    end
-  end
-
   describe "#matches?" do
+    before do
+      controller_for_resource_with_strong_parameters do
+        params.require(:user).permit(:name, :age)
+      end
+    end
+
     it "is true for a subset of the allowable attributes" do
       matcher = described_class.new(:name, self).for(:create)
       expect(matcher.matches?).to be_true
@@ -69,33 +69,25 @@ describe Shoulda::Matchers::ActionController::StrongParametersMatcher do
     end
   end
 
-  describe "#does_not_match?" do
-    it "it is true if any of the given attributes are allowed" do
-      matcher = described_class.new(:name, :admin, self).for(:create)
-      expect(matcher.does_not_match?).to be_true
-    end
-
-    it "it is false if all of the given attribtues are allowed" do
-      matcher = described_class.new(:name, :age, self).for(:create)
-      expect(matcher.does_not_match?).to be_false
-    end
-  end
-
-  describe "#failure_message" do
+  describe "failure" do
     it "includes all missing attributes" do
-      matcher = described_class.new(:name, :age, :city, :country, self).for(:create)
-      matcher.matches?
+      controller_class = controller_for_resource_with_strong_parameters do
+        params.require(:user).permit(:name, :age)
+      end
 
-      expect(matcher.failure_message).to eq "Expected controller to permit city and country, but it did not."
+      expect {
+        expect(controller_class).to permit(:name, :age, :city, :country).for(:create)
+      }.to fail_with_message("Expected controller to permit city and country, but it did not.")
     end
-  end
 
-  describe "#failure_message_when_negated" do
     it "includes all attributes that should not have been allowed but were" do
-      matcher = described_class.new(:name, :age, :city, :country, self).for(:create)
-      expect(matcher.does_not_match?).to be_true
+      controller_class = controller_for_resource_with_strong_parameters do
+        params.require(:user).permit(:name, :age)
+      end
 
-      expect(matcher.failure_message_when_negated).to eq "Expected controller not to permit city and country, but it did."
+      expect {
+        expect(controller_class).not_to permit(:name, :age).for(:create)
+      }.to fail_with_message("Expected controller not to permit name and age, but it did.")
     end
   end
 

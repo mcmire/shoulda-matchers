@@ -43,7 +43,7 @@ module Shoulda
         end
 
         def does_not_match?(controller = nil)
-          simulate_controller_action && parameters_difference.present?
+          simulate_controller_action && parameters_intersection.empty?
         end
 
         def failure_message
@@ -52,7 +52,7 @@ module Shoulda
         alias failure_message_for_should failure_message
 
         def failure_message_when_negated
-          "Expected controller not to permit #{parameters_difference.to_sentence}, but it did."
+          "Expected controller not to permit #{parameters_intersection.to_sentence}, but it did."
         end
         alias failure_message_for_should_not failure_message_when_negated
 
@@ -75,6 +75,10 @@ module Shoulda
 
         def parameters_difference
           attributes - @model_attrs.shoulda_permitted_params
+        end
+
+        def parameters_intersection
+          attributes & @model_attrs.shoulda_permitted_params
         end
 
         def stubbed_model_attributes
