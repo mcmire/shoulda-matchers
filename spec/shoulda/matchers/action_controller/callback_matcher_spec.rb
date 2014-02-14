@@ -30,13 +30,13 @@ describe Shoulda::Matchers::ActionController::CallbackMatcher do
       end
     end
 
-    describe '#failure_message' do
+    describe 'failure' do
       it 'includes the filter kind and name that was expected' do
         message = "Expected that HookController would have :authenticate_user! as a #{kind}_#{callback_type}"
 
-        matcher.matches?(controller)
-
-        expect(matcher.failure_message).to eq message
+        expect {
+          expect(controller).to send("use_#{kind}_#{callback_type}", :authenticate_user!)
+        }.to fail_with_message(message)
       end
     end
 
@@ -45,9 +45,9 @@ describe Shoulda::Matchers::ActionController::CallbackMatcher do
         add_callback
         message = "Expected that HookController would not have :authenticate_user! as a #{kind}_#{callback_type}"
 
-        matcher.matches?(controller)
-
-        expect(matcher.failure_message_when_negated).to eq message
+        expect {
+          expect(controller).not_to send("use_#{kind}_#{callback_type}", :authenticate_user!)
+        }.to fail_with_message(message)
       end
     end
 
