@@ -59,21 +59,19 @@ describe Shoulda::Matchers::Independent::DelegateMatcher do
 
     it 'has a failure message that indicates which method should have been delegated' do
       post_office = PostOffice.new
-      matcher = delegate_method(:deliver_mail).to(:mailman)
-
-      matcher.matches?(post_office)
-
       message = 'Expected PostOffice#deliver_mail to delegate to PostOffice#mailman'
-      expect(matcher.failure_message).to eq message
+
+      expect {
+        expect(post_office).to delegate_method(:deliver_mail).to(:mailman)
+      }.to fail_with_message(message)
     end
 
     it 'uses the proper syntax for class methods in errors' do
-      matcher = delegate_method(:deliver_mail).to(:mailman)
-
-      matcher.matches?(PostOffice)
-
       message = 'Expected PostOffice.deliver_mail to delegate to PostOffice.mailman'
-      expect(matcher.failure_message).to eq message
+
+      expect {
+        expect(PostOffice).to delegate_method(:deliver_mail).to(:mailman)
+      }.to fail_with_message(message)
     end
   end
 
@@ -130,12 +128,11 @@ describe Shoulda::Matchers::Independent::DelegateMatcher do
       end
 
       it 'has a failure message that indicates which arguments were expected' do
-        matcher = delegate_method(:deliver_mail).to(:mailman).with_arguments('123 Nowhere Ln.')
-
-        matcher.matches?(post_office)
-
         message = 'Expected PostOffice#deliver_mail to delegate to PostOffice#mailman with arguments: ["123 Nowhere Ln."]'
-        expect(matcher.failure_message).to eq message
+
+        expect {
+          expect(post_office).to delegate_method(:deliver_mail).to(:mailman).with_arguments('123 Nowhere Ln.')
+        }.to fail_with_message(message)
       end
     end
   end
@@ -172,12 +169,11 @@ describe Shoulda::Matchers::Independent::DelegateMatcher do
       end
 
       it 'has a failure message that indicates which method was expected' do
-        matcher = delegate_method(:deliver_mail).to(:mailman).as(:watch_tv)
-
-        matcher.matches?(post_office)
-
         message = 'Expected PostOffice#deliver_mail to delegate to PostOffice#mailman as #watch_tv'
-        expect(matcher.failure_message).to eq message
+
+        expect {
+          expect(post_office).to delegate_method(:deliver_mail).to(:mailman).as(:watch_tv)
+        }.to fail_with_message(message)
       end
     end
   end
