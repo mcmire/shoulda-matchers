@@ -37,39 +37,39 @@ describe Shoulda::Matchers::ActionController::StrongParametersMatcher do
     end
 
     it "is true for a subset of the allowable attributes" do
-      matcher = described_class.new(:name, self).for(:create)
+      matcher = described_class.new([:name]).in_context(self).for(:create)
       expect(matcher.matches?).to be_true
     end
 
     it "is true for all the allowable attributes" do
-      matcher = described_class.new(:name, :age, self).for(:create)
+      matcher = described_class.new([:name, :age]).in_context(self).for(:create)
       expect(matcher.matches?).to be_true
     end
 
     it "is false when any attributes are not allowed" do
-      matcher = described_class.new(:name, :admin, self).for(:create)
+      matcher = described_class.new([:name, :admin]).in_context(self).for(:create)
       expect(matcher.matches?).to be_false
     end
 
     it "is false when permit is not called" do
-      matcher = described_class.new(:name, self).for(:new, verb: :get)
+      matcher = described_class.new([:name]).in_context(self).for(:new, verb: :get)
       expect(matcher.matches?).to be_false
     end
 
     it "requires an action" do
-      matcher = described_class.new(:name, self)
+      matcher = described_class.new([:name])
       expect { matcher.matches? }
         .to raise_error(Shoulda::Matchers::ActionController::StrongParametersMatcher::ActionNotDefinedError)
     end
 
     it "requires a verb for non-restful action" do
-      matcher = described_class.new(:name, self).for(:authorize)
+      matcher = described_class.new([:name]).for(:authorize)
       expect { matcher.matches? }
         .to raise_error(Shoulda::Matchers::ActionController::StrongParametersMatcher::VerbNotDefinedError)
     end
   end
 
-  describe "failure" do
+  describe "failure message" do
     it "includes all missing attributes" do
       controller_class = controller_for_resource_with_strong_parameters do
         params.require(:user).permit(:name, :age)
@@ -95,7 +95,7 @@ describe Shoulda::Matchers::ActionController::StrongParametersMatcher do
     context "when given :create" do
       it "posts to the controller" do
         context = stub('context', post: nil)
-        matcher = described_class.new(:name, context).for(:create)
+        matcher = described_class.new([:name]).in_context(context).for(:create)
 
         matcher.matches?
         expect(context).to have_received(:post).with(:create)
@@ -105,7 +105,7 @@ describe Shoulda::Matchers::ActionController::StrongParametersMatcher do
     context "when given :update" do
       it "puts to the controller" do
         context = stub('context', put: nil)
-        matcher = described_class.new(:name, context).for(:update)
+        matcher = described_class.new([:name]).in_context(context).for(:update)
 
         matcher.matches?
         expect(context).to have_received(:put).with(:update)
@@ -115,22 +115,11 @@ describe Shoulda::Matchers::ActionController::StrongParametersMatcher do
     context "when given a custom action and verb" do
       it "puts to the controller" do
         context = stub('context', delete: nil)
-        matcher = described_class.new(:name, context).for(:hide, verb: :delete)
+        matcher = described_class.new([:name]).in_context(context).for(:hide, verb: :delete)
 
         matcher.matches?
         expect(context).to have_received(:delete).with(:hide)
       end
-    end
-  end
-
-  describe "#in_context" do
-    it 'sets the object the controller action is sent to' do
-      context = stub('context', post: nil)
-      matcher = described_class.new(:name, nil).for(:create).in_context(context)
-
-      matcher.matches?
-
-      expect(context).to have_received(:post).with(:create)
     end
   end
 end

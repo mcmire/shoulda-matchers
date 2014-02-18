@@ -7,8 +7,7 @@ module Shoulda
   module Matchers
     module ActionController
       def permit(*attributes)
-        attributes_and_context = attributes + [self]
-        StrongParametersMatcher.new(*attributes_and_context)
+        StrongParametersMatcher.new(self, attributes)
       end
 
       class StrongParametersMatcher
@@ -22,9 +21,9 @@ module Shoulda
           end
         end
 
-        def initialize(*attributes_and_context)
-          @attributes = attributes_and_context[0...-1]
-          @context = attributes_and_context.last
+        def initialize(context = nil, attributes)
+          @attributes = attributes
+          @context = context
         end
 
         def for(action, options = {})
@@ -111,7 +110,7 @@ module Shoulda
         end
       end
 
-      module StubbedParameters
+      module StrongParametersMatcher::StubbedParameters
         extend ActiveSupport::Concern
 
         included do
