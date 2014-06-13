@@ -2,7 +2,7 @@ $LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
 require 'shoulda/matchers/version'
 
 Gem::Specification.new do |s|
-  s.name        = "shoulda-matchers"
+  s.name        = "mcmire-shoulda-matchers"
   s.version     = Shoulda::Matchers::VERSION.dup
   s.authors     = ["Tammer Saleh", "Joe Ferris", "Ryan McGeary", "Dan Croak",
                    "Matt Jankowski", "Stafford Brunk"]
