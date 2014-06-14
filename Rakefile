@@ -47,24 +47,26 @@ namespace :docs do
   end
 
   desc 'Generate docs for a particular version'
-  task :generate, [:version, :is_latest] => :setup do |t, args|
-    latest = (args.is_latest == 'true')
-    generate_docs(args.version, latest: latest)
+  task :generate, [:version, :latest_version] => :setup do |t, args|
+    generate_docs(args.version, latest_version: latest_version)
   end
 
   desc 'Generate docs for a particular version and push them to GitHub'
-  task :publish, [:version, :is_latest] => :setup do |t, args|
-    latest = (args.is_latest == 'true')
-    generate_docs(args.version, latest: latest)
-    publish_docs(args.version, latest: latest)
+  task :publish, [:version, :latest_version] => :setup do |t, args|
+    generate_docs(args.version, latest_version: latest_version)
+    publish_docs(args.version, latest_version: latest_version)
   end
 
   desc "Generate docs for version #{CURRENT_VERSION} and push them to GitHub"
   task :publish_latest => :setup do
     version = Gem::Version.new(CURRENT_VERSION)
-    latest = !version.prerelease?
-    generate_docs(CURRENT_VERSION, latest: latest)
-    publish_docs(CURRENT_VERSION, latest: latest)
+
+    unless version.prerelease?
+      latest_version = version
+    end
+
+    generate_docs(CURRENT_VERSION, latest_version: latest_version)
+    publish_docs(CURRENT_VERSION, latest_version: latest_version)
   end
 
   def rewrite_index_to_inject_version(ref, version)
@@ -88,13 +90,13 @@ namespace :docs do
       sh "git add #{ref}"
     end
 
-    if options[:latest]
-      generate_file_that_redirects_to_latest_version(ref)
+    if options[:latest_version]
+      generate_file_that_redirects_to_latest_version(options[:latest_version])
     end
   end
 
   def publish_docs(version, options = {})
-    message = build_commit_message(version, options)
+    message = build_commit_message(version)
 
     within_gh_pages do
       sh 'git clean -f'
@@ -104,6 +106,9 @@ namespace :docs do
   end
 
   def generate_file_that_redirects_to_latest_version(version)
+    ref = determine_ref_from(version)
+    locals = { ref: ref }
+
     erb = ERB.new(File.read('doc_config/gh-pages/index.html.erb'))
 
     within_gh_pages do
@@ -120,12 +125,8 @@ namespace :docs do
     end
   end
 
-  def build_commit_message(version, options)
-    if options[:latest]
-      "Regenerated docs for latest version #{version}"
-    else
-      "Regenerated docs for version #{version}"
-    end
+  def build_commit_message(version)
+    "Regenerated docs for version #{version}"
   end
 
   def within_gh_pages(&block)
