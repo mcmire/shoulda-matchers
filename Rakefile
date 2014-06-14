@@ -62,7 +62,7 @@ namespace :docs do
     version = Gem::Version.new(CURRENT_VERSION)
 
     unless version.prerelease?
-      latest_version = version
+      latest_version = version.to_s
     end
 
     generate_docs(CURRENT_VERSION, latest_version: latest_version)
