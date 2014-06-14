@@ -61,8 +61,10 @@ namespace :docs do
 
   desc "Generate docs for version #{CURRENT_VERSION} and push them to GitHub"
   task :publish_latest => :setup do
-    generate_docs(CURRENT_VERSION, latest: true)
-    publish_docs(CURRENT_VERSION, latest: true)
+    version = Gem::Version.new(CURRENT_VERSION)
+    latest = !version.prerelease?
+    generate_docs(CURRENT_VERSION, latest: latest)
+    publish_docs(CURRENT_VERSION, latest: latest)
   end
 
   def rewrite_index_to_inject_version(ref, version)
