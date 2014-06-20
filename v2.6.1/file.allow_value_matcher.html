@@ -103,12 +103,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe UserProfile do</span>
-      <span class="c1">#       it { should allow_value(&#39;http://foo.com&#39;, &#39;http://bar.com/baz&#39;).for(:website_url) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should allow_value(&#39;http://foo.com&#39;, &#39;http://bar.com/baz&#39;).</span>
+      <span class="c1">#           for(:website_url)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class UserProfileTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should allow_value(&#39;http://foo.com&#39;, &#39;http://bar.com/baz&#39;).for(:website_url)</span>
+      <span class="c1">#       should allow_value(&#39;http://foo.com&#39;, &#39;http://bar.com/baz&#39;).</span>
+      <span class="c1">#         for(:website_url)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># #### should_not</span>
@@ -128,7 +132,9 @@
       <span class="c1">#</span>
       <span class="c1">#     describe UserProfile do</span>
       <span class="c1">#       # One assertion: &#39;buz&#39; and &#39;bar&#39; will not be tested</span>
-      <span class="c1">#       it { should_not allow_value(&#39;fiz&#39;, &#39;buz&#39;, &#39;bar&#39;).for(:website_url) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should_not allow_value(&#39;fiz&#39;, &#39;buz&#39;, &#39;bar&#39;).for(:website_url)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#</span>
       <span class="c1">#       # Three assertions, all tested separately</span>
       <span class="c1">#       it { should_not allow_value(&#39;fiz&#39;).for(:website_url) }</span>
@@ -207,7 +213,8 @@
       <span class="c1">#</span>
       <span class="c1">#       def sports_team_must_be_valid</span>
       <span class="c1">#         if sports_team !~ /^(Broncos|Titans)$/i</span>
-      <span class="c1">#           self.errors.add :chosen_sports_team, &#39;Must be either a Broncos fan or a Titans fan&#39;</span>
+      <span class="c1">#           self.errors.add :chosen_sports_team,</span>
+      <span class="c1">#             &#39;Must be either a Broncos fan or a Titans fan&#39;</span>
       <span class="c1">#         end</span>
       <span class="c1">#       end</span>
       <span class="c1">#     end</span>
@@ -420,7 +427,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:04 2014 by
+  Generated on Fri Jun 20 11:42:38 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

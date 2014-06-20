@@ -123,12 +123,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Product do</span>
-      <span class="c1">#       it { should serialize(:specifications).as(ProductSpecsSerializer) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should serialize(:specifications).</span>
+      <span class="c1">#           as(ProductSpecsSerializer)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class ProductTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should serialize(:specifications).as(ProductSpecsSerializer)</span>
+      <span class="c1">#       should serialize(:specifications).</span>
+      <span class="c1">#         as(ProductSpecsSerializer)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### as_instance_of</span>
@@ -151,12 +155,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Product do</span>
-      <span class="c1">#       it { should serialize(:options).as_instance_of(ProductOptionsSerializer) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should serialize(:options).</span>
+      <span class="c1">#           as_instance_of(ProductOptionsSerializer)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class ProductTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should serialize(:options).as_instance_of(ProductOptionsSerializer)</span>
+      <span class="c1">#       should serialize(:options).</span>
+      <span class="c1">#         as_instance_of(ProductOptionsSerializer)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># @return [SerializeMatcher]</span>
@@ -266,7 +274,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:05 2014 by
+  Generated on Fri Jun 20 11:42:39 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

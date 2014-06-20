@@ -101,7 +101,7 @@
 </dl>
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>:nodoc:</p>
+    <p>Matchers for non-Rails-dependent code.</p>
 
 
   </div>
@@ -127,7 +127,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#delegate_method-instance_method" title="#delegate_method (instance method)">- (Object) <strong>delegate_method</strong>(delegating_method) </a>
+      <a href="#delegate_method-instance_method" title="#delegate_method (instance method)">- (DelegateMatcher) <strong>delegate_method</strong>(delegating_method) </a>
     
 
     
@@ -141,7 +141,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Ensure that a given method is delegated properly.</p>
+    <span class="summary_desc"><div class='inline'><p>The <code>delegate_method</code> matcher tests that an object forwards messages to other, internal objects by way of delegation.</p>
 </div></span>
   
 </li>
@@ -159,7 +159,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="delegate_method-instance_method">
   
-    - (<tt>Object</tt>) <strong>delegate_method</strong>(delegating_method) 
+    - (<tt><span class='object_link'>DelegateMatcher</span></tt>) <strong>delegate_method</strong>(delegating_method) 
   
 
   
@@ -167,24 +167,112 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Ensure that a given method is delegated properly.</p>
+    <p>The <code>delegate_method</code> matcher tests that an object forwards messages
+to other, internal objects by way of delegation.</p>
 
-<p>Basic Syntax:
-  it { should delegate_method(method_name).to(delegate_name) }</p>
+<p>In this example, we test that Courier forwards a call to #deliver onto
+its PostOffice instance:</p>
 
-<p>Options:
-* <tt>:as</tt> - The name of the delegating method. Defaults to
-  method_name.
-* <tt>:with_arguments</tt> - Tests that the delegate method is called
-  with certain arguments.</p>
+<pre class="code ruby"><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;forwardable&#39;</span>
 
-<p>Examples:
-  it { should delegate_method(:deliver_mail).to(:mailman) }
-  it { should delegate_method(:deliver_mail).to(:mailman).
-    as(:deliver_mail_via_mailman) }
-  it { should delegate_method(:deliver_mail).to(:mailman).
-    as(:deliver_mail_hastily).
-    with_arguments(&#39;221B Baker St.&#39;, hastily: true) }</p>
+<span class="k">class</span> <span class="nc">Courier</span>
+  <span class="kp">extend</span> <span class="no">Forwardable</span>
+
+  <span class="kp">attr_reader</span> <span class="ss">:post_office</span>
+
+  <span class="n">def_delegators</span> <span class="ss">:post_office</span><span class="p">,</span> <span class="ss">:deliver</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="vi">@post_office</span> <span class="o">=</span> <span class="no">PostOffice</span><span class="o">.</span><span class="n">new</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">Courier</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">delegate_method</span><span class="p">(</span><span class="ss">:deliver</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="ss">:post_office</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">CourierTest</span> <span class="o">&lt;</span> <span class="ss">Test</span><span class="p">:</span><span class="ss">:Unit</span><span class="o">::</span><span class="no">TestCase</span>
+  <span class="n">should</span> <span class="n">delegate_method</span><span class="p">(</span><span class="ss">:deliver</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="ss">:post_office</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>To employ some terminology, we would say that Courier&#39;s #deliver method
+is the delegating method, PostOffice is the delegate object, and
+PostOffice#deliver is the delegate method.</p>
+
+<h4>Qualifiers</h4>
+
+<h5>as</h5>
+
+<p>Use <code>as</code> if the name of the delegate method is different from the name
+of the delegating method.</p>
+
+<p>Here, Courier has a #deliver method, but instead of calling #deliver on
+the PostOffice, it calls #ship:</p>
+
+<pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">Courier</span>
+  <span class="kp">attr_reader</span> <span class="ss">:post_office</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="vi">@post_office</span> <span class="o">=</span> <span class="no">PostOffice</span><span class="o">.</span><span class="n">new</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">deliver</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
+    <span class="n">post_office</span><span class="o">.</span><span class="n">ship</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">Courier</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">delegate_method</span><span class="p">(</span><span class="ss">:deliver</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="ss">:post_office</span><span class="p">)</span><span class="o">.</span><span class="n">as</span><span class="p">(</span><span class="ss">:ship</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">CourierTest</span> <span class="o">&lt;</span> <span class="ss">Test</span><span class="p">:</span><span class="ss">:Unit</span><span class="o">::</span><span class="no">TestCase</span>
+  <span class="n">should</span> <span class="n">delegate_method</span><span class="p">(</span><span class="ss">:deliver</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="ss">:post_office</span><span class="p">)</span><span class="o">.</span><span class="n">as</span><span class="p">(</span><span class="ss">:ship</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h5>with_arguments</h5>
+
+<p>Use <code>with_arguments</code> to assert that the delegate method is called with
+certain arguments.</p>
+
+<p>Here, when Courier#deliver calls PostOffice#ship, it adds an options
+hash:</p>
+
+<pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">Courier</span>
+  <span class="kp">attr_reader</span> <span class="ss">:post_office</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="vi">@post_office</span> <span class="o">=</span> <span class="no">PostOffice</span><span class="o">.</span><span class="n">new</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">deliver</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
+    <span class="n">post_office</span><span class="o">.</span><span class="n">ship</span><span class="p">(</span><span class="n">package</span><span class="p">,</span> <span class="ss">expedited</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">Courier</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">delegate_method</span><span class="p">(</span><span class="ss">:deliver</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">to</span><span class="p">(</span><span class="ss">:post_office</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">as</span><span class="p">(</span><span class="ss">:ship</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">with_arguments</span><span class="p">(</span><span class="ss">expedited</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">CourierTest</span> <span class="o">&lt;</span> <span class="ss">Test</span><span class="p">:</span><span class="ss">:Unit</span><span class="o">::</span><span class="no">TestCase</span>
+  <span class="n">should</span> <span class="n">delegate_method</span><span class="p">(</span><span class="ss">:deliver</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">to</span><span class="p">(</span><span class="ss">:post_office</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">as</span><span class="p">(</span><span class="ss">:ship</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">with_arguments</span><span class="p">(</span><span class="ss">expedited</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
 
 
   </div>
@@ -198,12 +286,12 @@
       <pre>
 
 
-24
-25
-26</pre>
+110
+111
+112</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/independent/delegate_matcher.rb', line 24</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/independent/delegate_matcher.rb', line 110</span>
 
 <span class="k">def</span> <span class="nf">delegate_method</span><span class="p">(</span><span class="n">delegating_method</span><span class="p">)</span>
   <span class="no">DelegateMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">delegating_method</span><span class="p">)</span>
@@ -220,7 +308,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:06 2014 by
+  Generated on Fri Jun 20 11:42:39 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

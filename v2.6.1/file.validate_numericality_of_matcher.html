@@ -141,12 +141,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Person do</span>
-      <span class="c1">#       it { should validate_numericality_of(:number_of_cars).is_less_than(2) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should validate_numericality_of(:number_of_cars).</span>
+      <span class="c1">#           is_less_than(2)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class PersonTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should validate_numericality_of(:number_of_cars).is_less_than(2)</span>
+      <span class="c1">#       should validate_numericality_of(:number_of_cars).</span>
+      <span class="c1">#         is_less_than(2)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### is_less_than_or_equal_to</span>
@@ -164,12 +168,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Person do</span>
-      <span class="c1">#       it { should validate_numericality_of(:birth_year).is_less_than_or_equal_to(1987) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should validate_numericality_of(:birth_year).</span>
+      <span class="c1">#           is_less_than_or_equal_to(1987)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class PersonTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should validate_numericality_of(:birth_year).is_less_than_or_equal_to(1987)</span>
+      <span class="c1">#       should validate_numericality_of(:birth_year).</span>
+      <span class="c1">#         is_less_than_or_equal_to(1987)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### is_equal_to</span>
@@ -209,12 +217,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Person do</span>
-      <span class="c1">#       it { should validate_numericality_of(:height).is_greater_than_or_equal_to(55) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should validate_numericality_of(:height).</span>
+      <span class="c1">#           is_greater_than_or_equal_to(55)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class PersonTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should validate_numericality_of(:height).is_greater_than_or_equal_to(55)</span>
+      <span class="c1">#       should validate_numericality_of(:height).</span>
+      <span class="c1">#         is_greater_than_or_equal_to(55)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### is_greater_than</span>
@@ -231,12 +243,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Person do</span>
-      <span class="c1">#       it { should validate_numericality_of(:legal_age).is_greater_than(21) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should validate_numericality_of(:legal_age).</span>
+      <span class="c1">#           is_greater_than(21)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class PersonTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should validate_numericality_of(:legal_age).is_greater_than(21)</span>
+      <span class="c1">#       should validate_numericality_of(:legal_age).</span>
+      <span class="c1">#         is_greater_than(21)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### even</span>
@@ -501,7 +517,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:05 2014 by
+  Generated on Fri Jun 20 11:42:38 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

@@ -528,12 +528,16 @@ record to be invalid:</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">UserProfile</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">allow_value</span><span class="p">(</span><span class="s1">&#39;http://foo.com&#39;</span><span class="p">,</span> <span class="s1">&#39;http://bar.com/baz&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">for</span><span class="p">(</span><span class="ss">:website_url</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">allow_value</span><span class="p">(</span><span class="s1">&#39;http://foo.com&#39;</span><span class="p">,</span> <span class="s1">&#39;http://bar.com/baz&#39;</span><span class="p">)</span><span class="o">.</span>
+      <span class="k">for</span><span class="p">(</span><span class="ss">:website_url</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">UserProfileTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">allow_value</span><span class="p">(</span><span class="s1">&#39;http://foo.com&#39;</span><span class="p">,</span> <span class="s1">&#39;http://bar.com/baz&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">for</span><span class="p">(</span><span class="ss">:website_url</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">allow_value</span><span class="p">(</span><span class="s1">&#39;http://foo.com&#39;</span><span class="p">,</span> <span class="s1">&#39;http://bar.com/baz&#39;</span><span class="p">)</span><span class="o">.</span>
+    <span class="k">for</span><span class="p">(</span><span class="ss">:website_url</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -554,7 +558,9 @@ record to be invalid.</p>
 
 <span class="n">describe</span> <span class="no">UserProfile</span> <span class="k">do</span>
   <span class="c1"># One assertion: &#39;buz&#39; and &#39;bar&#39; will not be tested</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">allow_value</span><span class="p">(</span><span class="s1">&#39;fiz&#39;</span><span class="p">,</span> <span class="s1">&#39;buz&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">for</span><span class="p">(</span><span class="ss">:website_url</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should_not</span> <span class="n">allow_value</span><span class="p">(</span><span class="s1">&#39;fiz&#39;</span><span class="p">,</span> <span class="s1">&#39;buz&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">for</span><span class="p">(</span><span class="ss">:website_url</span><span class="p">)</span>
+  <span class="k">end</span>
 
   <span class="c1"># Three assertions, all tested separately</span>
   <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">allow_value</span><span class="p">(</span><span class="s1">&#39;fiz&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">for</span><span class="p">(</span><span class="ss">:website_url</span><span class="p">)</span> <span class="p">}</span>
@@ -636,7 +642,8 @@ being validated.</p>
 
   <span class="k">def</span> <span class="nf">sports_team_must_be_valid</span>
     <span class="k">if</span> <span class="n">sports_team</span> <span class="o">!~</span> <span class="sr">/^(Broncos|Titans)$/i</span>
-      <span class="nb">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">add</span> <span class="ss">:chosen_sports_team</span><span class="p">,</span> <span class="s1">&#39;Must be either a Broncos fan or a Titans fan&#39;</span>
+      <span class="nb">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">add</span> <span class="ss">:chosen_sports_team</span><span class="p">,</span>
+        <span class="s1">&#39;Must be either a Broncos fan or a Titans fan&#39;</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -674,16 +681,16 @@ being validated.</p>
       <pre>
 
 
-153
-154
-155
-156
-157
-158
-159</pre>
+160
+161
+162
+163
+164
+165
+166</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/allow_value_matcher.rb', line 153</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/allow_value_matcher.rb', line 160</span>
 
 <span class="k">def</span> <span class="nf">allow_value</span><span class="p">(</span><span class="o">*</span><span class="n">values</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">values</span><span class="o">.</span><span class="n">empty?</span>
@@ -732,12 +739,16 @@ and so one must be used.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Game</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">ensure_exclusion_of</span><span class="p">(</span><span class="ss">:supported_os</span><span class="p">)</span><span class="o">.</span><span class="n">in_array</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;Mac&#39;</span><span class="p">,</span> <span class="s1">&#39;Linux&#39;</span><span class="o">]</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">ensure_exclusion_of</span><span class="p">(</span><span class="ss">:supported_os</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">in_array</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;Mac&#39;</span><span class="p">,</span> <span class="s1">&#39;Linux&#39;</span><span class="o">]</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">GameTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">ensure_exclusion_of</span><span class="p">(</span><span class="ss">:supported_os</span><span class="p">)</span><span class="o">.</span><span class="n">in_array</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;Mac&#39;</span><span class="p">,</span> <span class="s1">&#39;Linux&#39;</span><span class="o">]</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">ensure_exclusion_of</span><span class="p">(</span><span class="ss">:supported_os</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">in_array</span><span class="p">(</span><span class="o">[</span><span class="s1">&#39;Mac&#39;</span><span class="p">,</span> <span class="s1">&#39;Linux&#39;</span><span class="o">]</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -753,12 +764,16 @@ and so one must be used.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Game</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">ensure_exclusion_of</span><span class="p">(</span><span class="ss">:floors_with_enemies</span><span class="p">)</span><span class="o">.</span><span class="n">in_range</span><span class="p">(</span><span class="mi">5</span><span class="o">.</span><span class="n">.</span><span class="mi">8</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">ensure_exclusion_of</span><span class="p">(</span><span class="ss">:floors_with_enemies</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">in_range</span><span class="p">(</span><span class="mi">5</span><span class="o">.</span><span class="n">.</span><span class="mi">8</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">GameTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">ensure_exclusion_of</span><span class="p">(</span><span class="ss">:floors_with_enemies</span><span class="p">)</span><span class="o">.</span><span class="n">in_range</span><span class="p">(</span><span class="mi">5</span><span class="o">.</span><span class="n">.</span><span class="mi">8</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">ensure_exclusion_of</span><span class="p">(</span><span class="ss">:floors_with_enemies</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">in_range</span><span class="p">(</span><span class="mi">5</span><span class="o">.</span><span class="n">.</span><span class="mi">8</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -801,12 +816,12 @@ and so one must be used.</p>
       <pre>
 
 
-82
-83
-84</pre>
+90
+91
+92</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/ensure_exclusion_of_matcher.rb', line 82</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/ensure_exclusion_of_matcher.rb', line 90</span>
 
 <span class="k">def</span> <span class="nf">ensure_exclusion_of</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span>
   <span class="no">EnsureExclusionOfMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span>
@@ -850,12 +865,16 @@ and so one must be used.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Issue</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">ensure_inclusion_of</span><span class="p">(</span><span class="ss">:state</span><span class="p">)</span><span class="o">.</span><span class="n">in_array</span><span class="p">(</span><span class="sx">%w(open resolved unresolved)</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">ensure_inclusion_of</span><span class="p">(</span><span class="ss">:state</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">in_array</span><span class="p">(</span><span class="sx">%w(open resolved unresolved)</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">IssueTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">ensure_inclusion_of</span><span class="p">(</span><span class="ss">:state</span><span class="p">)</span><span class="o">.</span><span class="n">in_array</span><span class="p">(</span><span class="sx">%w(open resolved unresolved)</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">ensure_inclusion_of</span><span class="p">(</span><span class="ss">:state</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">in_array</span><span class="p">(</span><span class="sx">%w(open resolved unresolved)</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -1053,12 +1072,12 @@ when a given value is too high.</p>
       <pre>
 
 
-213
-214
-215</pre>
+217
+218
+219</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/ensure_inclusion_of_matcher.rb', line 213</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/ensure_inclusion_of_matcher.rb', line 217</span>
 
 <span class="k">def</span> <span class="nf">ensure_inclusion_of</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span>
   <span class="no">EnsureInclusionOfMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span>
@@ -1162,7 +1181,8 @@ length and cannot take a string which is shorter or longer.</p>
 
 <h5>is_at_least + is_at_most</h5>
 
-<p>Use <code>is_at_least</code> and <code>is_at_most</code> to test usage of the <code>:in</code> option.</p>
+<p>Use <code>is_at_least</code> and <code>is_at_most</code> together to test usage of the <code>:in</code>
+option.</p>
 
 <pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">User</span>
   <span class="kp">include</span> <span class="ss">ActiveModel</span><span class="p">:</span><span class="ss">:Model</span>
@@ -1172,12 +1192,16 @@ length and cannot take a string which is shorter or longer.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">ensure_length_of</span><span class="p">(</span><span class="ss">:password</span><span class="p">)</span><span class="o">.</span><span class="n">is_at_least</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">is_at_most</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">ensure_length_of</span><span class="p">(</span><span class="ss">:password</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">is_at_least</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">is_at_most</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">UserTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">ensure_length_of</span><span class="p">(</span><span class="ss">:password</span><span class="p">)</span><span class="o">.</span><span class="n">is_at_least</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">is_at_most</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">ensure_length_of</span><span class="p">(</span><span class="ss">:password</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">is_at_least</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">is_at_most</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -1280,12 +1304,12 @@ length and cannot take a string which is shorter or longer.</p>
       <pre>
 
 
-186
-187
-188</pre>
+191
+192
+193</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/ensure_length_of_matcher.rb', line 186</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/ensure_length_of_matcher.rb', line 191</span>
 
 <span class="k">def</span> <span class="nf">ensure_length_of</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span>
   <span class="no">EnsureLengthOfMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span>
@@ -1399,7 +1423,8 @@ length and cannot take a string which is shorter or longer.</p>
 <pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">Artillery</span>
   <span class="kp">include</span> <span class="ss">ActiveModel</span><span class="p">:</span><span class="ss">:Model</span>
 
-  <span class="n">validates_absence_of</span> <span class="ss">:arms</span><span class="p">,</span> <span class="ss">message</span><span class="p">:</span> <span class="s2">&quot;We&#39;re fresh outta arms here, soldier!&quot;</span>
+  <span class="n">validates_absence_of</span> <span class="ss">:arms</span><span class="p">,</span>
+    <span class="ss">message</span><span class="p">:</span> <span class="s2">&quot;We&#39;re fresh outta arms here, soldier!&quot;</span>
 <span class="k">end</span>
 
 <span class="c1"># RSpec</span>
@@ -1429,12 +1454,12 @@ length and cannot take a string which is shorter or longer.</p>
       <pre>
 
 
-51
 52
-53</pre>
+53
+54</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/validate_absence_of_matcher.rb', line 51</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/validate_absence_of_matcher.rb', line 52</span>
 
 <span class="k">def</span> <span class="nf">validate_absence_of</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span>
   <span class="no">ValidateAbsenceOfMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span>
@@ -1691,12 +1716,16 @@ it.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Person</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:number_of_cars</span><span class="p">)</span><span class="o">.</span><span class="n">is_less_than</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:number_of_cars</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">is_less_than</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">PersonTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:number_of_cars</span><span class="p">)</span><span class="o">.</span><span class="n">is_less_than</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:number_of_cars</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">is_less_than</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -1715,12 +1744,16 @@ take a number which is greater than it.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Person</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:birth_year</span><span class="p">)</span><span class="o">.</span><span class="n">is_less_than_or_equal_to</span><span class="p">(</span><span class="mi">1987</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:birth_year</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">is_less_than_or_equal_to</span><span class="p">(</span><span class="mi">1987</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">PersonTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:birth_year</span><span class="p">)</span><span class="o">.</span><span class="n">is_less_than_or_equal_to</span><span class="p">(</span><span class="mi">1987</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:birth_year</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">is_less_than_or_equal_to</span><span class="p">(</span><span class="mi">1987</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -1762,12 +1795,16 @@ cannot take a number which is less than it.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Person</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:height</span><span class="p">)</span><span class="o">.</span><span class="n">is_greater_than_or_equal_to</span><span class="p">(</span><span class="mi">55</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:height</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">is_greater_than_or_equal_to</span><span class="p">(</span><span class="mi">55</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">PersonTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:height</span><span class="p">)</span><span class="o">.</span><span class="n">is_greater_than_or_equal_to</span><span class="p">(</span><span class="mi">55</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:height</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">is_greater_than_or_equal_to</span><span class="p">(</span><span class="mi">55</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -1785,12 +1822,16 @@ the given value and cannot take a number less than or equal to it.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Person</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:legal_age</span><span class="p">)</span><span class="o">.</span><span class="n">is_greater_than</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:legal_age</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">is_greater_than</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">PersonTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:legal_age</span><span class="p">)</span><span class="o">.</span><span class="n">is_greater_than</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">validate_numericality_of</span><span class="p">(</span><span class="ss">:legal_age</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">is_greater_than</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -1896,12 +1937,12 @@ is even.</p>
       <pre>
 
 
-246
-247
-248</pre>
+262
+263
+264</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/validate_numericality_of_matcher.rb', line 246</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/validate_numericality_of_matcher.rb', line 262</span>
 
 <span class="k">def</span> <span class="nf">validate_numericality_of</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span>
   <span class="no">ValidateNumericalityOfMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span>
@@ -1954,12 +1995,16 @@ is even.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Robot</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">validate_presence_of</span><span class="p">(</span><span class="ss">:legs</span><span class="p">)</span><span class="o">.</span><span class="n">with_message</span><span class="p">(</span><span class="s1">&#39;Robot has no legs&#39;</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">validate_presence_of</span><span class="p">(</span><span class="ss">:legs</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">with_message</span><span class="p">(</span><span class="s1">&#39;Robot has no legs&#39;</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">RobotTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">validate_presence_of</span><span class="p">(</span><span class="ss">:legs</span><span class="p">)</span><span class="o">.</span><span class="n">with_message</span><span class="p">(</span><span class="s1">&#39;Robot has no legs&#39;</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">validate_presence_of</span><span class="p">(</span><span class="ss">:legs</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">with_message</span><span class="p">(</span><span class="s1">&#39;Robot has no legs&#39;</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -1975,12 +2020,12 @@ is even.</p>
       <pre>
 
 
-43
-44
-45</pre>
+47
+48
+49</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/validate_presence_of_matcher.rb', line 43</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_model/validate_presence_of_matcher.rb', line 47</span>
 
 <span class="k">def</span> <span class="nf">validate_presence_of</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span>
   <span class="no">ValidatePresenceOfMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="kp">attr</span><span class="p">)</span>
@@ -2211,7 +2256,7 @@ attributes in the pre-existing record.</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:06 2014 by
+  Generated on Fri Jun 20 11:42:39 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

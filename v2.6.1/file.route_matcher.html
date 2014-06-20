@@ -123,14 +123,24 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe &#39;Routing&#39; do</span>
-      <span class="c1">#       it { should route(:get, &#39;/posts&#39;).to(controller: :posts, action: :index) }</span>
-      <span class="c1">#       it { should route(:get, &#39;/posts/1&#39;).to(&#39;posts#show&#39;, id: 1) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should route(:get, &#39;/posts&#39;).</span>
+      <span class="c1">#           to(controller: :posts, action: :index)</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should route(:get, &#39;/posts/1&#39;).</span>
+      <span class="c1">#           to(&#39;posts#show&#39;, id: 1)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class RoutesTest &lt; ActionController::IntegrationTest</span>
-      <span class="c1">#       should route(:get, &#39;/posts&#39;).to(controller: :posts, action: :index)</span>
-      <span class="c1">#       should route(:get, &#39;/posts/1&#39;).to(&#39;posts#show&#39;, id: 1)</span>
+      <span class="c1">#       should route(:get, &#39;/posts&#39;).</span>
+      <span class="c1">#         to(controller: :posts, action: :index)</span>
+      <span class="c1">#</span>
+      <span class="c1">#       should route(:get, &#39;/posts/1&#39;).</span>
+      <span class="c1">#         to(&#39;posts#show&#39;, id: 1)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># @return [RouteMatcher]</span>
@@ -201,7 +211,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:04 2014 by
+  Generated on Fri Jun 20 11:42:38 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

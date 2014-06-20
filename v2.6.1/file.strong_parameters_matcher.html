@@ -94,6 +94,149 @@
 <span class="k">module</span> <span class="nn">Shoulda</span>
   <span class="k">module</span> <span class="nn">Matchers</span>
     <span class="k">module</span> <span class="nn">ActionController</span>
+      <span class="c1"># The `permit` matcher tests that an action in your controller receives a</span>
+      <span class="c1"># whitelist of parameters using Rails&#39; Strong Parameters feature</span>
+      <span class="c1"># (specifically that `permit` was called with the correct arguments).</span>
+      <span class="c1">#</span>
+      <span class="c1"># Here&#39;s an example:</span>
+      <span class="c1">#</span>
+      <span class="c1">#     class UsersController &lt; ApplicationController</span>
+      <span class="c1">#       def create</span>
+      <span class="c1">#         user = User.create(user_params)</span>
+      <span class="c1">#         # ...</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#</span>
+      <span class="c1">#       private</span>
+      <span class="c1">#</span>
+      <span class="c1">#       def user_params</span>
+      <span class="c1">#         params.require(:user).permit(</span>
+      <span class="c1">#           :first_name,</span>
+      <span class="c1">#           :last_name,</span>
+      <span class="c1">#           :email,</span>
+      <span class="c1">#           :password</span>
+      <span class="c1">#         )</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe UsersController do</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should permit(:first_name, :last_name, :email, :password).</span>
+      <span class="c1">#           for(:create)</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class UsersControllerTest &lt; ActionController::TestCase</span>
+      <span class="c1">#       should permit(:first_name, :last_name, :email, :password).</span>
+      <span class="c1">#         for(:create)</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1"># If your action requires query parameters in order to work, then you&#39;ll</span>
+      <span class="c1"># need to supply them:</span>
+      <span class="c1">#</span>
+      <span class="c1">#     class UsersController &lt; ApplicationController</span>
+      <span class="c1">#       def update</span>
+      <span class="c1">#         user = User.find(params[:id])</span>
+      <span class="c1">#</span>
+      <span class="c1">#         if user.update_attributes(user_params)</span>
+      <span class="c1">#           # ...</span>
+      <span class="c1">#         else</span>
+      <span class="c1">#           # ...</span>
+      <span class="c1">#         end</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#</span>
+      <span class="c1">#       private</span>
+      <span class="c1">#</span>
+      <span class="c1">#       def user_params</span>
+      <span class="c1">#         params.require(:user).permit(</span>
+      <span class="c1">#           :first_name,</span>
+      <span class="c1">#           :last_name,</span>
+      <span class="c1">#           :email,</span>
+      <span class="c1">#           :password</span>
+      <span class="c1">#         )</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe UsersController do</span>
+      <span class="c1">#       before do</span>
+      <span class="c1">#         create(:user, id: 1)</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should permit(:first_name, :last_name, :email, :password).</span>
+      <span class="c1">#           for(:update, params: { id: 1 })</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class UsersControllerTest &lt; ActionController::TestCase</span>
+      <span class="c1">#       setup do</span>
+      <span class="c1">#         create(:user, id: 1)</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#</span>
+      <span class="c1">#       should permit(:first_name, :last_name, :email, :password).</span>
+      <span class="c1">#         for(:update, params: { id: 1 })</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1"># Finally, if you have an action that isn&#39;t one of the seven resourceful</span>
+      <span class="c1"># actions, then you&#39;ll need to provide the HTTP verb that it responds to:</span>
+      <span class="c1">#</span>
+      <span class="c1">#     Rails.application.routes.draw do</span>
+      <span class="c1">#       resources :users do</span>
+      <span class="c1">#         member do</span>
+      <span class="c1">#           put :toggle</span>
+      <span class="c1">#         end</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     class UsersController &lt; ApplicationController</span>
+      <span class="c1">#       def toggle</span>
+      <span class="c1">#         user = User.find(params[:id])</span>
+      <span class="c1">#</span>
+      <span class="c1">#         if user.update_attributes(user_params)</span>
+      <span class="c1">#           # ...</span>
+      <span class="c1">#         else</span>
+      <span class="c1">#           # ...</span>
+      <span class="c1">#         end</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#</span>
+      <span class="c1">#       private</span>
+      <span class="c1">#</span>
+      <span class="c1">#       def user_params</span>
+      <span class="c1">#         params.require(:user).permit(:activated)</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe UsersController do</span>
+      <span class="c1">#       before do</span>
+      <span class="c1">#         create(:user, id: 1)</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should permit(:activated).for(:toggle,</span>
+      <span class="c1">#           params: { id: 1 },</span>
+      <span class="c1">#           verb: :put</span>
+      <span class="c1">#         )</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class UsersControllerTest &lt; ActionController::TestCase</span>
+      <span class="c1">#       setup do</span>
+      <span class="c1">#         create(:user, id: 1)</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#</span>
+      <span class="c1">#       should permit(:activated).for(:toggle,</span>
+      <span class="c1">#         params: { id: 1 },</span>
+      <span class="c1">#         verb: :put</span>
+      <span class="c1">#       )</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1"># @return [StrongParametersMatcher]</span>
+      <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">permit</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
         <span class="no">StrongParametersMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">in_context</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
       <span class="k">end</span>
@@ -219,7 +362,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:04 2014 by
+  Generated on Fri Jun 20 11:42:38 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

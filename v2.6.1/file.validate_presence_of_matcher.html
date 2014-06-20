@@ -114,12 +114,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Robot do</span>
-      <span class="c1">#       it { should validate_presence_of(:legs).with_message(&#39;Robot has no legs&#39;) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should validate_presence_of(:legs).</span>
+      <span class="c1">#           with_message(&#39;Robot has no legs&#39;)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class RobotTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should validate_presence_of(:legs).with_message(&#39;Robot has no legs&#39;)</span>
+      <span class="c1">#       should validate_presence_of(:legs).</span>
+      <span class="c1">#         with_message(&#39;Robot has no legs&#39;)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># @return [ValidatePresenceOfMatcher]</span>
@@ -199,7 +203,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:05 2014 by
+  Generated on Fri Jun 20 11:42:38 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

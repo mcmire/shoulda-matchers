@@ -115,12 +115,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Car do</span>
-      <span class="c1">#       it { should accept_nested_attributes_for(:mirrors).allow_destroy(true) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should accept_nested_attributes_for(:mirrors).</span>
+      <span class="c1">#           allow_destroy(true)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class CarTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should accept_nested_attributes_for(:mirrors).allow_destroy(true)</span>
+      <span class="c1">#       should accept_nested_attributes_for(:mirrors).</span>
+      <span class="c1">#         allow_destroy(true)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### limit</span>
@@ -133,12 +137,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Car do</span>
-      <span class="c1">#       it { should accept_nested_attributes_for(:windows).limit(3) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should accept_nested_attributes_for(:windows).</span>
+      <span class="c1">#           limit(3)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class CarTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should accept_nested_attributes_for(:windows).limit(3)</span>
+      <span class="c1">#       should accept_nested_attributes_for(:windows).</span>
+      <span class="c1">#         limit(3)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### update_only</span>
@@ -152,12 +160,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Car do</span>
-      <span class="c1">#       it { should accept_nested_attributes_for(:engine).update_only(true) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should accept_nested_attributes_for(:engine).</span>
+      <span class="c1">#           update_only(true)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class CarTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should accept_nested_attributes_for(:engine).update_only(true)</span>
+      <span class="c1">#       should accept_nested_attributes_for(:engine).</span>
+      <span class="c1">#         update_only(true)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># @return [AcceptNestedAttributesForMatcher]</span>
@@ -289,7 +301,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:05 2014 by
+  Generated on Fri Jun 20 11:42:38 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

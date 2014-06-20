@@ -82,10 +82,11 @@
     </div>
 
     <div id="main">
-      <div id="content"><div id='filecontents'><pre class="code ruby"><span class="k">module</span> <span class="nn">Shoulda</span> <span class="c1"># :nodoc:</span>
+      <div id="content"><div id='filecontents'><pre class="code ruby"><span class="k">module</span> <span class="nn">Shoulda</span>
   <span class="k">module</span> <span class="nn">Matchers</span>
-    <span class="k">module</span> <span class="nn">ActiveRecord</span> <span class="c1"># :nodoc:</span>
+    <span class="k">module</span> <span class="nn">ActiveRecord</span>
       <span class="k">module</span> <span class="nn">AssociationMatchers</span>
+        <span class="c1"># @private</span>
         <span class="k">class</span> <span class="nc">InverseOfMatcher</span>
           <span class="kp">attr_accessor</span> <span class="ss">:missing_option</span>
 
@@ -125,7 +126,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:05 2014 by
+  Generated on Fri Jun 20 11:42:38 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

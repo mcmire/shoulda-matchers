@@ -99,17 +99,7 @@
   
   
 </dl>
-<h2>Overview</h2><div class="docstring">
-  <div class="discussion">
-    <p>:nodoc:</p>
 
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div>
 
 
 
@@ -382,12 +372,16 @@ specified.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Car</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">accept_nested_attributes_for</span><span class="p">(</span><span class="ss">:mirrors</span><span class="p">)</span><span class="o">.</span><span class="n">allow_destroy</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">accept_nested_attributes_for</span><span class="p">(</span><span class="ss">:mirrors</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">allow_destroy</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">CarTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">accept_nested_attributes_for</span><span class="p">(</span><span class="ss">:mirrors</span><span class="p">)</span><span class="o">.</span><span class="n">allow_destroy</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">accept_nested_attributes_for</span><span class="p">(</span><span class="ss">:mirrors</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">allow_destroy</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -401,12 +395,16 @@ specified.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Car</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">accept_nested_attributes_for</span><span class="p">(</span><span class="ss">:windows</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">accept_nested_attributes_for</span><span class="p">(</span><span class="ss">:windows</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">limit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">CarTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">accept_nested_attributes_for</span><span class="p">(</span><span class="ss">:windows</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">accept_nested_attributes_for</span><span class="p">(</span><span class="ss">:windows</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">limit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -421,12 +419,16 @@ specified.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Car</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">accept_nested_attributes_for</span><span class="p">(</span><span class="ss">:engine</span><span class="p">)</span><span class="o">.</span><span class="n">update_only</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">accept_nested_attributes_for</span><span class="p">(</span><span class="ss">:engine</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">update_only</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">CarTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">accept_nested_attributes_for</span><span class="p">(</span><span class="ss">:engine</span><span class="p">)</span><span class="o">.</span><span class="n">update_only</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">accept_nested_attributes_for</span><span class="p">(</span><span class="ss">:engine</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">update_only</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -442,12 +444,12 @@ specified.</p>
       <pre>
 
 
-81
-82
-83</pre>
+93
+94
+95</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/accept_nested_attributes_for_matcher.rb', line 81</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/accept_nested_attributes_for_matcher.rb', line 93</span>
 
 <span class="k">def</span> <span class="nf">accept_nested_attributes_for</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
   <span class="no">AcceptNestedAttributesForMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
@@ -501,12 +503,16 @@ the <code>where</code> clause.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Person</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:family</span><span class="p">)</span><span class="o">.</span><span class="n">conditions</span><span class="p">(</span><span class="n">everyone_is_perfect</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:family</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">conditions</span><span class="p">(</span><span class="n">everyone_is_perfect</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">PersonTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:family</span><span class="p">)</span><span class="o">.</span><span class="n">conditions</span><span class="p">(</span><span class="n">everyone_is_perfect</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:family</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">conditions</span><span class="p">(</span><span class="n">everyone_is_perfect</span><span class="p">:</span> <span class="kp">false</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -560,12 +566,16 @@ asserts that the model you&#39;re referring to actually exists.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Person</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:great_country</span><span class="p">)</span><span class="o">.</span><span class="n">with_foreign_key</span><span class="p">(</span><span class="s1">&#39;country_id&#39;</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:great_country</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">with_foreign_key</span><span class="p">(</span><span class="s1">&#39;country_id&#39;</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">PersonTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:great_country</span><span class="p">)</span><span class="o">.</span><span class="n">with_foreign_key</span><span class="p">(</span><span class="s1">&#39;country_id&#39;</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:great_country</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">with_foreign_key</span><span class="p">(</span><span class="s1">&#39;country_id&#39;</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -639,12 +649,12 @@ specified.</p>
       <pre>
 
 
-157
-158
-159</pre>
+165
+166
+167</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 157</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 165</span>
 
 <span class="k">def</span> <span class="nf">belong_to</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
   <span class="no">AssociationMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:belongs_to</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
@@ -699,12 +709,16 @@ the <code>where</code> clause.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Person</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:issues</span><span class="p">)</span><span class="o">.</span><span class="n">conditions</span><span class="p">(</span><span class="ss">difficulty</span><span class="p">:</span> <span class="s1">&#39;hard&#39;</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:issues</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">conditions</span><span class="p">(</span><span class="ss">difficulty</span><span class="p">:</span> <span class="s1">&#39;hard&#39;</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">PersonTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:issues</span><span class="p">)</span><span class="o">.</span><span class="n">conditions</span><span class="p">(</span><span class="ss">difficulty</span><span class="p">:</span> <span class="s1">&#39;hard&#39;</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:issues</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">conditions</span><span class="p">(</span><span class="ss">difficulty</span><span class="p">:</span> <span class="s1">&#39;hard&#39;</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -719,12 +733,16 @@ the <code>where</code> clause.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Person</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:projects</span><span class="p">)</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="s1">&#39;time_spent&#39;</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:projects</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">order</span><span class="p">(</span><span class="s1">&#39;time_spent&#39;</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">PersonTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:projects</span><span class="p">)</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="s1">&#39;time_spent&#39;</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:projects</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">order</span><span class="p">(</span><span class="s1">&#39;time_spent&#39;</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -739,12 +757,16 @@ asserts that the model you&#39;re referring to actually exists.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Person</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:places_visited</span><span class="p">)</span><span class="o">.</span><span class="n">class_name</span><span class="p">(</span><span class="s1">&#39;City&#39;</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:places_visited</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">class_name</span><span class="p">(</span><span class="s1">&#39;City&#39;</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">PersonTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:places_visited</span><span class="p">)</span><span class="o">.</span><span class="n">class_name</span><span class="p">(</span><span class="s1">&#39;City&#39;</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:places_visited</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">class_name</span><span class="p">(</span><span class="s1">&#39;City&#39;</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -758,12 +780,16 @@ asserts that the model you&#39;re referring to actually exists.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Person</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:interviews</span><span class="p">)</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:interviews</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">validate</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">PersonTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:interviews</span><span class="p">)</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:interviews</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">validate</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -779,12 +805,12 @@ asserts that the model you&#39;re referring to actually exists.</p>
       <pre>
 
 
-606
-607
-608</pre>
+636
+637
+638</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 606</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 636</span>
 
 <span class="k">def</span> <span class="nf">have_and_belong_to_many</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
   <span class="no">AssociationMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:has_and_belongs_to_many</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
@@ -1165,12 +1191,18 @@ association.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Person</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_many</span><span class="p">(</span><span class="ss">:job_offers</span><span class="p">)</span><span class="o">.</span><span class="n">through</span><span class="p">(</span><span class="ss">:friends</span><span class="p">)</span><span class="o">.</span><span class="n">source</span><span class="p">(</span><span class="ss">:opportunities</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">have_many</span><span class="p">(</span><span class="ss">:job_offers</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">through</span><span class="p">(</span><span class="ss">:friends</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">source</span><span class="p">(</span><span class="ss">:opportunities</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">PersonTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">have_many</span><span class="p">(</span><span class="ss">:job_offers</span><span class="p">)</span><span class="o">.</span><span class="n">through</span><span class="p">(</span><span class="ss">:friends</span><span class="p">)</span><span class="o">.</span><span class="n">source</span><span class="p">(</span><span class="ss">:opportunities</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">have_many</span><span class="p">(</span><span class="ss">:job_offers</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">through</span><span class="p">(</span><span class="ss">:friends</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">source</span><span class="p">(</span><span class="ss">:opportunities</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -1205,12 +1237,12 @@ association.</p>
       <pre>
 
 
-331
-332
-333</pre>
+345
+346
+347</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 331</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 345</span>
 
 <span class="k">def</span> <span class="nf">have_many</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
   <span class="no">AssociationMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:has_many</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
@@ -1422,12 +1454,12 @@ association.</p>
       <pre>
 
 
-505
-506
-507</pre>
+519
+520
+521</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 505</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 519</span>
 
 <span class="k">def</span> <span class="nf">have_one</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
   <span class="no">AssociationMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:has_one</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
@@ -1547,12 +1579,16 @@ association.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Product</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">serialize</span><span class="p">(</span><span class="ss">:specifications</span><span class="p">)</span><span class="o">.</span><span class="n">as</span><span class="p">(</span><span class="no">ProductSpecsSerializer</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">serialize</span><span class="p">(</span><span class="ss">:specifications</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">as</span><span class="p">(</span><span class="no">ProductSpecsSerializer</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">ProductTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">serialize</span><span class="p">(</span><span class="ss">:specifications</span><span class="p">)</span><span class="o">.</span><span class="n">as</span><span class="p">(</span><span class="no">ProductSpecsSerializer</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">serialize</span><span class="p">(</span><span class="ss">:specifications</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">as</span><span class="p">(</span><span class="no">ProductSpecsSerializer</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -1576,12 +1612,16 @@ association.</p>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Product</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">serialize</span><span class="p">(</span><span class="ss">:options</span><span class="p">)</span><span class="o">.</span><span class="n">as_instance_of</span><span class="p">(</span><span class="no">ProductOptionsSerializer</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">serialize</span><span class="p">(</span><span class="ss">:options</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">as_instance_of</span><span class="p">(</span><span class="no">ProductOptionsSerializer</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">ProductTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">serialize</span><span class="p">(</span><span class="ss">:options</span><span class="p">)</span><span class="o">.</span><span class="n">as_instance_of</span><span class="p">(</span><span class="no">ProductOptionsSerializer</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">serialize</span><span class="p">(</span><span class="ss">:options</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">as_instance_of</span><span class="p">(</span><span class="no">ProductOptionsSerializer</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -1597,12 +1637,12 @@ association.</p>
       <pre>
 
 
-80
-81
-82</pre>
+88
+89
+90</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/serialize_matcher.rb', line 80</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/serialize_matcher.rb', line 88</span>
 
 <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
   <span class="no">SerializeMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
@@ -1619,7 +1659,7 @@ association.</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:06 2014 by
+  Generated on Fri Jun 20 11:42:39 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

@@ -82,28 +82,114 @@
     </div>
 
     <div id="main">
-      <div id="content"><div id='filecontents'><pre class="code ruby"><span class="k">module</span> <span class="nn">Shoulda</span> <span class="c1"># :nodoc:</span>
+      <div id="content"><div id='filecontents'><pre class="code ruby"><span class="k">module</span> <span class="nn">Shoulda</span>
   <span class="k">module</span> <span class="nn">Matchers</span>
-    <span class="k">module</span> <span class="nn">Independent</span> <span class="c1"># :nodoc:</span>
-
-      <span class="c1"># Ensure that a given method is delegated properly.</span>
+    <span class="k">module</span> <span class="nn">Independent</span>
+      <span class="c1"># The `delegate_method` matcher tests that an object forwards messages</span>
+      <span class="c1"># to other, internal objects by way of delegation.</span>
       <span class="c1">#</span>
-      <span class="c1"># Basic Syntax:</span>
-      <span class="c1">#   it { should delegate_method(method_name).to(delegate_name) }</span>
+      <span class="c1"># In this example, we test that Courier forwards a call to #deliver onto</span>
+      <span class="c1"># its PostOffice instance:</span>
       <span class="c1">#</span>
-      <span class="c1"># Options:</span>
-      <span class="c1"># * &lt;tt&gt;:as&lt;/tt&gt; - The name of the delegating method. Defaults to</span>
-      <span class="c1">#   method_name.</span>
-      <span class="c1"># * &lt;tt&gt;:with_arguments&lt;/tt&gt; - Tests that the delegate method is called</span>
-      <span class="c1">#   with certain arguments.</span>
+      <span class="c1">#     require &#39;forwardable&#39;</span>
       <span class="c1">#</span>
-      <span class="c1"># Examples:</span>
-      <span class="c1">#   it { should delegate_method(:deliver_mail).to(:mailman) }</span>
-      <span class="c1">#   it { should delegate_method(:deliver_mail).to(:mailman).</span>
-      <span class="c1">#     as(:deliver_mail_via_mailman) }</span>
-      <span class="c1">#   it { should delegate_method(:deliver_mail).to(:mailman).</span>
-      <span class="c1">#     as(:deliver_mail_hastily).</span>
-      <span class="c1">#     with_arguments(&#39;221B Baker St.&#39;, hastily: true) }</span>
+      <span class="c1">#     class Courier</span>
+      <span class="c1">#       extend Forwardable</span>
+      <span class="c1">#</span>
+      <span class="c1">#       attr_reader :post_office</span>
+      <span class="c1">#</span>
+      <span class="c1">#       def_delegators :post_office, :deliver</span>
+      <span class="c1">#</span>
+      <span class="c1">#       def initialize</span>
+      <span class="c1">#         @post_office = PostOffice.new</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe Courier do</span>
+      <span class="c1">#       it { should delegate_method(:deliver).to(:post_office) }</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class CourierTest &lt; Test::Unit::TestCase</span>
+      <span class="c1">#       should delegate_method(:deliver).to(:post_office)</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1"># To employ some terminology, we would say that Courier&#39;s #deliver method</span>
+      <span class="c1"># is the delegating method, PostOffice is the delegate object, and</span>
+      <span class="c1"># PostOffice#deliver is the delegate method.</span>
+      <span class="c1">#</span>
+      <span class="c1"># #### Qualifiers</span>
+      <span class="c1">#</span>
+      <span class="c1"># ##### as</span>
+      <span class="c1">#</span>
+      <span class="c1"># Use `as` if the name of the delegate method is different from the name</span>
+      <span class="c1"># of the delegating method.</span>
+      <span class="c1">#</span>
+      <span class="c1"># Here, Courier has a #deliver method, but instead of calling #deliver on</span>
+      <span class="c1"># the PostOffice, it calls #ship:</span>
+      <span class="c1">#</span>
+      <span class="c1">#     class Courier</span>
+      <span class="c1">#       attr_reader :post_office</span>
+      <span class="c1">#</span>
+      <span class="c1">#       def initialize</span>
+      <span class="c1">#         @post_office = PostOffice.new</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#</span>
+      <span class="c1">#       def deliver(package)</span>
+      <span class="c1">#         post_office.ship(package)</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe Courier do</span>
+      <span class="c1">#       it { should delegate_method(:deliver).to(:post_office).as(:ship) }</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class CourierTest &lt; Test::Unit::TestCase</span>
+      <span class="c1">#       should delegate_method(:deliver).to(:post_office).as(:ship)</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1"># ##### with_arguments</span>
+      <span class="c1">#</span>
+      <span class="c1"># Use `with_arguments` to assert that the delegate method is called with</span>
+      <span class="c1"># certain arguments.</span>
+      <span class="c1">#</span>
+      <span class="c1"># Here, when Courier#deliver calls PostOffice#ship, it adds an options</span>
+      <span class="c1"># hash:</span>
+      <span class="c1">#</span>
+      <span class="c1">#     class Courier</span>
+      <span class="c1">#       attr_reader :post_office</span>
+      <span class="c1">#</span>
+      <span class="c1">#       def initialize</span>
+      <span class="c1">#         @post_office = PostOffice.new</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#</span>
+      <span class="c1">#       def deliver(package)</span>
+      <span class="c1">#         post_office.ship(package, expedited: true)</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe Courier do</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should delegate_method(:deliver).</span>
+      <span class="c1">#           to(:post_office).</span>
+      <span class="c1">#           as(:ship).</span>
+      <span class="c1">#           with_arguments(expedited: true)</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class CourierTest &lt; Test::Unit::TestCase</span>
+      <span class="c1">#       should delegate_method(:deliver).</span>
+      <span class="c1">#         to(:post_office).</span>
+      <span class="c1">#         as(:ship).</span>
+      <span class="c1">#         with_arguments(expedited: true)</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1"># @return [DelegateMatcher]</span>
       <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">delegate_method</span><span class="p">(</span><span class="n">delegating_method</span><span class="p">)</span>
         <span class="no">DelegateMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">delegating_method</span><span class="p">)</span>
@@ -295,7 +381,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:05 2014 by
+  Generated on Fri Jun 20 11:42:39 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

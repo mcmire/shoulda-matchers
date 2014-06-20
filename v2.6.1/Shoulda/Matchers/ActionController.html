@@ -140,7 +140,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#permit-instance_method" title="#permit (instance method)">- (Object) <strong>permit</strong>(*params) </a>
+      <a href="#permit-instance_method" title="#permit (instance method)">- (StrongParametersMatcher) <strong>permit</strong>(*params) </a>
     
 
     
@@ -154,7 +154,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>The <code>permit</code> matcher tests that an action in your controller receives a whitelist of parameters using Rails&#39; Strong Parameters feature (specifically that <code>permit</code> was called with the correct arguments).</p>
+</div></span>
   
 </li>
 
@@ -552,24 +553,176 @@ present in <code>config.filter_parameters</code>.</p>
       <div class="method_details ">
   <h3 class="signature " id="permit-instance_method">
   
-    - (<tt>Object</tt>) <strong>permit</strong>(*params) 
+    - (<tt><span class='object_link'>StrongParametersMatcher</span></tt>) <strong>permit</strong>(*params) 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The <code>permit</code> matcher tests that an action in your controller receives a
+whitelist of parameters using Rails&#39; Strong Parameters feature
+(specifically that <code>permit</code> was called with the correct arguments).</p>
+
+<p>Here&#39;s an example:</p>
+
+<pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">create</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user_params</span><span class="p">)</span>
+    <span class="c1"># ...</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">user_params</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span><span class="o">.</span><span class="n">permit</span><span class="p">(</span>
+      <span class="ss">:first_name</span><span class="p">,</span>
+      <span class="ss">:last_name</span><span class="p">,</span>
+      <span class="ss">:email</span><span class="p">,</span>
+      <span class="ss">:password</span>
+    <span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">UsersController</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">permit</span><span class="p">(</span><span class="ss">:first_name</span><span class="p">,</span> <span class="ss">:last_name</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">)</span><span class="o">.</span>
+      <span class="k">for</span><span class="p">(</span><span class="ss">:create</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">UsersControllerTest</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:TestCase</span>
+  <span class="n">should</span> <span class="n">permit</span><span class="p">(</span><span class="ss">:first_name</span><span class="p">,</span> <span class="ss">:last_name</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">)</span><span class="o">.</span>
+    <span class="k">for</span><span class="p">(</span><span class="ss">:create</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>If your action requires query parameters in order to work, then you&#39;ll
+need to supply them:</p>
+
+<pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">update</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">user_params</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+    <span class="k">else</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">user_params</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span><span class="o">.</span><span class="n">permit</span><span class="p">(</span>
+      <span class="ss">:first_name</span><span class="p">,</span>
+      <span class="ss">:last_name</span><span class="p">,</span>
+      <span class="ss">:email</span><span class="p">,</span>
+      <span class="ss">:password</span>
+    <span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">UsersController</span> <span class="k">do</span>
+  <span class="n">before</span> <span class="k">do</span>
+    <span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">permit</span><span class="p">(</span><span class="ss">:first_name</span><span class="p">,</span> <span class="ss">:last_name</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">)</span><span class="o">.</span>
+      <span class="k">for</span><span class="p">(</span><span class="ss">:update</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span> <span class="p">})</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">UsersControllerTest</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:TestCase</span>
+  <span class="n">setup</span> <span class="k">do</span>
+    <span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">should</span> <span class="n">permit</span><span class="p">(</span><span class="ss">:first_name</span><span class="p">,</span> <span class="ss">:last_name</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">)</span><span class="o">.</span>
+    <span class="k">for</span><span class="p">(</span><span class="ss">:update</span><span class="p">,</span> <span class="ss">params</span><span class="p">:</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span> <span class="p">})</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Finally, if you have an action that isn&#39;t one of the seven resourceful
+actions, then you&#39;ll need to provide the HTTP verb that it responds to:</p>
+
+<pre class="code ruby"><code class="ruby"><span class="no">Rails</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
+  <span class="n">resources</span> <span class="ss">:users</span> <span class="k">do</span>
+    <span class="n">member</span> <span class="k">do</span>
+      <span class="n">put</span> <span class="ss">:toggle</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">toggle</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">user_params</span><span class="p">)</span>
+      <span class="c1"># ...</span>
+    <span class="k">else</span>
+      <span class="c1"># ...</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">user_params</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span><span class="o">.</span><span class="n">permit</span><span class="p">(</span><span class="ss">:activated</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">UsersController</span> <span class="k">do</span>
+  <span class="n">before</span> <span class="k">do</span>
+    <span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">permit</span><span class="p">(</span><span class="ss">:activated</span><span class="p">)</span><span class="o">.</span><span class="n">for</span><span class="p">(</span><span class="ss">:toggle</span><span class="p">,</span>
+      <span class="ss">params</span><span class="p">:</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span> <span class="p">},</span>
+      <span class="ss">verb</span><span class="p">:</span> <span class="ss">:put</span>
+    <span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">UsersControllerTest</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:TestCase</span>
+  <span class="n">setup</span> <span class="k">do</span>
+    <span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">should</span> <span class="n">permit</span><span class="p">(</span><span class="ss">:activated</span><span class="p">)</span><span class="o">.</span><span class="n">for</span><span class="p">(</span><span class="ss">:toggle</span><span class="p">,</span>
+    <span class="ss">params</span><span class="p">:</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span> <span class="p">},</span>
+    <span class="ss">verb</span><span class="p">:</span> <span class="ss">:put</span>
+  <span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td class="lines">
       <pre>
 
 
-13
-14
-15</pre>
+156
+157
+158</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/strong_parameters_matcher.rb', line 13</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/strong_parameters_matcher.rb', line 156</span>
 
 <span class="k">def</span> <span class="nf">permit</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
   <span class="no">StrongParametersMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">in_context</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
@@ -1035,14 +1188,24 @@ figure it out otherwise:</p>
 
 <pre class="code ruby"><code class="ruby"><span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="s1">&#39;Routing&#39;</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">route</span><span class="p">(</span><span class="ss">:get</span><span class="p">,</span> <span class="s1">&#39;/posts&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="ss">controller</span><span class="p">:</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">action</span><span class="p">:</span> <span class="ss">:index</span><span class="p">)</span> <span class="p">}</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">route</span><span class="p">(</span><span class="ss">:get</span><span class="p">,</span> <span class="s1">&#39;/posts/1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;posts#show&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">route</span><span class="p">(</span><span class="ss">:get</span><span class="p">,</span> <span class="s1">&#39;/posts&#39;</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">to</span><span class="p">(</span><span class="ss">controller</span><span class="p">:</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">action</span><span class="p">:</span> <span class="ss">:index</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="n">it</span> <span class="k">do</span>
+    <span class="n">should</span> <span class="n">route</span><span class="p">(</span><span class="ss">:get</span><span class="p">,</span> <span class="s1">&#39;/posts/1&#39;</span><span class="p">)</span><span class="o">.</span>
+      <span class="n">to</span><span class="p">(</span><span class="s1">&#39;posts#show&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">RoutesTest</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:IntegrationTest</span>
-  <span class="n">should</span> <span class="n">route</span><span class="p">(</span><span class="ss">:get</span><span class="p">,</span> <span class="s1">&#39;/posts&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="ss">controller</span><span class="p">:</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">action</span><span class="p">:</span> <span class="ss">:index</span><span class="p">)</span>
-  <span class="n">should</span> <span class="n">route</span><span class="p">(</span><span class="ss">:get</span><span class="p">,</span> <span class="s1">&#39;/posts/1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;posts#show&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">route</span><span class="p">(</span><span class="ss">:get</span><span class="p">,</span> <span class="s1">&#39;/posts&#39;</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">to</span><span class="p">(</span><span class="ss">controller</span><span class="p">:</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">action</span><span class="p">:</span> <span class="ss">:index</span><span class="p">)</span>
+
+  <span class="n">should</span> <span class="n">route</span><span class="p">(</span><span class="ss">:get</span><span class="p">,</span> <span class="s1">&#39;/posts/1&#39;</span><span class="p">)</span><span class="o">.</span>
+    <span class="n">to</span><span class="p">(</span><span class="s1">&#39;posts#show&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -1058,12 +1221,12 @@ figure it out otherwise:</p>
       <pre>
 
 
-54
-55
-56</pre>
+64
+65
+66</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/route_matcher.rb', line 54</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/route_matcher.rb', line 64</span>
 
 <span class="k">def</span> <span class="nf">route</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
   <span class="no">RouteMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="nb">self</span><span class="p">)</span>
@@ -1730,7 +1893,7 @@ callback is defined within your controller.</p>
 </div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:06 2014 by
+  Generated on Fri Jun 20 11:42:39 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

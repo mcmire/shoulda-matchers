@@ -117,12 +117,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Person do</span>
-      <span class="c1">#       it { should belong_to(:family).conditions(everyone_is_perfect: false) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should belong_to(:family).</span>
+      <span class="c1">#           conditions(everyone_is_perfect: false)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class PersonTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should belong_to(:family).conditions(everyone_is_perfect: false)</span>
+      <span class="c1">#       should belong_to(:family).</span>
+      <span class="c1">#         conditions(everyone_is_perfect: false)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### order</span>
@@ -173,12 +177,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Person do</span>
-      <span class="c1">#       it { should belong_to(:great_country).with_foreign_key(&#39;country_id&#39;) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should belong_to(:great_country).</span>
+      <span class="c1">#           with_foreign_key(&#39;country_id&#39;)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class PersonTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should belong_to(:great_country).with_foreign_key(&#39;country_id&#39;)</span>
+      <span class="c1">#       should belong_to(:great_country).</span>
+      <span class="c1">#         with_foreign_key(&#39;country_id&#39;)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### dependent</span>
@@ -384,12 +392,18 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Person do</span>
-      <span class="c1">#       it { should have_many(:job_offers).through(:friends).source(:opportunities) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should have_many(:job_offers).</span>
+      <span class="c1">#           through(:friends).</span>
+      <span class="c1">#           source(:opportunities)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class PersonTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should have_many(:job_offers).through(:friends).source(:opportunities)</span>
+      <span class="c1">#       should have_many(:job_offers).</span>
+      <span class="c1">#         through(:friends).</span>
+      <span class="c1">#         source(:opportunities)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### validate</span>
@@ -621,12 +635,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Person do</span>
-      <span class="c1">#       it { should have_and_belong_to_many(:issues).conditions(difficulty: &#39;hard&#39;) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should have_and_belong_to_many(:issues).</span>
+      <span class="c1">#           conditions(difficulty: &#39;hard&#39;)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class PersonTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should have_and_belong_to_many(:issues).conditions(difficulty: &#39;hard&#39;)</span>
+      <span class="c1">#       should have_and_belong_to_many(:issues).</span>
+      <span class="c1">#         conditions(difficulty: &#39;hard&#39;)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### order</span>
@@ -640,12 +658,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Person do</span>
-      <span class="c1">#       it { should have_and_belong_to_many(:projects).order(&#39;time_spent&#39;) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should have_and_belong_to_many(:projects).</span>
+      <span class="c1">#           order(&#39;time_spent&#39;)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class PersonTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should have_and_belong_to_many(:projects).order(&#39;time_spent&#39;)</span>
+      <span class="c1">#       should have_and_belong_to_many(:projects).</span>
+      <span class="c1">#         order(&#39;time_spent&#39;)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### class_name</span>
@@ -659,12 +681,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Person do</span>
-      <span class="c1">#       it { should have_and_belong_to_many(:places_visited).class_name(&#39;City&#39;) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should have_and_belong_to_many(:places_visited).</span>
+      <span class="c1">#           class_name(&#39;City&#39;)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class PersonTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should have_and_belong_to_many(:places_visited).class_name(&#39;City&#39;)</span>
+      <span class="c1">#       should have_and_belong_to_many(:places_visited).</span>
+      <span class="c1">#         class_name(&#39;City&#39;)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### validate</span>
@@ -677,12 +703,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Person do</span>
-      <span class="c1">#       it { should have_and_belong_to_many(:interviews).validate(false) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should have_and_belong_to_many(:interviews).</span>
+      <span class="c1">#           validate(false)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class PersonTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should have_and_belong_to_many(:interviews).validate(false)</span>
+      <span class="c1">#       should have_and_belong_to_many(:interviews).</span>
+      <span class="c1">#         validate(false)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># @return [AssociationMatcher]</span>
@@ -996,7 +1026,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:05 2014 by
+  Generated on Fri Jun 20 11:42:38 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

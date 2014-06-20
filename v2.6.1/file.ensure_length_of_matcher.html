@@ -163,7 +163,8 @@
       <span class="c1">#</span>
       <span class="c1"># ##### is_at_least + is_at_most</span>
       <span class="c1">#</span>
-      <span class="c1"># Use `is_at_least` and `is_at_most` to test usage of the `:in` option.</span>
+      <span class="c1"># Use `is_at_least` and `is_at_most` together to test usage of the `:in`</span>
+      <span class="c1"># option.</span>
       <span class="c1">#</span>
       <span class="c1">#     class User</span>
       <span class="c1">#       include ActiveModel::Model</span>
@@ -173,12 +174,16 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe User do</span>
-      <span class="c1">#       it { should ensure_length_of(:password).is_at_least(5).is_at_most(30) }</span>
+      <span class="c1">#       it do</span>
+      <span class="c1">#         should ensure_length_of(:password).</span>
+      <span class="c1">#           is_at_least(5).is_at_most(30)</span>
+      <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class UserTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should ensure_length_of(:password).is_at_least(5).is_at_most(30)</span>
+      <span class="c1">#       should ensure_length_of(:password).</span>
+      <span class="c1">#         is_at_least(5).is_at_most(30)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># ##### with_message</span>
@@ -422,7 +427,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 23:06:04 2014 by
+  Generated on Fri Jun 20 11:42:38 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>
