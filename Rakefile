@@ -36,7 +36,7 @@ GH_PAGES_DIR = '.gh-pages'
 
 namespace :docs do
   file GH_PAGES_DIR do
-    sh "git clone git@github.com:thoughtbot/shoulda-matchers.git #{GH_PAGES_DIR} --branch gh-pages"
+    sh "git clone git@github.com:mcmire/shoulda-matchers.git #{GH_PAGES_DIR} --branch gh-pages"
   end
 
   task :setup => GH_PAGES_DIR do
