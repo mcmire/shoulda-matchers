@@ -82,9 +82,10 @@
     </div>
 
     <div id="main">
-      <div id="content"><div id='filecontents'><pre class="code ruby"><span class="k">module</span> <span class="nn">Shoulda</span> <span class="c1"># :nodoc:</span>
+      <div id="content"><div id='filecontents'><pre class="code ruby"><span class="k">module</span> <span class="nn">Shoulda</span>
   <span class="k">module</span> <span class="nn">Matchers</span>
-    <span class="k">module</span> <span class="nn">Independent</span> <span class="c1"># :nodoc:</span>
+    <span class="k">module</span> <span class="nn">Independent</span>
+      <span class="c1"># @private</span>
       <span class="k">class</span> <span class="nc">DelegateMatcher</span><span class="o">::</span><span class="no">StubbedTarget</span> <span class="c1"># :nodoc:</span>
         <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">method</span><span class="p">)</span>
           <span class="vi">@received_method</span> <span class="o">=</span> <span class="kp">false</span>
@@ -119,7 +120,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 22:48:27 2014 by
+  Generated on Thu Jun 19 23:04:44 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

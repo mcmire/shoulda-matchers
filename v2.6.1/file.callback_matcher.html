@@ -82,70 +82,149 @@
     </div>
 
     <div id="main">
-      <div id="content"><div id='filecontents'><pre class="code ruby"><span class="k">module</span> <span class="nn">Shoulda</span> <span class="c1"># :nodoc:</span>
+      <div id="content"><div id='filecontents'><pre class="code ruby"><span class="k">module</span> <span class="nn">Shoulda</span>
   <span class="k">module</span> <span class="nn">Matchers</span>
-    <span class="k">module</span> <span class="nn">ActionController</span> <span class="c1"># :nodoc:</span>
-      <span class="c1"># Ensure a controller uses a given before_filter</span>
+    <span class="k">module</span> <span class="nn">ActionController</span>
+      <span class="c1"># The `use_before_filter` matcher is used to test that a before_filter</span>
+      <span class="c1"># callback is defined within your controller.</span>
       <span class="c1">#</span>
-      <span class="c1"># Example:</span>
+      <span class="c1">#     class UsersController &lt; ApplicationController</span>
+      <span class="c1">#       before_filter :authenticate_user!</span>
+      <span class="c1">#     end</span>
       <span class="c1">#</span>
-      <span class="c1">#   it { should use_before_filter(:authenticate_user!) }</span>
-      <span class="c1">#   it { should_not use_before_filter(:prevent_ssl) }</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe UsersController do</span>
+      <span class="c1">#       it { should use_before_filter(:authenticate_user!) }</span>
+      <span class="c1">#       it { should_not use_before_filter(:prevent_ssl) }</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class UsersControllerTest &lt; ActionController::TestCase</span>
+      <span class="c1">#       should use_before_filter(:authenticate_user!)</span>
+      <span class="c1">#       should_not use_before_filter(:prevent_ssl)</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">use_before_filter</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
         <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:before</span><span class="p">,</span> <span class="ss">:filter</span><span class="p">)</span>
       <span class="k">end</span>
 
-      <span class="c1"># Ensure a controller uses a given before_filter</span>
+      <span class="c1"># The `use_after_filter` matcher is used to test that an after_filter</span>
+      <span class="c1"># callback is defined within your controller.</span>
       <span class="c1">#</span>
-      <span class="c1"># Example:</span>
+      <span class="c1">#     class IssuesController &lt; ApplicationController</span>
+      <span class="c1">#       after_filter :log_activity</span>
+      <span class="c1">#     end</span>
       <span class="c1">#</span>
-      <span class="c1">#   it { should use_after_filter(:log_activity) }</span>
-      <span class="c1">#   it { should_not use_after_filter(:destroy_user) }</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe IssuesController do</span>
+      <span class="c1">#       it { should use_after_filter(:log_activity) }</span>
+      <span class="c1">#       it { should_not use_after_filter(:destroy_user) }</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class IssuesControllerTest &lt; ActionController::TestCase</span>
+      <span class="c1">#       should use_after_filter(:log_activity)</span>
+      <span class="c1">#       should_not use_after_filter(:destroy_user)</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">use_after_filter</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
         <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:after</span><span class="p">,</span> <span class="ss">:filter</span><span class="p">)</span>
       <span class="k">end</span>
 
-      <span class="c1"># Ensure a controller uses a given before_action</span>
+      <span class="c1"># The `use_before_action` matcher is used to test that a before_action</span>
+      <span class="c1"># callback is defined within your controller.</span>
       <span class="c1">#</span>
-      <span class="c1"># Example:</span>
+      <span class="c1">#     class UsersController &lt; ApplicationController</span>
+      <span class="c1">#       before_action :authenticate_user!</span>
+      <span class="c1">#     end</span>
       <span class="c1">#</span>
-      <span class="c1">#   it { should use_before_action(:authenticate_user!) }</span>
-      <span class="c1">#   it { should_not use_before_action(:prevent_ssl) }</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe UsersController do</span>
+      <span class="c1">#       it { should use_before_action(:authenticate_user!) }</span>
+      <span class="c1">#       it { should_not use_before_action(:prevent_ssl) }</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class UsersControllerTest &lt; ActionController::TestCase</span>
+      <span class="c1">#       should use_before_action(:authenticate_user!)</span>
+      <span class="c1">#       should_not use_before_action(:prevent_ssl)</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">use_before_action</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
         <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:before</span><span class="p">,</span> <span class="ss">:action</span><span class="p">)</span>
       <span class="k">end</span>
 
-      <span class="c1"># Ensure a controller uses a given after_action</span>
+      <span class="c1"># The `use_after_action` matcher is used to test that an after_action</span>
+      <span class="c1"># callback is defined within your controller.</span>
       <span class="c1">#</span>
-      <span class="c1"># Example:</span>
+      <span class="c1">#     class IssuesController &lt; ApplicationController</span>
+      <span class="c1">#       after_action :log_activity</span>
+      <span class="c1">#     end</span>
       <span class="c1">#</span>
-      <span class="c1">#   it { should use_after_action(:log_activity) }</span>
-      <span class="c1">#   it { should_not use_after_action(:destroy_user) }</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe IssuesController do</span>
+      <span class="c1">#       it { should use_after_action(:log_activity) }</span>
+      <span class="c1">#       it { should_not use_after_action(:destroy_user) }</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class IssuesControllerTest &lt; ActionController::TestCase</span>
+      <span class="c1">#       should use_after_action(:log_activity)</span>
+      <span class="c1">#       should_not use_after_action(:destroy_user)</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">use_after_action</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
         <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:after</span><span class="p">,</span> <span class="ss">:action</span><span class="p">)</span>
       <span class="k">end</span>
 
-      <span class="c1"># Ensure a controller uses a given around_filter</span>
+      <span class="c1"># The `use_around_filter` matcher is used to test that an around_filter</span>
+      <span class="c1"># callback is defined within your controller.</span>
       <span class="c1">#</span>
-      <span class="c1"># Example:</span>
+      <span class="c1">#     class ChangesController &lt; ApplicationController</span>
+      <span class="c1">#       around_filter :wrap_in_transaction</span>
+      <span class="c1">#     end</span>
       <span class="c1">#</span>
-      <span class="c1">#   it { should use_around_filter(:log_activity) }</span>
-      <span class="c1">#   it { should_not use_around_filter(:destroy_user) }</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe ChangesController do</span>
+      <span class="c1">#       it { should use_around_filter(:wrap_in_transaction) }</span>
+      <span class="c1">#       it { should_not use_around_filter(:save_view_context) }</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class ChangesControllerTest &lt; ActionController::TestCase</span>
+      <span class="c1">#       should use_around_filter(:wrap_in_transaction)</span>
+      <span class="c1">#       should_not use_around_filter(:save_view_context)</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">use_around_filter</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
         <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:around</span><span class="p">,</span> <span class="ss">:filter</span><span class="p">)</span>
       <span class="k">end</span>
 
-      <span class="c1"># Ensure a controller uses a given around_action</span>
+      <span class="c1"># The `use_around_action` matcher is used to test that an around_action</span>
+      <span class="c1"># callback is defined within your controller.</span>
       <span class="c1">#</span>
-      <span class="c1"># Example:</span>
+      <span class="c1">#     class ChangesController &lt; ApplicationController</span>
+      <span class="c1">#       around_action :wrap_in_transaction</span>
+      <span class="c1">#     end</span>
       <span class="c1">#</span>
-      <span class="c1">#   it { should use_around_action(:log_activity) }</span>
-      <span class="c1">#   it { should_not use_around_action(:destroy_user) }</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe ChangesController do</span>
+      <span class="c1">#       it { should use_around_action(:wrap_in_transaction) }</span>
+      <span class="c1">#       it { should_not use_around_action(:save_view_context) }</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class ChangesControllerTest &lt; ActionController::TestCase</span>
+      <span class="c1">#       should use_around_action(:wrap_in_transaction)</span>
+      <span class="c1">#       should_not use_around_action(:save_view_context)</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">use_around_action</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
         <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:around</span><span class="p">,</span> <span class="ss">:action</span><span class="p">)</span>
       <span class="k">end</span>
 
-      <span class="k">class</span> <span class="nc">CallbackMatcher</span> <span class="c1"># :nodoc:</span>
+      <span class="c1"># @private</span>
+      <span class="k">class</span> <span class="nc">CallbackMatcher</span>
         <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">method_name</span><span class="p">,</span> <span class="n">kind</span><span class="p">,</span> <span class="n">callback_type</span><span class="p">)</span>
           <span class="vi">@method_name</span> <span class="o">=</span> <span class="n">method_name</span>
           <span class="vi">@kind</span> <span class="o">=</span> <span class="n">kind</span>
@@ -190,7 +269,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 22:48:26 2014 by
+  Generated on Thu Jun 19 23:04:43 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

@@ -98,6 +98,7 @@
         <span class="no">StrongParametersMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">in_context</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
       <span class="k">end</span>
 
+      <span class="c1"># @private</span>
       <span class="k">class</span> <span class="nc">StrongParametersMatcher</span>
         <span class="kp">attr_writer</span> <span class="ss">:stubbed_params</span>
 
@@ -198,12 +199,14 @@
           <span class="n">expected_permitted_params</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:inspect</span><span class="p">)</span><span class="o">.</span><span class="n">to_sentence</span>
         <span class="k">end</span>
 
+        <span class="c1"># @private</span>
         <span class="k">class</span> <span class="nc">ActionNotDefinedError</span> <span class="o">&lt;</span> <span class="no">StandardError</span>
           <span class="k">def</span> <span class="nf">message</span>
             <span class="s1">&#39;You must specify the controller action using the #for method.&#39;</span>
           <span class="k">end</span>
         <span class="k">end</span>
 
+        <span class="c1"># @private</span>
         <span class="k">class</span> <span class="nc">VerbNotDefinedError</span> <span class="o">&lt;</span> <span class="no">StandardError</span>
           <span class="k">def</span> <span class="nf">message</span>
             <span class="s1">&#39;You must specify an HTTP verb when using a non-RESTful action. For example: for(:authorize, verb: :post)&#39;</span>
@@ -216,7 +219,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 19 22:48:26 2014 by
+  Generated on Thu Jun 19 23:04:43 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>
