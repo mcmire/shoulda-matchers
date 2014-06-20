@@ -490,6 +490,24 @@ exists on your model.</p>
 <span class="k">end</span>
 </code></pre>
 
+<p>Note that polymorphic associations are automatically detected and do not
+need any qualifiers:</p>
+
+<pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">Comment</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+  <span class="n">belongs_to</span> <span class="ss">:commentable</span><span class="p">,</span> <span class="ss">polymorphic</span><span class="p">:</span> <span class="kp">true</span>
+<span class="k">end</span>
+
+<span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">Comment</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:commentable</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">CommentTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
+  <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:commentable</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
 <h4>Qualifiers</h4>
 
 <h5>conditions</h5>
@@ -623,17 +641,55 @@ specified.</p>
 <p>Use <code>touch</code> to assert that the <code>:touch</code> option was specified.</p>
 
 <pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">Person</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
-  <span class="n">belongs_to</span> <span class="ss">:mental_institution</span><span class="p">,</span> <span class="ss">touch</span><span class="p">:</span> <span class="kp">true</span>
+  <span class="n">belongs_to</span> <span class="ss">:organization</span><span class="p">,</span> <span class="ss">touch</span><span class="p">:</span> <span class="kp">true</span>
 <span class="k">end</span>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">Person</span> <span class="k">do</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:mental_institution</span><span class="p">)</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:organization</span><span class="p">)</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
 <span class="k">end</span>
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">PersonTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:mental_institution</span><span class="p">)</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+  <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:organization</span><span class="p">)</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h4>autosave</h4>
+
+<p>Use <code>autosave</code> to assert that the <code>:autosave</code> option was specified.</p>
+
+<pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">Account</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+  <span class="n">belongs_to</span> <span class="ss">:bank</span><span class="p">,</span> <span class="ss">autosave</span><span class="p">:</span> <span class="kp">true</span>
+<span class="k">end</span>
+
+<span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">Account</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:bank</span><span class="p">)</span><span class="o">.</span><span class="n">autosave</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">AccountTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
+  <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:bank</span><span class="p">)</span><span class="o">.</span><span class="n">autosave</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
+<h5>inverse_of</h5>
+
+<p>Use <code>inverse_of</code> to assert that the <code>:inverse_of</code> option was specified.</p>
+
+<pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">Person</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+  <span class="n">belongs_to</span> <span class="ss">:organization</span><span class="p">,</span> <span class="n">inverse_of</span><span class="p">:</span> <span class="ss">:employees</span>
+<span class="k">end</span>
+
+<span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">Person</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:organization</span><span class="p">)</span><span class="o">.</span><span class="n">inverse_of</span><span class="p">(</span><span class="ss">:employees</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">PersonTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
+  <span class="n">should</span> <span class="n">belong_to</span><span class="p">(</span><span class="ss">:organization</span><span class="p">)</span><span class="o">.</span><span class="n">inverse_of</span><span class="p">(</span><span class="ss">:employees</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -649,12 +705,12 @@ specified.</p>
       <pre>
 
 
-165
-166
-167</pre>
+218
+219
+220</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 165</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 218</span>
 
 <span class="k">def</span> <span class="nf">belong_to</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
   <span class="no">AssociationMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:belongs_to</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
@@ -793,6 +849,25 @@ asserts that the model you&#39;re referring to actually exists.</p>
 <span class="k">end</span>
 </code></pre>
 
+<h4>autosave</h4>
+
+<p>Use <code>autosave</code> to assert that the <code>:autosave</code> option was specified.</p>
+
+<pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">Publisher</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+  <span class="n">has_and_belongs_to_many</span> <span class="ss">:advertisers</span><span class="p">,</span> <span class="ss">autosave</span><span class="p">:</span> <span class="kp">true</span>
+<span class="k">end</span>
+
+<span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">Publisher</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:advertisers</span><span class="p">)</span><span class="o">.</span><span class="n">autosave</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">AccountTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
+  <span class="n">should</span> <span class="n">have_and_belong_to_many</span><span class="p">(</span><span class="ss">:advertisers</span><span class="p">)</span><span class="o">.</span><span class="n">autosave</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
 
   </div>
 </div>
@@ -805,12 +880,12 @@ asserts that the model you&#39;re referring to actually exists.</p>
       <pre>
 
 
-636
-637
-638</pre>
+743
+744
+745</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 636</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 743</span>
 
 <span class="k">def</span> <span class="nf">have_and_belong_to_many</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
   <span class="no">AssociationMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:has_and_belongs_to_many</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
@@ -1002,6 +1077,20 @@ has a index on a specific column.</p>
 <span class="k">end</span>
 </code></pre>
 
+<p>Since it only ever makes since for <code>unique</code> to be <code>true</code>, you can also
+leave off the argument to save some keystrokes:</p>
+
+<pre class="code ruby"><code class="ruby"><span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">Blog</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_db_index</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span><span class="o">.</span><span class="n">unique</span> <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">BlogTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
+  <span class="n">should</span> <span class="n">have_db_index</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span><span class="o">.</span><span class="n">unique</span>
+<span class="k">end</span>
+</code></pre>
+
 
   </div>
 </div>
@@ -1014,12 +1103,12 @@ has a index on a specific column.</p>
       <pre>
 
 
-55
-56
-57</pre>
+68
+69
+70</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/have_db_index_matcher.rb', line 55</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/have_db_index_matcher.rb', line 68</span>
 
 <span class="k">def</span> <span class="nf">have_db_index</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
   <span class="no">HaveDbIndexMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
@@ -1225,6 +1314,25 @@ association.</p>
 <span class="k">end</span>
 </code></pre>
 
+<h4>autosave</h4>
+
+<p>Use <code>autosave</code> to assert that the <code>:autosave</code> option was specified.</p>
+
+<pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">Player</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+  <span class="n">has_many</span> <span class="ss">:games</span><span class="p">,</span> <span class="ss">autosave</span><span class="p">:</span> <span class="kp">true</span>
+<span class="k">end</span>
+
+<span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">Player</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_many</span><span class="p">(</span><span class="ss">:games</span><span class="p">)</span><span class="o">.</span><span class="n">autosave</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">PlayerTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
+  <span class="n">should</span> <span class="n">have_many</span><span class="p">(</span><span class="ss">:games</span><span class="p">)</span><span class="o">.</span><span class="n">autosave</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
 
   </div>
 </div>
@@ -1237,12 +1345,12 @@ association.</p>
       <pre>
 
 
-345
-346
-347</pre>
+416
+417
+418</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 345</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 416</span>
 
 <span class="k">def</span> <span class="nf">have_many</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
   <span class="no">AssociationMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:has_many</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
@@ -1442,6 +1550,25 @@ association.</p>
 <span class="k">end</span>
 </code></pre>
 
+<h4>autosave</h4>
+
+<p>Use <code>autosave</code> to assert that the <code>:autosave</code> option was specified.</p>
+
+<pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">Account</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+  <span class="n">has_one</span> <span class="ss">:bank</span><span class="p">,</span> <span class="ss">autosave</span><span class="p">:</span> <span class="kp">true</span>
+<span class="k">end</span>
+
+<span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">Account</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_one</span><span class="p">(</span><span class="ss">:bank</span><span class="p">)</span><span class="o">.</span><span class="n">autosave</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">AccountTest</span> <span class="o">&lt;</span> <span class="ss">ActiveSupport</span><span class="p">:</span><span class="ss">:TestCase</span>
+  <span class="n">should</span> <span class="n">have_one</span><span class="p">(</span><span class="ss">:bank</span><span class="p">)</span><span class="o">.</span><span class="n">autosave</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+
 
   </div>
 </div>
@@ -1454,12 +1581,12 @@ association.</p>
       <pre>
 
 
-519
-520
-521</pre>
+608
+609
+610</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 519</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/active_record/association_matcher.rb', line 608</span>
 
 <span class="k">def</span> <span class="nf">have_one</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
   <span class="no">AssociationMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:has_one</span><span class="p">,</span> <span class="nb">name</span><span class="p">)</span>
@@ -1659,7 +1786,7 @@ association.</p>
 </div>
 
       <div id="footer">
-  Generated on Fri Jun 20 11:42:39 2014 by
+  Generated on Fri Jun 20 16:44:07 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

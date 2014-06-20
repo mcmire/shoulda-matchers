@@ -90,17 +90,11 @@
       <span class="c1"># take a blacklist of values, and inversely, can take values outside of</span>
       <span class="c1"># this list.</span>
       <span class="c1">#</span>
-      <span class="c1"># #### Qualifiers</span>
-      <span class="c1">#</span>
-      <span class="c1"># `in_array` or `in_range` are used to test usage of the `:in` option,</span>
-      <span class="c1"># and so one must be used.</span>
-      <span class="c1">#</span>
-      <span class="c1"># ##### in_array</span>
-      <span class="c1">#</span>
-      <span class="c1"># Use `in_array` if your blacklist is an array of values.</span>
+      <span class="c1"># If your blacklist is an array of values, use `in_array`:</span>
       <span class="c1">#</span>
       <span class="c1">#     class Game</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :supported_os</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_exclusion_of :supported_os, in: [&#39;Mac&#39;, &#39;Linux&#39;]</span>
       <span class="c1">#     end</span>
@@ -119,12 +113,11 @@
       <span class="c1">#         in_array([&#39;Mac&#39;, &#39;Linux&#39;])</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
-      <span class="c1"># ##### in_range</span>
-      <span class="c1">#</span>
-      <span class="c1"># Use `in_range` if your blacklist is a range of values.</span>
+      <span class="c1"># If your blacklist is a range of values, use `in_rnage`:</span>
       <span class="c1">#</span>
       <span class="c1">#     class Game</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :supported_os</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_exclusion_of :supported_os, in: [&#39;Mac&#39;, &#39;Linux&#39;]</span>
       <span class="c1">#     end</span>
@@ -143,11 +136,16 @@
       <span class="c1">#         in_range(5..8)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
+      <span class="c1"># #### Qualifiers</span>
+      <span class="c1">#</span>
       <span class="c1"># ##### with_message</span>
       <span class="c1">#</span>
       <span class="c1"># Use `with_message` if you are using a custom validation message.</span>
       <span class="c1">#</span>
       <span class="c1">#     class Game</span>
+      <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :weapon</span>
+      <span class="c1">#</span>
       <span class="c1">#       validates_exclusion_of :weapon,</span>
       <span class="c1">#         in: [&#39;pistol&#39;, &#39;paintball gun&#39;, &#39;stick&#39;],</span>
       <span class="c1">#         message: &#39;You chose a puny weapon&#39;</span>
@@ -253,7 +251,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Fri Jun 20 11:42:38 2014 by
+  Generated on Fri Jun 20 16:44:06 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

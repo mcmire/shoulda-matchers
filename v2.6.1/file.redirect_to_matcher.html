@@ -99,8 +99,8 @@
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe PostsController do</span>
-      <span class="c1">#       describe &#39;GET #list&#39; do</span>
-      <span class="c1">#         before { get :list }</span>
+      <span class="c1">#       describe &#39;GET #show&#39; do</span>
+      <span class="c1">#         before { get :show }</span>
       <span class="c1">#</span>
       <span class="c1">#         it { should redirect_to(posts_path) }</span>
       <span class="c1">#         it { should redirect_to(action: :index) }</span>
@@ -109,8 +109,8 @@
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class PostsControllerTest &lt; ActionController::TestCase</span>
-      <span class="c1">#       context &#39;GET #list&#39; do</span>
-      <span class="c1">#         setup { get :list }</span>
+      <span class="c1">#       context &#39;GET #show&#39; do</span>
+      <span class="c1">#         setup { get :show }</span>
       <span class="c1">#</span>
       <span class="c1">#         should redirect_to { posts_path }</span>
       <span class="c1">#         should redirect_to(action: :index)</span>
@@ -182,7 +182,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Fri Jun 20 11:42:38 2014 by
+  Generated on Fri Jun 20 16:44:06 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

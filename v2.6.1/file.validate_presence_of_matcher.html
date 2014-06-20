@@ -88,7 +88,10 @@
       <span class="c1"># The `validate_presence_of` matcher tests usage of the</span>
       <span class="c1"># `validates_presence_of` validation.</span>
       <span class="c1">#</span>
-      <span class="c1">#     class Robot &lt; ActiveRecord::Base</span>
+      <span class="c1">#     class Robot</span>
+      <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :arms</span>
+      <span class="c1">#</span>
       <span class="c1">#       validates_presence_of :arms</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
@@ -102,13 +105,50 @@
       <span class="c1">#       should validate_presence_of(:arms)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
+      <span class="c1"># #### Caveats</span>
+      <span class="c1">#</span>
+      <span class="c1"># Under Rails 4 and greater, if your model `has_secure_password` and you</span>
+      <span class="c1"># are validating presence of the password using a record whose password</span>
+      <span class="c1"># has already been set prior to calling the matcher, you will be</span>
+      <span class="c1"># instructed to use a record whose password is empty instead.</span>
+      <span class="c1">#</span>
+      <span class="c1"># For example, given this scenario:</span>
+      <span class="c1">#</span>
+      <span class="c1">#     class User &lt; ActiveRecord::Base</span>
+      <span class="c1">#       has_secure_password validations: false</span>
+      <span class="c1">#</span>
+      <span class="c1">#       validates_presence_of :password</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     describe User do</span>
+      <span class="c1">#       subject { User.new(password: &#39;123456&#39;) }</span>
+      <span class="c1">#</span>
+      <span class="c1">#       it { should validate_presence_of(:password) }</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1"># the above test will raise an error like this:</span>
+      <span class="c1">#</span>
+      <span class="c1">#     The validation failed because your User model declares</span>
+      <span class="c1">#     `has_secure_password`, and `validate_presence_of` was called on a</span>
+      <span class="c1">#     user which has `password` already set to a value. Please use a user</span>
+      <span class="c1">#     with an empty `password` instead.</span>
+      <span class="c1">#</span>
+      <span class="c1"># This happens because `has_secure_password` itself overrides your model</span>
+      <span class="c1"># so that it is impossible to set `password` to nil. This means that it is</span>
+      <span class="c1"># impossible to test that setting `password` to nil places your model in</span>
+      <span class="c1"># an invalid state (which in turn means that the validation itself is</span>
+      <span class="c1"># unnecessary).</span>
+      <span class="c1">#</span>
       <span class="c1"># #### Qualifiers</span>
       <span class="c1">#</span>
       <span class="c1"># ##### with_message</span>
       <span class="c1">#</span>
       <span class="c1"># Use `with_message` if you are using a custom validation message.</span>
       <span class="c1">#</span>
-      <span class="c1">#     class Robot &lt; ActiveRecord::Base</span>
+      <span class="c1">#     class Robot</span>
+      <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :legs</span>
+      <span class="c1">#</span>
       <span class="c1">#       validates_presence_of :legs, message: &#39;Robot has no legs&#39;</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
@@ -203,7 +243,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Fri Jun 20 11:42:38 2014 by
+  Generated on Fri Jun 20 16:44:06 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

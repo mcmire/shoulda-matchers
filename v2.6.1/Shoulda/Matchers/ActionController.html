@@ -200,7 +200,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The <code>render_template</code> matcher tests that an action renders a template.</p>
+    <span class="summary_desc"><div class='inline'><p>The <code>render_template</code> matcher tests that an action renders a template or partial.</p>
 </div></span>
   
 </li>
@@ -223,7 +223,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The <code>render_with_layout</code> matcher tests that an action is rendered with a certain layout.</p>
+    <span class="summary_desc"><div class='inline'><p>The <code>render_with_layout</code> matcher asserts that an action is rendered with a particular layout.</p>
 </div></span>
   
 </li>
@@ -347,7 +347,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#use_after_action-instance_method" title="#use_after_action (instance method)">- (Object) <strong>use_after_action</strong>(callback) </a>
+      <a href="#use_after_action-instance_method" title="#use_after_action (instance method)">- (CallbackMatcher) <strong>use_after_action</strong>(callback) </a>
     
 
     
@@ -370,7 +370,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#use_after_filter-instance_method" title="#use_after_filter (instance method)">- (Object) <strong>use_after_filter</strong>(callback) </a>
+      <a href="#use_after_filter-instance_method" title="#use_after_filter (instance method)">- (CallbackMatcher) <strong>use_after_filter</strong>(callback) </a>
     
 
     
@@ -393,7 +393,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#use_around_action-instance_method" title="#use_around_action (instance method)">- (Object) <strong>use_around_action</strong>(callback) </a>
+      <a href="#use_around_action-instance_method" title="#use_around_action (instance method)">- (CallbackMatcher) <strong>use_around_action</strong>(callback) </a>
     
 
     
@@ -416,7 +416,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#use_around_filter-instance_method" title="#use_around_filter (instance method)">- (Object) <strong>use_around_filter</strong>(callback) </a>
+      <a href="#use_around_filter-instance_method" title="#use_around_filter (instance method)">- (CallbackMatcher) <strong>use_around_filter</strong>(callback) </a>
     
 
     
@@ -439,7 +439,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#use_before_action-instance_method" title="#use_before_action (instance method)">- (Object) <strong>use_before_action</strong>(callback) </a>
+      <a href="#use_before_action-instance_method" title="#use_before_action (instance method)">- (CallbackMatcher) <strong>use_before_action</strong>(callback) </a>
     
 
     
@@ -462,7 +462,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#use_before_filter-instance_method" title="#use_before_filter (instance method)">- (Object) <strong>use_before_filter</strong>(callback) </a>
+      <a href="#use_before_filter-instance_method" title="#use_before_filter (instance method)">- (CallbackMatcher) <strong>use_before_filter</strong>(callback) </a>
     
 
     
@@ -759,8 +759,8 @@ Shoulda, it provides a more expressive syntax over
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">PostsController</span> <span class="k">do</span>
-  <span class="n">describe</span> <span class="s1">&#39;GET #list&#39;</span> <span class="k">do</span>
-    <span class="n">before</span> <span class="p">{</span> <span class="n">get</span> <span class="ss">:list</span> <span class="p">}</span>
+  <span class="n">describe</span> <span class="s1">&#39;GET #show&#39;</span> <span class="k">do</span>
+    <span class="n">before</span> <span class="p">{</span> <span class="n">get</span> <span class="ss">:show</span> <span class="p">}</span>
 
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="n">posts_path</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="ss">action</span><span class="p">:</span> <span class="ss">:index</span><span class="p">)</span> <span class="p">}</span>
@@ -769,8 +769,8 @@ Shoulda, it provides a more expressive syntax over
 
 <span class="c1"># Test::Unit</span>
 <span class="k">class</span> <span class="nc">PostsControllerTest</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:TestCase</span>
-  <span class="n">context</span> <span class="s1">&#39;GET #list&#39;</span> <span class="k">do</span>
-    <span class="n">setup</span> <span class="p">{</span> <span class="n">get</span> <span class="ss">:list</span> <span class="p">}</span>
+  <span class="n">context</span> <span class="s1">&#39;GET #show&#39;</span> <span class="k">do</span>
+    <span class="n">setup</span> <span class="p">{</span> <span class="n">get</span> <span class="ss">:show</span> <span class="p">}</span>
 
     <span class="n">should</span> <span class="n">redirect_to</span> <span class="p">{</span> <span class="n">posts_path</span> <span class="p">}</span>
     <span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="ss">action</span><span class="p">:</span> <span class="ss">:index</span><span class="p">)</span>
@@ -818,15 +818,18 @@ Shoulda, it provides a more expressive syntax over
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The <code>render_template</code> matcher tests that an action renders a template.
-In RSpec, it is very similar to rspec-rails&#39;s <code>render_template</code>
-matcher. In Test::Unit, it provides a more expressive syntax over
-<code>assert_template</code>.</p>
+    <p>The <code>render_template</code> matcher tests that an action renders a template
+or partial. In RSpec, it is very similar to rspec-rails&#39;s
+<code>render_template</code> matcher. In Test::Unit, it provides a more expressive
+syntax over <code>assert_template</code>.</p>
 
 <pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">PostsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="k">def</span> <span class="nf">show</span>
   <span class="k">end</span>
 <span class="k">end</span>
+
+<span class="c1"># app/views/posts/show.html.erb</span>
+<span class="o">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;sidebar&#39;</span> <span class="o">%&gt;</span>
 
 <span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="no">PostsController</span> <span class="k">do</span>
@@ -834,6 +837,7 @@ matcher. In Test::Unit, it provides a more expressive syntax over
     <span class="n">before</span> <span class="p">{</span> <span class="n">get</span> <span class="ss">:show</span> <span class="p">}</span>
 
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">render_template</span><span class="p">(</span><span class="ss">partial</span><span class="p">:</span> <span class="s1">&#39;sidebar&#39;</span><span class="p">)</span> <span class="p">}</span>
   <span class="k">end</span>
 <span class="k">end</span>
 
@@ -843,6 +847,7 @@ matcher. In Test::Unit, it provides a more expressive syntax over
     <span class="n">setup</span> <span class="p">{</span> <span class="n">get</span> <span class="ss">:show</span> <span class="p">}</span>
 
     <span class="n">should</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;show&#39;</span><span class="p">)</span>
+    <span class="n">should</span> <span class="n">render_template</span><span class="p">(</span><span class="ss">partial</span><span class="p">:</span> <span class="s1">&#39;sidebar&#39;</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
@@ -859,12 +864,12 @@ matcher. In Test::Unit, it provides a more expressive syntax over
       <pre>
 
 
-34
-35
-36</pre>
+41
+42
+43</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/render_template_matcher.rb', line 34</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/render_template_matcher.rb', line 41</span>
 
 <span class="k">def</span> <span class="nf">render_template</span><span class="p">(</span><span class="n">options</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">message</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">)</span>
   <span class="no">RenderTemplateMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="nb">self</span><span class="p">)</span>
@@ -887,8 +892,8 @@ matcher. In Test::Unit, it provides a more expressive syntax over
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The <code>render_with_layout</code> matcher tests that an action is rendered with
-a certain layout.</p>
+    <p>The <code>render_with_layout</code> matcher asserts that an action is rendered with
+a particular layout.</p>
 
 <pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">PostsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="k">def</span> <span class="nf">show</span>
@@ -915,6 +920,34 @@ a certain layout.</p>
 <span class="k">end</span>
 </code></pre>
 
+<p>It can also be used to assert that the action is not rendered with a
+layout at all:</p>
+
+<pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">PostsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">sidebar</span>
+    <span class="n">render</span> <span class="ss">layout</span><span class="p">:</span> <span class="kp">false</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># RSpec</span>
+<span class="n">describe</span> <span class="no">PostsController</span> <span class="k">do</span>
+  <span class="n">describe</span> <span class="s1">&#39;GET #sidebar&#39;</span> <span class="k">do</span>
+    <span class="n">before</span> <span class="p">{</span> <span class="n">get</span> <span class="ss">:sidebar</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">render_with_layout</span> <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># Test::Unit</span>
+<span class="k">class</span> <span class="nc">PostsControllerTest</span> <span class="o">&lt;</span> <span class="ss">ActionController</span><span class="p">:</span><span class="ss">:TestCase</span>
+  <span class="n">context</span> <span class="s1">&#39;GET #sidebar&#39;</span> <span class="k">do</span>
+    <span class="n">setup</span> <span class="p">{</span> <span class="n">get</span> <span class="ss">:sidebar</span> <span class="p">}</span>
+
+    <span class="n">should_not</span> <span class="n">render_with_layout</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
 
   </div>
 </div>
@@ -927,12 +960,12 @@ a certain layout.</p>
       <pre>
 
 
-33
-34
-35</pre>
+60
+61
+62</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/render_with_layout_matcher.rb', line 33</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/render_with_layout_matcher.rb', line 60</span>
 
 <span class="k">def</span> <span class="nf">render_with_layout</span><span class="p">(</span><span class="n">expected_layout</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">)</span>
   <span class="no">RenderWithLayoutMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">expected_layout</span><span class="p">)</span><span class="o">.</span><span class="n">in_context</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
@@ -1154,7 +1187,8 @@ generates the same route. For an RSpec suite, this is like using a
 combination of <code>route_to</code> and <code>be_routable</code>. For a Test::Unit suite, it
 provides a more expressive syntax over <code>assert_routing</code>.</p>
 
-<p>Given these routes:</p>
+<p>You can use this matcher either in a controller test case or in a
+routing test case. For instance, given these routes:</p>
 
 <pre class="code ruby"><code class="ruby"><span class="ss">My</span><span class="p">:</span><span class="ss">:Application</span><span class="o">.</span><span class="n">routes</span><span class="o">.</span><span class="n">draw</span> <span class="k">do</span>
   <span class="n">get</span> <span class="s1">&#39;/posts&#39;</span><span class="p">,</span> <span class="ss">controller</span><span class="p">:</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="ss">action</span><span class="p">:</span> <span class="s1">&#39;index&#39;</span>
@@ -1162,8 +1196,8 @@ provides a more expressive syntax over <code>assert_routing</code>.</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>You can choose to keep your routing tests under the test file for one
-controller:</p>
+<p>You could choose to write tests for these routes alongside other tests
+for PostsController:</p>
 
 <pre class="code ruby"><code class="ruby"><span class="k">class</span> <span class="nc">PostsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="c1"># ...</span>
@@ -1182,9 +1216,7 @@ controller:</p>
 <span class="k">end</span>
 </code></pre>
 
-<p>Or if you like, you can keep all of your routing tests in one file.
-Just be sure to always specify a controller as <code>route</code> won&#39;t be able to
-figure it out otherwise:</p>
+<p>Or you could place the tests along with other route tests:</p>
 
 <pre class="code ruby"><code class="ruby"><span class="c1"># RSpec</span>
 <span class="n">describe</span> <span class="s1">&#39;Routing&#39;</span> <span class="k">do</span>
@@ -1209,6 +1241,29 @@ figure it out otherwise:</p>
 <span class="k">end</span>
 </code></pre>
 
+<p>Notice that in the former case, as we are inside of a test case for
+PostsController, we do not have to specify that the routes resolve to
+this controller. In the latter case we specify this using the
+<code>controller</code> key passed to the <code>to</code> qualifier.</p>
+
+<h4>Qualifiers</h4>
+
+<h5>to</h5>
+
+<p>Use <code>to</code> to specify the action (along with the controller, if needed)
+that the route resolves to.</p>
+
+<pre class="code ruby"><code class="ruby"><span class="c1"># Three ways of saying the same thing (using the example above)</span>
+<span class="n">route</span><span class="p">(</span><span class="ss">:get</span><span class="p">,</span> <span class="s1">&#39;/posts&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="ss">action</span><span class="p">:</span> <span class="n">index</span><span class="p">)</span>
+<span class="n">route</span><span class="p">(</span><span class="ss">:get</span><span class="p">,</span> <span class="s1">&#39;/posts&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="ss">controller</span><span class="p">:</span> <span class="ss">:posts</span><span class="p">,</span> <span class="ss">action</span><span class="p">:</span> <span class="n">index</span><span class="p">)</span>
+<span class="n">route</span><span class="p">(</span><span class="ss">:get</span><span class="p">,</span> <span class="s1">&#39;/posts&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;posts#index&#39;</span><span class="p">)</span>
+</code></pre>
+
+<p>If there are parameters in your route, then specify those too:</p>
+
+<pre class="code ruby"><code class="ruby"><span class="n">route</span><span class="p">(</span><span class="ss">:get</span><span class="p">,</span> <span class="s1">&#39;/posts/1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;posts#show&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre>
+
 
   </div>
 </div>
@@ -1221,12 +1276,12 @@ figure it out otherwise:</p>
       <pre>
 
 
-64
-65
-66</pre>
+84
+85
+86</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/route_matcher.rb', line 64</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/route_matcher.rb', line 84</span>
 
 <span class="k">def</span> <span class="nf">route</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
   <span class="no">RouteMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="nb">self</span><span class="p">)</span>
@@ -1531,7 +1586,7 @@ instead of the usual &quot;future&quot; hash.</p>
       <div class="method_details ">
   <h3 class="signature " id="use_after_action-instance_method">
   
-    - (<tt>Object</tt>) <strong>use_after_action</strong>(callback) 
+    - (<tt><span class='object_link'>CallbackMatcher</span></tt>) <strong>use_after_action</strong>(callback) 
   
 
   
@@ -1571,12 +1626,12 @@ callback is defined within your controller.</p>
       <pre>
 
 
-92
-93
-94</pre>
+100
+101
+102</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/callback_matcher.rb', line 92</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/callback_matcher.rb', line 100</span>
 
 <span class="k">def</span> <span class="nf">use_after_action</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
   <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:after</span><span class="p">,</span> <span class="ss">:action</span><span class="p">)</span>
@@ -1591,7 +1646,7 @@ callback is defined within your controller.</p>
       <div class="method_details ">
   <h3 class="signature " id="use_after_filter-instance_method">
   
-    - (<tt>Object</tt>) <strong>use_after_filter</strong>(callback) 
+    - (<tt><span class='object_link'>CallbackMatcher</span></tt>) <strong>use_after_filter</strong>(callback) 
   
 
   
@@ -1631,12 +1686,12 @@ callback is defined within your controller.</p>
       <pre>
 
 
-46
-47
-48</pre>
+50
+51
+52</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/callback_matcher.rb', line 46</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/callback_matcher.rb', line 50</span>
 
 <span class="k">def</span> <span class="nf">use_after_filter</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
   <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:after</span><span class="p">,</span> <span class="ss">:filter</span><span class="p">)</span>
@@ -1651,7 +1706,7 @@ callback is defined within your controller.</p>
       <div class="method_details ">
   <h3 class="signature " id="use_around_action-instance_method">
   
-    - (<tt>Object</tt>) <strong>use_around_action</strong>(callback) 
+    - (<tt><span class='object_link'>CallbackMatcher</span></tt>) <strong>use_around_action</strong>(callback) 
   
 
   
@@ -1691,12 +1746,12 @@ callback is defined within your controller.</p>
       <pre>
 
 
-138
-139
-140</pre>
+150
+151
+152</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/callback_matcher.rb', line 138</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/callback_matcher.rb', line 150</span>
 
 <span class="k">def</span> <span class="nf">use_around_action</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
   <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:around</span><span class="p">,</span> <span class="ss">:action</span><span class="p">)</span>
@@ -1711,7 +1766,7 @@ callback is defined within your controller.</p>
       <div class="method_details ">
   <h3 class="signature " id="use_around_filter-instance_method">
   
-    - (<tt>Object</tt>) <strong>use_around_filter</strong>(callback) 
+    - (<tt><span class='object_link'>CallbackMatcher</span></tt>) <strong>use_around_filter</strong>(callback) 
   
 
   
@@ -1751,12 +1806,12 @@ callback is defined within your controller.</p>
       <pre>
 
 
-115
-116
-117</pre>
+125
+126
+127</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/callback_matcher.rb', line 115</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/callback_matcher.rb', line 125</span>
 
 <span class="k">def</span> <span class="nf">use_around_filter</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
   <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:around</span><span class="p">,</span> <span class="ss">:filter</span><span class="p">)</span>
@@ -1771,7 +1826,7 @@ callback is defined within your controller.</p>
       <div class="method_details ">
   <h3 class="signature " id="use_before_action-instance_method">
   
-    - (<tt>Object</tt>) <strong>use_before_action</strong>(callback) 
+    - (<tt><span class='object_link'>CallbackMatcher</span></tt>) <strong>use_before_action</strong>(callback) 
   
 
   
@@ -1811,12 +1866,12 @@ callback is defined within your controller.</p>
       <pre>
 
 
-69
-70
-71</pre>
+75
+76
+77</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/callback_matcher.rb', line 69</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/callback_matcher.rb', line 75</span>
 
 <span class="k">def</span> <span class="nf">use_before_action</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
   <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:before</span><span class="p">,</span> <span class="ss">:action</span><span class="p">)</span>
@@ -1831,7 +1886,7 @@ callback is defined within your controller.</p>
       <div class="method_details ">
   <h3 class="signature " id="use_before_filter-instance_method">
   
-    - (<tt>Object</tt>) <strong>use_before_filter</strong>(callback) 
+    - (<tt><span class='object_link'>CallbackMatcher</span></tt>) <strong>use_before_filter</strong>(callback) 
   
 
   
@@ -1871,12 +1926,12 @@ callback is defined within your controller.</p>
       <pre>
 
 
-23
-24
-25</pre>
+25
+26
+27</pre>
     </td>
     <td class="code">
-      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/callback_matcher.rb', line 23</span>
+      <pre><span class="info file"># File 'lib/shoulda/matchers/action_controller/callback_matcher.rb', line 25</span>
 
 <span class="k">def</span> <span class="nf">use_before_filter</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
   <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:before</span><span class="p">,</span> <span class="ss">:filter</span><span class="p">)</span>
@@ -1893,7 +1948,7 @@ callback is defined within your controller.</p>
 </div>
 
       <div id="footer">
-  Generated on Fri Jun 20 11:42:39 2014 by
+  Generated on Fri Jun 20 16:44:08 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

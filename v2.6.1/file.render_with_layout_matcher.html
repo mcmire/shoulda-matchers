@@ -85,8 +85,8 @@
       <div id="content"><div id='filecontents'><pre class="code ruby"><span class="k">module</span> <span class="nn">Shoulda</span>
   <span class="k">module</span> <span class="nn">Matchers</span>
     <span class="k">module</span> <span class="nn">ActionController</span>
-      <span class="c1"># The `render_with_layout` matcher tests that an action is rendered with</span>
-      <span class="c1"># a certain layout.</span>
+      <span class="c1"># The `render_with_layout` matcher asserts that an action is rendered with</span>
+      <span class="c1"># a particular layout.</span>
       <span class="c1">#</span>
       <span class="c1">#     class PostsController &lt; ApplicationController</span>
       <span class="c1">#       def show</span>
@@ -109,6 +109,33 @@
       <span class="c1">#         setup { get :show }</span>
       <span class="c1">#</span>
       <span class="c1">#         should render_with_layout(&#39;posts&#39;)</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1"># It can also be used to assert that the action is not rendered with a</span>
+      <span class="c1"># layout at all:</span>
+      <span class="c1">#</span>
+      <span class="c1">#     class PostsController &lt; ApplicationController</span>
+      <span class="c1">#       def sidebar</span>
+      <span class="c1">#         render layout: false</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe PostsController do</span>
+      <span class="c1">#       describe &#39;GET #sidebar&#39; do</span>
+      <span class="c1">#         before { get :sidebar }</span>
+      <span class="c1">#</span>
+      <span class="c1">#         it { should_not render_with_layout }</span>
+      <span class="c1">#       end</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class PostsControllerTest &lt; ActionController::TestCase</span>
+      <span class="c1">#       context &#39;GET #sidebar&#39; do</span>
+      <span class="c1">#         setup { get :sidebar }</span>
+      <span class="c1">#</span>
+      <span class="c1">#         should_not render_with_layout</span>
       <span class="c1">#       end</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
@@ -202,7 +229,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Fri Jun 20 11:42:38 2014 by
+  Generated on Fri Jun 20 16:44:06 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

@@ -91,17 +91,11 @@
       <span class="c1"># `validates_inclusion_of` validation, asserting that an attribute can</span>
       <span class="c1"># take a whitelist of values and cannot take values outside of this list.</span>
       <span class="c1">#</span>
-      <span class="c1"># #### Qualifiers</span>
-      <span class="c1">#</span>
-      <span class="c1"># `in_array` or `in_range` are used to test usage of the `:in` option,</span>
-      <span class="c1"># and so one must be used.</span>
-      <span class="c1">#</span>
-      <span class="c1"># ##### in_array</span>
-      <span class="c1">#</span>
-      <span class="c1"># Use `in_array` if your whitelist is an array of values.</span>
+      <span class="c1"># If your whitelist is an array of values, use `in_array`:</span>
       <span class="c1">#</span>
       <span class="c1">#     class Issue</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :state</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_inclusion_of :state, in: %w(open resolved unresolved)</span>
       <span class="c1">#     end</span>
@@ -120,12 +114,11 @@
       <span class="c1">#         in_array(%w(open resolved unresolved))</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
-      <span class="c1"># ##### in_range</span>
-      <span class="c1">#</span>
-      <span class="c1"># Use `in_range` if your whitelist is a range of values.</span>
+      <span class="c1"># If your whitelist is a range of values, use `in_range`:</span>
       <span class="c1">#</span>
       <span class="c1">#     class Issue</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :priority</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_inclusion_of :priority, in: 1..5</span>
       <span class="c1">#     end</span>
@@ -140,12 +133,15 @@
       <span class="c1">#       should ensure_inclusion_of(:state).in_range(1..5)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
+      <span class="c1"># #### Optional qualifiers</span>
+      <span class="c1">#</span>
       <span class="c1"># ##### with_message</span>
       <span class="c1">#</span>
       <span class="c1"># Use `with_message` if you are using a custom validation message.</span>
       <span class="c1">#</span>
       <span class="c1">#     class Issue</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :severity</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_inclusion_of :severity,</span>
       <span class="c1">#         in: %w(low medium high),</span>
@@ -175,6 +171,7 @@
       <span class="c1">#</span>
       <span class="c1">#     class Person</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :age</span>
       <span class="c1">#</span>
       <span class="c1">#       validate :age_must_be_valid</span>
       <span class="c1">#</span>
@@ -210,6 +207,7 @@
       <span class="c1">#</span>
       <span class="c1">#     class Person</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :age</span>
       <span class="c1">#</span>
       <span class="c1">#       validate :age_must_be_valid</span>
       <span class="c1">#</span>
@@ -244,6 +242,7 @@
       <span class="c1">#</span>
       <span class="c1">#     class Issue</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :state</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_presence_of :state</span>
       <span class="c1">#       validates_inclusion_of :state,</span>
@@ -273,6 +272,7 @@
       <span class="c1">#</span>
       <span class="c1">#     class Issue</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :state</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_presence_of :state</span>
       <span class="c1">#       validates_inclusion_of :state,</span>
@@ -548,7 +548,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Fri Jun 20 11:42:38 2014 by
+  Generated on Fri Jun 20 16:44:06 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

@@ -88,7 +88,10 @@
       <span class="c1"># The `validate_numericality_of` matcher tests usage of the</span>
       <span class="c1"># `validates_numericality_of` validation.</span>
       <span class="c1">#</span>
-      <span class="c1">#     class Person &lt; ActiveRecord::Base</span>
+      <span class="c1">#     class Person</span>
+      <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :gpa</span>
+      <span class="c1">#</span>
       <span class="c1">#       validates_numericality_of :gpa</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
@@ -112,6 +115,7 @@
       <span class="c1">#</span>
       <span class="c1">#     class Person</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :age</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_numericality_of :age, only_integer: true</span>
       <span class="c1">#     end</span>
@@ -135,6 +139,7 @@
       <span class="c1">#</span>
       <span class="c1">#     class Person</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :number_of_cars</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_numericality_of :number_of_cars, less_than: 2</span>
       <span class="c1">#     end</span>
@@ -162,6 +167,7 @@
       <span class="c1">#</span>
       <span class="c1">#     class Person</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :birth_year</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_numericality_of :birth_year, less_than_or_equal_to: 1987</span>
       <span class="c1">#     end</span>
@@ -188,6 +194,7 @@
       <span class="c1">#</span>
       <span class="c1">#     class Person</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :weight</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_numericality_of :weight, equal_to: 150</span>
       <span class="c1">#     end</span>
@@ -211,6 +218,7 @@
       <span class="c1">#</span>
       <span class="c1">#     class Person</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :height</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_numericality_of :height, greater_than_or_equal_to: 55</span>
       <span class="c1">#     end</span>
@@ -237,6 +245,7 @@
       <span class="c1">#</span>
       <span class="c1">#     class Person</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :legal_age</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_numericality_of :legal_age, greater_than: 21</span>
       <span class="c1">#     end</span>
@@ -262,6 +271,7 @@
       <span class="c1">#</span>
       <span class="c1">#     class Person</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :birth_month</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_numericality_of :birth_month, even: true</span>
       <span class="c1">#     end</span>
@@ -284,6 +294,7 @@
       <span class="c1">#</span>
       <span class="c1">#     class Person</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :birth_day</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_numericality_of :birth_day, odd: true</span>
       <span class="c1">#     end</span>
@@ -304,6 +315,7 @@
       <span class="c1">#</span>
       <span class="c1">#     class Person</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :number_of_dependents</span>
       <span class="c1">#</span>
       <span class="c1">#       validates_numericality_of :number_of_dependents,</span>
       <span class="c1">#         message: &#39;Number of dependents must be a number&#39;</span>
@@ -327,18 +339,21 @@
       <span class="c1">#</span>
       <span class="c1"># Use `allow_nil` to assert that the attribute allows nil.</span>
       <span class="c1">#</span>
-      <span class="c1">#     class Post &lt; ActiveRecord::Base</span>
-      <span class="c1">#       validates_uniqueness_of :author_id, allow_nil: true</span>
+      <span class="c1">#     class Age</span>
+      <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       attr_accessor :age</span>
+      <span class="c1">#</span>
+      <span class="c1">#       validates_numericality_of :age, allow_nil: true</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe Post do</span>
-      <span class="c1">#       it { should validate_uniqueness_of(:author_id).allow_nil }</span>
+      <span class="c1">#       it { should validate_numericality_of(:age).allow_nil }</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     # Test::Unit</span>
       <span class="c1">#     class PostTest &lt; ActiveSupport::TestCase</span>
-      <span class="c1">#       should validate_uniqueness_of(:author_id).allow_nil</span>
+      <span class="c1">#       should validate_numericality_of(:age).allow_nil</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1"># @return [ValidateNumericalityOfMatcher]</span>
@@ -517,7 +532,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Fri Jun 20 11:42:38 2014 by
+  Generated on Fri Jun 20 16:44:06 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

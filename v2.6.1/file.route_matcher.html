@@ -91,15 +91,16 @@
       <span class="c1"># combination of `route_to` and `be_routable`. For a Test::Unit suite, it</span>
       <span class="c1"># provides a more expressive syntax over `assert_routing`.</span>
       <span class="c1">#</span>
-      <span class="c1"># Given these routes:</span>
+      <span class="c1"># You can use this matcher either in a controller test case or in a</span>
+      <span class="c1"># routing test case. For instance, given these routes:</span>
       <span class="c1">#</span>
       <span class="c1">#     My::Application.routes.draw do</span>
       <span class="c1">#       get &#39;/posts&#39;, controller: &#39;posts&#39;, action: &#39;index&#39;</span>
       <span class="c1">#       get &#39;/posts/:id&#39; =&gt; &#39;posts#show&#39;</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
-      <span class="c1"># You can choose to keep your routing tests under the test file for one</span>
-      <span class="c1"># controller:</span>
+      <span class="c1"># You could choose to write tests for these routes alongside other tests</span>
+      <span class="c1"># for PostsController:</span>
       <span class="c1">#</span>
       <span class="c1">#     class PostsController &lt; ApplicationController</span>
       <span class="c1">#       # ...</span>
@@ -117,9 +118,7 @@
       <span class="c1">#       should route(:get, &#39;/posts/1&#39;).to(action: :show, id: 1)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
-      <span class="c1"># Or if you like, you can keep all of your routing tests in one file.</span>
-      <span class="c1"># Just be sure to always specify a controller as `route` won&#39;t be able to</span>
-      <span class="c1"># figure it out otherwise:</span>
+      <span class="c1"># Or you could place the tests along with other route tests:</span>
       <span class="c1">#</span>
       <span class="c1">#     # RSpec</span>
       <span class="c1">#     describe &#39;Routing&#39; do</span>
@@ -142,6 +141,27 @@
       <span class="c1">#       should route(:get, &#39;/posts/1&#39;).</span>
       <span class="c1">#         to(&#39;posts#show&#39;, id: 1)</span>
       <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1"># Notice that in the former case, as we are inside of a test case for</span>
+      <span class="c1"># PostsController, we do not have to specify that the routes resolve to</span>
+      <span class="c1"># this controller. In the latter case we specify this using the</span>
+      <span class="c1"># `controller` key passed to the `to` qualifier.</span>
+      <span class="c1">#</span>
+      <span class="c1"># #### Qualifiers</span>
+      <span class="c1">#</span>
+      <span class="c1"># ##### to</span>
+      <span class="c1">#</span>
+      <span class="c1"># Use `to` to specify the action (along with the controller, if needed)</span>
+      <span class="c1"># that the route resolves to.</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Three ways of saying the same thing (using the example above)</span>
+      <span class="c1">#     route(:get, &#39;/posts&#39;).to(action: index)</span>
+      <span class="c1">#     route(:get, &#39;/posts&#39;).to(controller: :posts, action: index)</span>
+      <span class="c1">#     route(:get, &#39;/posts&#39;).to(&#39;posts#index&#39;)</span>
+      <span class="c1">#</span>
+      <span class="c1"># If there are parameters in your route, then specify those too:</span>
+      <span class="c1">#</span>
+      <span class="c1">#     route(:get, &#39;/posts/1&#39;).to(&#39;posts#show&#39;, id: 1)</span>
       <span class="c1">#</span>
       <span class="c1"># @return [RouteMatcher]</span>
       <span class="c1">#</span>
@@ -211,7 +231,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Fri Jun 20 11:42:38 2014 by
+  Generated on Fri Jun 20 16:44:06 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

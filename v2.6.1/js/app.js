@@ -270,9 +270,7 @@ function makeHeadersSticky() {
       stickyHeaderContainer: '#header',
       switchOnCollisionWith: 'top',
       fillHeadersWith: function (node) {
-        var $elem = node.clone();
-        $elem.find('small').remove();
-        return $elem;
+        return $('<h3>').text(node.find('strong').text());
       }
     })
     .add('.method_details > h3')

@@ -104,6 +104,8 @@
       <span class="c1">#       should_not use_before_filter(:prevent_ssl)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
+      <span class="c1"># @return [CallbackMatcher]</span>
+      <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">use_before_filter</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
         <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:before</span><span class="p">,</span> <span class="ss">:filter</span><span class="p">)</span>
       <span class="k">end</span>
@@ -126,6 +128,8 @@
       <span class="c1">#       should use_after_filter(:log_activity)</span>
       <span class="c1">#       should_not use_after_filter(:destroy_user)</span>
       <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1"># @return [CallbackMatcher]</span>
       <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">use_after_filter</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
         <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:after</span><span class="p">,</span> <span class="ss">:filter</span><span class="p">)</span>
@@ -150,6 +154,8 @@
       <span class="c1">#       should_not use_before_action(:prevent_ssl)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
+      <span class="c1"># @return [CallbackMatcher]</span>
+      <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">use_before_action</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
         <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:before</span><span class="p">,</span> <span class="ss">:action</span><span class="p">)</span>
       <span class="k">end</span>
@@ -172,6 +178,8 @@
       <span class="c1">#       should use_after_action(:log_activity)</span>
       <span class="c1">#       should_not use_after_action(:destroy_user)</span>
       <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1"># @return [CallbackMatcher]</span>
       <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">use_after_action</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
         <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:after</span><span class="p">,</span> <span class="ss">:action</span><span class="p">)</span>
@@ -196,6 +204,8 @@
       <span class="c1">#       should_not use_around_filter(:save_view_context)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
+      <span class="c1"># @return [CallbackMatcher]</span>
+      <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">use_around_filter</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
         <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:around</span><span class="p">,</span> <span class="ss">:filter</span><span class="p">)</span>
       <span class="k">end</span>
@@ -218,6 +228,8 @@
       <span class="c1">#       should use_around_action(:wrap_in_transaction)</span>
       <span class="c1">#       should_not use_around_action(:save_view_context)</span>
       <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1"># @return [CallbackMatcher]</span>
       <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">use_around_action</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
         <span class="no">CallbackMatcher</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="ss">:around</span><span class="p">,</span> <span class="ss">:action</span><span class="p">)</span>
@@ -269,7 +281,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Fri Jun 20 11:42:38 2014 by
+  Generated on Fri Jun 20 16:44:06 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

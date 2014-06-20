@@ -92,12 +92,16 @@
       <span class="c1">#</span>
       <span class="c1">#     class Post</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       include ActiveModel::MassAssignmentSecurity</span>
+      <span class="c1">#       attr_accessor :title</span>
       <span class="c1">#</span>
       <span class="c1">#       attr_accessible :title</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
       <span class="c1">#     class User</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       include ActiveModel::MassAssignmentSecurity</span>
+      <span class="c1">#       attr_accessor :encrypted_password</span>
       <span class="c1">#</span>
       <span class="c1">#       attr_protected :encrypted_password</span>
       <span class="c1">#     end</span>
@@ -120,15 +124,17 @@
       <span class="c1">#       should_not allow_mass_assignment_of(:encrypted_password)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
-      <span class="c1"># #### Qualifiers</span>
+      <span class="c1"># #### Optional qualifiers</span>
       <span class="c1">#</span>
       <span class="c1"># ##### as</span>
       <span class="c1">#</span>
       <span class="c1"># Use `as` if your mass-assignment rules apply only under a certain role</span>
-      <span class="c1"># (Rails &gt;= 3.1 only).</span>
+      <span class="c1"># *(Rails &gt;= 3.1 only)*.</span>
       <span class="c1">#</span>
       <span class="c1">#     class Post</span>
       <span class="c1">#       include ActiveModel::Model</span>
+      <span class="c1">#       include ActiveModel::MassAssignmentSecurity</span>
+      <span class="c1">#       attr_accessor :title</span>
       <span class="c1">#</span>
       <span class="c1">#       attr_accessible :title, as: :admin</span>
       <span class="c1">#     end</span>
@@ -252,7 +258,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Fri Jun 20 11:42:38 2014 by
+  Generated on Fri Jun 20 16:44:06 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>

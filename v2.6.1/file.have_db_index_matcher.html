@@ -134,6 +134,19 @@
       <span class="c1">#       should have_db_index(:name).unique(true)</span>
       <span class="c1">#     end</span>
       <span class="c1">#</span>
+      <span class="c1"># Since it only ever makes since for `unique` to be `true`, you can also</span>
+      <span class="c1"># leave off the argument to save some keystrokes:</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # RSpec</span>
+      <span class="c1">#     describe Blog do</span>
+      <span class="c1">#       it { should have_db_index(:name).unique }</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
+      <span class="c1">#     # Test::Unit</span>
+      <span class="c1">#     class BlogTest &lt; ActiveSupport::TestCase</span>
+      <span class="c1">#       should have_db_index(:name).unique</span>
+      <span class="c1">#     end</span>
+      <span class="c1">#</span>
       <span class="c1"># @return [HaveDbIndexMatcher]</span>
       <span class="c1">#</span>
       <span class="k">def</span> <span class="nf">have_db_index</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
@@ -234,7 +247,7 @@
 </pre></div></div>
 
       <div id="footer">
-  Generated on Fri Jun 20 11:42:39 2014 by
+  Generated on Fri Jun 20 16:44:07 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.3 (ruby-2.1.1).
 </div>
