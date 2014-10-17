@@ -637,12 +637,12 @@ nav {
   width: 100%;
   background: #f5f4f1; }
   /* line 9, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
-  nav .btn {
+  nav .btn, nav .btn-github, nav .btn-docs {
     float: right;
     margin-top: 1.4375em; }
     @media screen and (max-width: 52.5em) {
       /* line 9, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
-      nav .btn {
+      nav .btn, nav .btn-github, nav .btn-docs {
         display: none; } }
 
 /* line 19, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
@@ -659,38 +659,52 @@ nav {
       padding-left: 0.625em; } }
 
 /* line 31, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
-.btn {
+.btn, .btn-github, .btn-docs {
   height: 2.8125em;
   width: 9.375em;
   -webkit-transition: all, linear, 0.3s;
   -moz-transition: all, linear, 0.3s;
   transition: all, linear, 0.3s;
-  border: solid 2px #f15e30;
   border-radius: 1.25em;
-  color: #f15e30;
   display: inline-block;
   font-weight: 400;
   padding: 0.625em 1.25em;
+  margin-left: 0.625em;
   text-align: center;
   text-transform: uppercase; }
-  /* line 43, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
-  .btn:hover {
+
+/* line 43, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+.btn-github {
+  border: solid 2px #f15e30;
+  color: #f15e30; }
+  /* line 48, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  .btn-github:hover {
     background: #f15e30;
     color: white;
     cursor: pointer; }
 
-/* line 50, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 55, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+.btn-docs {
+  border: solid 2px #39bfc1;
+  color: #39bfc1; }
+  /* line 60, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  .btn-docs:hover {
+    background: #39bfc1;
+    color: white;
+    cursor: pointer; }
+
+/* line 67, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .main-header {
   height: 37.5em;
   width: auto;
   background: url("/shoulda-matchers/images/background-header.png") no-repeat top;
   background-size: cover; }
   @media screen and (max-width: 47.5em) {
-    /* line 50, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 67, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .main-header {
       height: 18.75em;
       width: auto; } }
-  /* line 59, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 76, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .main-header h1 {
     font-weight: 500;
     text-shadow: 1px 1px 7px #107a7a;
@@ -698,16 +712,15 @@ nav {
     text-align: center;
     padding: 60px 15px 50px; }
     @media screen and (max-width: 52.5em) {
-      /* line 59, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+      /* line 76, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
       .main-header h1 {
         font-size: 2.75em; } }
 
-/* line 72, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 89, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .browser-container {
-  padding: 0 1.25em;
   position: relative; }
 
-/* line 77, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 93, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .browser-bar {
   height: 2em;
   width: 100%;
@@ -715,11 +728,11 @@ nav {
   background-repeat: no-repeat;
   border-radius: 0.25em 0.25em 0 0; }
   @media screen and (max-width: 47.5em) {
-    /* line 77, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 93, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .browser-bar {
       display: none; } }
 
-/* line 88, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 104, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .browser-button {
   height: 0.9375em;
   width: 0.9375em;
@@ -728,11 +741,8 @@ nav {
   float: left;
   margin: 0.5625em 0 0 0.5em; }
 
-/* line 96, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 112, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .tool-tip, .tool-tip-one, .tool-tip-two {
-  -webkit-animation: bounceIn 0.7s 0.5s 1 none, bounceOut 0.9s 3.5s 1 forwards;
-  -moz-animation: bounceIn 0.7s 0.5s 1 none, bounceOut 0.9s 3.5s 1 forwards;
-  animation: bounceIn 0.7s 0.5s 1 none, bounceOut 0.9s 3.5s 1 forwards;
   position: absolute;
   top: 3.125em;
   right: -0.9375em;
@@ -745,83 +755,89 @@ nav {
   padding: 0.9375em;
   z-index: 5; }
   @media screen and (max-width: 67.1875em) {
-    /* line 96, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 112, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .tool-tip, .tool-tip-one, .tool-tip-two {
       margin-right: 3.125em; } }
   @media screen and (max-width: 47.5em) {
-    /* line 96, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 112, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .tool-tip, .tool-tip-one, .tool-tip-two {
       display: none; } }
-  /* line 115, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 130, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .tool-tip p, .tool-tip-one p, .tool-tip-two p {
     color: #6d6e70;
     text-align: initial; }
 
-/* line 121, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 136, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .tool-tip-one {
-  -webkit-animation: bounceIn 0.7s 0.5s 1 none, bounceOut 0.9s 3.5s 1 forwards;
-  -moz-animation: bounceIn 0.7s 0.5s 1 none, bounceOut 0.9s 3.5s 1 forwards;
-  animation: bounceIn 0.7s 0.5s 1 none, bounceOut 0.9s 3.5s 1 forwards; }
+  -webkit-animation: bounceIn 0.7s 0.3s 1 none, bounceOut 0.9s 3.2s 1 forwards;
+  -moz-animation: bounceIn 0.7s 0.3s 1 none, bounceOut 0.9s 3.2s 1 forwards;
+  animation: bounceIn 0.7s 0.3s 1 none, bounceOut 0.9s 3.2s 1 forwards; }
 
-/* line 126, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 141, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .tool-tip-two {
-  -webkit-animation: bounceIn 0.7s 0.5s 1 none, bounceOut 0.9s 3.5s 1 forwards;
-  -moz-animation: bounceIn 0.7s 0.5s 1 none, bounceOut 0.9s 3.5s 1 forwards;
-  animation: bounceIn 0.7s 0.5s 1 none, bounceOut 0.9s 3.5s 1 forwards; }
+  -webkit-animation: bounceIn 0.7s 4.5s 1 backwards, bounceOut 0.9s 6.8s 1 forwards;
+  -moz-animation: bounceIn 0.7s 4.5s 1 backwards, bounceOut 0.9s 6.8s 1 forwards;
+  animation: bounceIn 0.7s 4.5s 1 backwards, bounceOut 0.9s 6.8s 1 forwards; }
 
-/* line 131, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 146, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .browser-background {
   height: 26.25em;
   width: 100%;
   background: #494f57;
   border-radius: 0 0 0.3125em 0.3125em; }
-  /* line 136, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
-  .browser-background .language-ruby, .browser-background .language-ruby-one, .browser-background .language-ruby-two {
-    -webkit-animation: fadeIn 0.9s 0.5s 1 backwards, fadeOut 0.9s 3s 1 forwards;
-    -moz-animation: fadeIn 0.9s 0.5s 1 backwards, fadeOut 0.9s 3s 1 forwards;
-    animation: fadeIn 0.9s 0.5s 1 backwards, fadeOut 0.9s 3s 1 forwards;
-    height: 26.25em;
-    width: 100%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+  /* line 151, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  .browser-background .language-ruby {
+    height: 28em;
+    width: 70%;
+    position: absolute;
+    top: 1.6em;
+    left: 1.6em;
     background: #494f57;
     border: none;
     box-shadow: none;
     font-size: 0.9375em;
-    margin: initial;
     text-shadow: none;
     z-index: 2; }
     @media screen and (max-width: 47.5em) {
-      /* line 136, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
-      .browser-background .language-ruby, .browser-background .language-ruby-one, .browser-background .language-ruby-two {
+      /* line 151, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+      .browser-background .language-ruby {
         display: none; } }
+  /* line 166, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  .browser-background .animation-one {
+    -webkit-animation: fadeIn 0.9s 0.3s 1 backwards, fadeOut 0.9s 3.2s 1 forwards;
+    -moz-animation: fadeIn 0.9s 0.3s 1 backwards, fadeOut 0.9s 3.2s 1 forwards;
+    animation: fadeIn 0.9s 0.3s 1 backwards, fadeOut 0.9s 3.2s 1 forwards; }
+  /* line 170, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  .browser-background .animation-two {
+    -webkit-animation: fadeIn 0.9s 4.5s 1 backwards, fadeOut 0.9s 7s 1 forwards;
+    -moz-animation: fadeIn 0.9s 4.5s 1 backwards, fadeOut 0.9s 7s 1 forwards;
+    animation: fadeIn 0.9s 4.5s 1 backwards, fadeOut 0.9s 7s 1 forwards; }
 
-/* line 163, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 175, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .benefits-header {
   background: #f5f4f1;
   border-bottom: solid 1px #e3e2dd;
   padding: 4.0625em 0 2.8125em 0;
   text-align: center; }
-  /* line 169, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 181, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .benefits-header span {
     color: #39bfc1;
     font-weight: 500; }
   @media screen and (max-width: 47.5em) {
-    /* line 163, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 175, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .benefits-header {
       padding: 1.875em; } }
 
-/* line 179, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 191, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .benefits-wrapper {
   padding: 4.6875em 0; }
   @media screen and (max-width: 47.5em) {
-    /* line 179, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 191, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .benefits-wrapper {
       padding-top: initial;
       padding-bottom: 1.5625em; } }
 
-/* line 188, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 200, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .benefit {
   float: left;
   display: block;
@@ -833,7 +849,7 @@ nav {
   .benefit:last-child {
     margin-right: 0; }
   @media screen and (max-width: 47.5em) {
-    /* line 188, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 200, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .benefit {
       float: left;
       display: block;
@@ -843,30 +859,30 @@ nav {
       /* line 38, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/neat/grid/_span-columns.scss */
       .benefit:last-child {
         margin-right: 0; } }
-  /* line 198, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 210, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .benefit h2 {
     font-weight: 500;
     padding: 2.5em 0 1.25em; }
 
-/* line 204, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 216, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .icon {
   height: 4.9375em;
   width: 4.9375em;
   margin: 0 auto; }
-  /* line 208, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 220, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .icon.animated {
     -webkit-animation: reveal 2s;
     -moz-animation: reveal 2s;
     animation: reveal 2s; }
 
-/* line 213, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 225, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .installation-wrapper {
   background: #f5f4f1;
   border-bottom: solid 1px #e3e2dd;
   border-top: solid 1px #e3e2dd;
   padding: 4.6875em 0; }
-  /* line 219, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
-  .installation-wrapper .language-ruby, .installation-wrapper .browser-background .language-ruby-one, .browser-background .installation-wrapper .language-ruby-one, .installation-wrapper .browser-background .language-ruby-two, .browser-background .installation-wrapper .language-ruby-two {
+  /* line 231, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  .installation-wrapper .language-ruby {
     background: #494f57;
     border: none;
     border-radius: none;
@@ -876,17 +892,17 @@ nav {
     text-shadow: none;
     width: 31.25em; }
     @media screen and (max-width: 33.75em) {
-      /* line 219, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
-      .installation-wrapper .language-ruby, .installation-wrapper .browser-background .language-ruby-one, .browser-background .installation-wrapper .language-ruby-one, .installation-wrapper .browser-background .language-ruby-two, .browser-background .installation-wrapper .language-ruby-two {
+      /* line 231, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+      .installation-wrapper .language-ruby {
         width: 21.875em; } }
 
-/* line 235, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 247, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .installation-header {
   font-weight: 500;
   padding-bottom: 2.1875em;
   text-align: center; }
 
-/* line 241, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 253, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .tabs {
   position: relative;
   top: auto;
@@ -896,37 +912,37 @@ nav {
   margin-left: -350px;
   width: 700px; }
 
-/* line 247, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 259, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .installation-instructions {
   margin-top: 1.875em; }
-  /* line 250, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 262, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .installation-instructions h2 {
     font-weight: 500;
     padding-bottom: 0.625em; }
 
 @media screen and (min-width: 40em) {
-  /* line 256, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 268, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .accordion-tabs-minimal {
     border: none; } }
 @media screen and (min-width: 40em) {
-  /* line 269, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 281, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .accordion-tabs-minimal li.tab-header-and-content {
     display: inline; } }
-/* line 274, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 286, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .accordion-tabs-minimal li.tab-header-and-content:first-child a.tab-link {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   border-top: 0; }
-/* line 280, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 292, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .accordion-tabs-minimal li.tab-header-and-content:last-child a.tab-link {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px; }
   @media screen and (min-width: 40em) {
-    /* line 280, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 292, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .accordion-tabs-minimal li.tab-header-and-content:last-child a.tab-link {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0; } }
-/* line 291, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 303, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .accordion-tabs-minimal li.tab-header-and-content a.tab-link {
   background-color: #f5f4f1;
   border-top: 1px solid #DDD;
@@ -935,28 +951,28 @@ nav {
   font-weight: 400;
   padding: 0.75em 30px; }
   @media screen and (min-width: 40em) {
-    /* line 291, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 303, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .accordion-tabs-minimal li.tab-header-and-content a.tab-link {
       display: inline-block;
       border-top: 0;
       border-top-right-radius: 3px;
       border-top-left-radius: 3px; } }
-  /* line 306, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 318, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .accordion-tabs-minimal li.tab-header-and-content a.tab-link:focus {
     outline: none; }
-  /* line 310, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 322, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .accordion-tabs-minimal li.tab-header-and-content a.tab-link.is-active {
     background-color: #f5f4f1;
     border-bottom: 0;
     font-weight: 500; }
     @media screen and (min-width: 40em) {
-      /* line 310, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+      /* line 322, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
       .accordion-tabs-minimal li.tab-header-and-content a.tab-link.is-active {
         background-color: #f5f4f1;
         border: 1px solid #DDD;
         border-bottom: 1px solid #f5f4f1;
         margin-bottom: -1px; } }
-/* line 324, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 336, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .accordion-tabs-minimal li.tab-header-and-content .tab-content {
   padding: 1.5em 30px;
   background: #f5f4f1;
@@ -964,15 +980,15 @@ nav {
   overflow: hidden;
   width: 100%; }
   @media screen and (min-width: 40em) {
-    /* line 324, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 336, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .accordion-tabs-minimal li.tab-header-and-content .tab-content {
       border-top: 1px solid #DDD;
       float: left;
       left: 0;
       padding: 0.75em 15px; } }
 
-/* line 341, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
-footer .btn {
+/* line 353, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+footer .btn, footer .btn-github, footer .btn-docs {
   position: relative;
   top: auto;
   right: auto;
@@ -981,7 +997,7 @@ footer .btn {
   height: auto;
   width: 150px;
   margin: 40px 0 40px  -75px; }
-/* line 347, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 359, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 footer p {
   text-align: center; }
 
