@@ -649,7 +649,7 @@ nav {
 .logo {
   height: 4.0625em;
   width: 15.625em;
-  background: url("../images/shoulda-matchers-logo.svg");
+  background: url("/shoulda-matchers/images/shoulda-matchers-logo.svg");
   display: inline-block;
   float: left;
   margin: 0.8125em 0 0; }
@@ -683,7 +683,7 @@ nav {
 .main-header {
   height: 37.5em;
   width: auto;
-  background: url("../images/background-header.png") no-repeat top;
+  background: url("/shoulda-matchers/images/background-header.png") no-repeat top;
   background-size: cover; }
   @media screen and (max-width: 47.5em) {
     /* line 50, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
