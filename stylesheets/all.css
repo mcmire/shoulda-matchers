@@ -405,7 +405,7 @@ h6 {
 
 /* line 22, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
 h1 {
-  font-size: 4.25em; }
+  font-size: 4.3em; }
 
 /* line 26, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
 h2 {
@@ -431,24 +431,25 @@ h6 {
 
 /* line 48, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
 p {
-  margin: 0 0 0.75em; }
+  margin: 0 0 0.75em;
+  font-size: 1.1em; }
 
-/* line 52, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
+/* line 53, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
 a {
   -webkit-transition: color 0.1s linear;
   -moz-transition: color 0.1s linear;
   transition: color 0.1s linear;
   color: #477DCA;
   text-decoration: none; }
-  /* line 57, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
+  /* line 58, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
   a:hover {
     color: #2c5999; }
-  /* line 61, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
+  /* line 62, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
   a:active, a:focus {
     color: #2c5999;
     outline: none; }
 
-/* line 67, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
+/* line 68, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
 hr {
   border-bottom: 1px solid #DDD;
   border-left: none;
@@ -456,24 +457,24 @@ hr {
   border-top: none;
   margin: 1.5em 0; }
 
-/* line 75, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
+/* line 76, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
 img,
 picture {
   margin: 0;
   max-width: 100%; }
 
-/* line 81, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
+/* line 82, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
 blockquote {
   border-left: 2px solid #DDD;
   color: #939496;
   margin: 1.5em 0;
   padding-left: 0.75em; }
 
-/* line 88, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
+/* line 89, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
 cite {
   color: #adaeaf;
   font-style: italic; }
-  /* line 92, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
+  /* line 93, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/bitters/_typography.scss */
   cite:before {
     content: "\2014 \00A0"; }
 
@@ -633,13 +634,13 @@ input[type="submit"] {
 
 /* line 5, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 nav {
-  height: 5.625em;
+  height: 6.875em;
   width: 100%;
   background: #f5f4f1; }
   /* line 9, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   nav .btn, nav .btn-github, nav .btn-docs {
     float: right;
-    margin-top: 1.4375em; }
+    margin-top: 2.1875em; }
     @media screen and (max-width: 52.5em) {
       /* line 9, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
       nav .btn, nav .btn-github, nav .btn-docs {
@@ -652,7 +653,7 @@ nav {
   background: url("/shoulda-matchers/images/shoulda-matchers-logo.svg");
   display: inline-block;
   float: left;
-  margin: 0.8125em 0 0; }
+  margin-top: 1.5625em; }
   @media screen and (max-width: 33.75em) {
     /* line 19, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .logo {
@@ -745,14 +746,14 @@ nav {
 .tool-tip, .tool-tip-one, .tool-tip-two {
   position: absolute;
   top: 3.125em;
-  right: -0.9375em;
+  right: -1.5625em;
   height: 3.4375em;
   width: 17.5em;
   background: #e3e2dd;
   border-radius: 0.3125em;
   box-shadow: -1px 3px 6px -1px rgba(0, 0, 0, 0.7);
   font-size: 1.375em;
-  padding: 0.9375em;
+  padding: 0.8125em 1.0625em 1.0625em;
   z-index: 5; }
   @media screen and (max-width: 67.1875em) {
     /* line 112, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
@@ -769,25 +770,25 @@ nav {
 
 /* line 136, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .tool-tip-one {
-  -webkit-animation: bounceIn 0.7s 0.3s 1 none, bounceOut 0.9s 3.2s 1 forwards;
-  -moz-animation: bounceIn 0.7s 0.3s 1 none, bounceOut 0.9s 3.2s 1 forwards;
-  animation: bounceIn 0.7s 0.3s 1 none, bounceOut 0.9s 3.2s 1 forwards; }
+  -webkit-animation: bounceIn 0.7s 0.3s 1 none, bounceOut 0.9s 3s 1 forwards;
+  -moz-animation: bounceIn 0.7s 0.3s 1 none, bounceOut 0.9s 3s 1 forwards;
+  animation: bounceIn 0.7s 0.3s 1 none, bounceOut 0.9s 3s 1 forwards; }
 
 /* line 141, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .tool-tip-two {
-  -webkit-animation: bounceIn 0.7s 4.5s 1 backwards, bounceOut 0.9s 6.8s 1 forwards;
-  -moz-animation: bounceIn 0.7s 4.5s 1 backwards, bounceOut 0.9s 6.8s 1 forwards;
-  animation: bounceIn 0.7s 4.5s 1 backwards, bounceOut 0.9s 6.8s 1 forwards; }
+  -webkit-animation: bounceIn 0.7s 4.3s 1 backwards, bounceOut 0.9s 6.6s 1 forwards;
+  -moz-animation: bounceIn 0.7s 4.3s 1 backwards, bounceOut 0.9s 6.6s 1 forwards;
+  animation: bounceIn 0.7s 4.3s 1 backwards, bounceOut 0.9s 6.6s 1 forwards; }
 
 /* line 146, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .browser-background {
-  height: 26.25em;
+  height: 28.125em;
   width: 100%;
   background: #494f57;
   border-radius: 0 0 0.3125em 0.3125em; }
   /* line 151, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .browser-background .language-ruby {
-    height: 28em;
+    height: 30em;
     width: 70%;
     position: absolute;
     top: 1.6em;
@@ -810,15 +811,15 @@ nav {
     animation: fadeIn 0.9s 0.3s 1 backwards, fadeOut 0.9s 3.2s 1 forwards; }
   /* line 171, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .browser-background .animation-two {
-    -webkit-animation: fadeIn 0.9s 4.5s 1 backwards, fadeOut 0.9s 7s 1 forwards;
-    -moz-animation: fadeIn 0.9s 4.5s 1 backwards, fadeOut 0.9s 7s 1 forwards;
-    animation: fadeIn 0.9s 4.5s 1 backwards, fadeOut 0.9s 7s 1 forwards; }
+    -webkit-animation: fadeIn 0.9s 4.3s 1 backwards, fadeOut 0.9s 7s 1 forwards;
+    -moz-animation: fadeIn 0.9s 4.3s 1 backwards, fadeOut 0.9s 7s 1 forwards;
+    animation: fadeIn 0.9s 4.3s 1 backwards, fadeOut 0.9s 7s 1 forwards; }
 
 /* line 176, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .benefits-header {
   background: #f5f4f1;
   border-bottom: solid 1px #e3e2dd;
-  padding: 4.0625em 0 2.8125em 0;
+  padding: 4.6875em 0 2.1875em 0;
   text-align: center; }
   /* line 182, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .benefits-header span {
@@ -988,17 +989,17 @@ nav {
       left: 0;
       padding: 0.75em 15px; } }
 
-/* line 354, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
-footer .btn, footer .btn-github, footer .btn-docs {
+/* line 355, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+footer .footer-buttons {
   position: relative;
   top: auto;
   right: auto;
   bottom: auto;
   left: 50%;
   height: auto;
-  width: 150px;
-  margin: 40px 0 40px  -75px; }
-/* line 360, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  width: 350px;
+  margin: 40px 0 40px  -175px; }
+/* line 365, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 footer p {
   text-align: center; }
 
