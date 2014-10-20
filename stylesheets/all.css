@@ -1002,6 +1002,9 @@ footer .footer-buttons {
 /* line 365, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 footer p {
   text-align: center; }
+  /* line 368, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  footer p a {
+    color: #39bfc1; }
 
 /* http://prismjs.com/download.html?themes=prism-twilight&languages=clike+ruby */
 /**
