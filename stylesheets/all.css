@@ -669,8 +669,8 @@ nav {
   border-radius: 1.25em;
   display: inline-block;
   font-weight: 400;
-  padding: 0.625em 1.25em;
   margin-left: 0.625em;
+  padding: 0.625em 1.25em;
   text-align: center;
   text-transform: uppercase; }
 
@@ -702,9 +702,9 @@ nav {
   background-size: cover; }
   /* line 72, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .main-header h1 {
+    color: white;
     font-weight: 500;
     text-shadow: 1px 1px 7px #107a7a;
-    color: white;
     text-align: center;
     padding: 60px 15px 50px; }
     @media screen and (max-width: 52.5em) {
