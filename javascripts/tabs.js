@@ -1,19 +1,42 @@
-$(document).ready(function () {
-  $('.accordion-tabs-minimal').each(function(index) {
-    $(this).children('li').first().children('a').addClass('is-active').next().addClass('is-open').show();
+(function() {
+  $(document).ready(function() {
+    var isTabActive, respondToTabBeingClicked, selectFirstTab, selectTab, switchContent, tabActiveClass, tabContentOpenClass, tabContentSelector, tabSelector, tabSetSelector, tabSets;
+    tabSetSelector = '.accordion-tabs-minimal';
+    tabSelector = '.tab-link';
+    tabContentSelector = '.tab-content';
+    tabActiveClass = 'is-active';
+    tabContentOpenClass = 'is-open';
+    tabSets = $(tabSetSelector);
+    selectFirstTab = function() {
+      var firstItem;
+      firstItem = $(this).children('li').first();
+      firstItem.find(tabSelector).addClass(tabActiveClass);
+      return firstItem.find(tabContentSelector).addClass(tabContentOpenClass).show();
+    };
+    isTabActive = function(tab) {
+      return tab.hasClass(tabActiveClass);
+    };
+    selectTab = function(tabSet, tab) {
+      tabSet.find(tabSelector).removeClass(tabActiveClass);
+      return tab.addClass(tabActiveClass);
+    };
+    switchContent = function(tabSet, content) {
+      tabSet.find(tabContentSelector).removeClass(tabContentOpenClass).hide();
+      return content.addClass(tabContentOpenClass).show();
+    };
+    respondToTabBeingClicked = function(event) {
+      var content, tab, tabSet;
+      event.preventDefault();
+      tab = $(this);
+      tabSet = tab.parents(tabSetSelector);
+      content = tab.next(tabContentSelector);
+      if (!isTabActive(tab)) {
+        selectTab(tabSet, tab);
+        return switchContent(tabSet, content);
+      }
+    };
+    tabSets.each(selectFirstTab);
+    return tabSets.on('click', tabSelector, respondToTabBeingClicked);
   });
 
-  $('.accordion-tabs-minimal').on('click', 'li > a', function(event) {
-    if (!$(this).hasClass('is-active')) {
-      event.preventDefault();
-      var accordionTabs = $(this).closest('.accordion-tabs-minimal')
-      accordionTabs.find('.is-open').removeClass('is-open').hide();
-
-      $(this).next().toggleClass('is-open').toggle();
-      accordionTabs.find('.is-active').removeClass('is-active');
-      $(this).addClass('is-active');
-    } else {
-      event.preventDefault();
-    }
-  });
-});
+}).call(this);

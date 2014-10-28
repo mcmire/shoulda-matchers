@@ -30,21 +30,21 @@
     <div class='main-header-copy'>
       <h1>Simple One-Liner Tests for Rails</h1>
     </div>
-    <div class='browser-container animate'>
+    <div class='browser-container presentation paused'>
       <div class='browser-bar'>
         <div class='browser-button'></div>
         <div class='browser-button'></div>
         <div class='browser-button'></div>
       </div>
-      <div class='tool-tip-one'>
+      <div class='animatable tool-tip tool-tip-one'>
         <p>Test <b>without</b> Shoulda Matchers.</p>
       </div>
-      <div class='tool-tip-two'>
+      <div class='animatable tool-tip tool-tip-two'>
         <p>Test <b>with</b> Shoulda Matchers.</p>
       </div>
       <div class='browser-background'>
-        <pre><code class='language-ruby animation-one'>describe User do&#x000A;  it 'is not valid if its username is the same as another user within the same account' do&#x000A;    _existing_user = FactoryGirl.create(:user,&#x000A;      username: 'johnsmith',&#x000A;      account_id: 1&#x000A;    )&#x000A;    user = FactoryGirl.build(:user,&#x000A;      username: 'johnsmith',&#x000A;      account_id: 1&#x000A;    )&#x000A;    expect(user).not_to be_valid&#x000A;  end&#x000A;&#x000A;  it 'is valid if its username is the same as another user within the same account, but for different case' do&#x000A;    _existing_user = FactoryGirl.create(:user,&#x000A;      username: 'johnsmith',&#x000A;      account_id: 1&#x000A;    )&#x000A;    user = FactoryGirl.build(:user,&#x000A;      username: 'JohnSmith',&#x000A;      account_id: 1&#x000A;    )&#x000A;    expect(user).to be_valid&#x000A;  end&#x000A;</code>
-        <code class='language-ruby animation-two'>describe User do&#x000A;  context 'validations' do&#x000A;    before { FactoryGirl.build(:user) }&#x000A;&#x000A;    it do&#x000A;      should validate_uniqueness_of(:username).&#x000A;        scoped_to(:account_id).&#x000A;        with_message('must be unique within an account').&#x000A;        case_insensitive&#x000A;    end&#x000A;  end&#x000A;end&#x000A;</code></pre>
+        <pre><code class='language-ruby animatable animation animation-one'>describe User do&#x000A;  it 'is not valid if its username is the same as another user within the same account' do&#x000A;    _existing_user = FactoryGirl.create(:user,&#x000A;      username: 'johnsmith',&#x000A;      account_id: 1&#x000A;    )&#x000A;    user = FactoryGirl.build(:user,&#x000A;      username: 'johnsmith',&#x000A;      account_id: 1&#x000A;    )&#x000A;    expect(user).not_to be_valid&#x000A;  end&#x000A;&#x000A;  it 'is valid if its username is the same as another user within the same account, but for different case' do&#x000A;    _existing_user = FactoryGirl.create(:user,&#x000A;      username: 'johnsmith',&#x000A;      account_id: 1&#x000A;    )&#x000A;    user = FactoryGirl.build(:user,&#x000A;      username: 'JohnSmith',&#x000A;      account_id: 1&#x000A;    )&#x000A;    expect(user).to be_valid&#x000A;  end&#x000A;</code>
+        <code class='language-ruby animatable animation animation-two'>describe User do&#x000A;  context 'validations' do&#x000A;    before { FactoryGirl.build(:user) }&#x000A;&#x000A;    it do&#x000A;      should validate_uniqueness_of(:username).&#x000A;        scoped_to(:account_id).&#x000A;        with_message('must be unique within an account').&#x000A;        case_insensitive&#x000A;    end&#x000A;  end&#x000A;end&#x000A;</code></pre>
       </div>
     </div>
   </div>

@@ -1,24 +1,21 @@
-$(function() {
-  var animate_icon;
+(function() {
+  $(document).ready(function() {
+    var animateElementsInView;
+    if ($('.animate').length > 0) {
+      animateElementsInView = function() {
+        return $('.animate').each(function() {
+          var element;
+          element = $(this);
+          if (element.visible(true, true)) {
+            return element.addClass('animated');
+          } else {
+            return element.removeClass('animated');
+          }
+        });
+      };
+      animateElementsInView();
+      return $(window).scroll(animateElementsInView);
+    }
+  });
 
-  if ($(".animate").length > 0) {
-    animate_icon = function() {
-      return $(".animate").each(function(i, el) {
-        var $el;
-        $el = $(el);
-
-        if ($el.visible(true, true)) {
-          return $el.addClass("animated");
-        } else {
-          return $el.removeClass("animated");
-        }
-      });
-    };
-
-    animate_icon();
-
-    return $(window).scroll(function(event) {
-      return animate_icon();
-    });
-  }
-});
+}).call(this);
