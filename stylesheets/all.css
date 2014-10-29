@@ -841,19 +841,18 @@ nav {
   text-align: center; }
   /* line 223, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .benefits-header span {
-    color: #39bfc1;
     font-weight: 500; }
 
-/* line 229, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 228, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .benefits-wrapper {
   padding: 4.6875em 0; }
   @media screen and (max-width: 47.5em) {
-    /* line 229, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 228, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .benefits-wrapper {
       padding-top: initial;
       padding-bottom: 1.5625em; } }
 
-/* line 238, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 237, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .benefit {
   float: left;
   display: block;
@@ -865,7 +864,7 @@ nav {
   .benefit:last-child {
     margin-right: 0; }
   @media screen and (max-width: 47.5em) {
-    /* line 238, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 237, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .benefit {
       float: left;
       display: block;
@@ -875,29 +874,29 @@ nav {
       /* line 38, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/neat/grid/_span-columns.scss */
       .benefit:last-child {
         margin-right: 0; } }
-  /* line 248, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 247, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .benefit h2 {
     font-weight: 500;
     padding: 2.5em 0 1.25em; }
 
-/* line 254, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 253, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .icon {
   height: 4.9375em;
   width: 4.9375em;
   margin: 0 auto; }
-  /* line 258, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 257, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .icon.animated {
     -webkit-animation: reveal 2s;
     -moz-animation: reveal 2s;
     animation: reveal 2s; }
 
-/* line 263, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 262, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .installation-wrapper {
   background: #f5f4f1;
   border-bottom: solid 1px #e3e2dd;
   border-top: solid 1px #e3e2dd;
   padding: 4.6875em 0; }
-  /* line 269, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 268, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .installation-wrapper .language-ruby {
     background: #494f57;
     border: none;
@@ -908,17 +907,17 @@ nav {
     text-shadow: none;
     width: 31.25em; }
     @media screen and (max-width: 33.75em) {
-      /* line 269, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+      /* line 268, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
       .installation-wrapper .language-ruby {
         width: 20em; } }
 
-/* line 285, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 284, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .installation-header {
   font-weight: 500;
   padding-bottom: 2.1875em;
   text-align: center; }
 
-/* line 291, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 290, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .tabs {
   position: relative;
   top: auto;
@@ -928,37 +927,37 @@ nav {
   margin-left: -350px;
   width: 700px; }
 
-/* line 297, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 296, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .installation-instructions {
   margin-top: 1.875em; }
-  /* line 300, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 299, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .installation-instructions h2 {
     font-weight: 500;
     padding-bottom: 0.625em; }
 
 @media screen and (min-width: 40em) {
-  /* line 306, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 305, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .accordion-tabs-minimal {
     border: none; } }
 @media screen and (min-width: 40em) {
-  /* line 319, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 318, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .accordion-tabs-minimal li.tab-header-and-content {
     display: inline; } }
-/* line 324, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 323, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .accordion-tabs-minimal li.tab-header-and-content:first-child a.tab-link {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   border-top: 0; }
-/* line 330, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 329, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .accordion-tabs-minimal li.tab-header-and-content:last-child a.tab-link {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px; }
   @media screen and (min-width: 40em) {
-    /* line 330, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 329, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .accordion-tabs-minimal li.tab-header-and-content:last-child a.tab-link {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0; } }
-/* line 341, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 340, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .accordion-tabs-minimal li.tab-header-and-content a.tab-link {
   background-color: #f5f4f1;
   border-top: 1px solid #DDD;
@@ -967,28 +966,28 @@ nav {
   font-weight: 400;
   padding: 0.75em 30px; }
   @media screen and (min-width: 40em) {
-    /* line 341, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 340, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .accordion-tabs-minimal li.tab-header-and-content a.tab-link {
       display: inline-block;
       border-top: 0;
       border-top-right-radius: 3px;
       border-top-left-radius: 3px; } }
-  /* line 356, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 355, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .accordion-tabs-minimal li.tab-header-and-content a.tab-link:focus {
     outline: none; }
-  /* line 360, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 359, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   .accordion-tabs-minimal li.tab-header-and-content a.tab-link.is-active {
     background-color: #f5f4f1;
     border-bottom: 0;
     font-weight: 500; }
     @media screen and (min-width: 40em) {
-      /* line 360, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+      /* line 359, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
       .accordion-tabs-minimal li.tab-header-and-content a.tab-link.is-active {
         background-color: #f5f4f1;
         border: 1px solid #DDD;
         border-bottom: 1px solid #f5f4f1;
         margin-bottom: -1px; } }
-/* line 374, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 373, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .accordion-tabs-minimal li.tab-header-and-content .tab-content {
   padding: 1.5em 30px;
   background: #f5f4f1;
@@ -996,14 +995,14 @@ nav {
   overflow: hidden;
   width: 100%; }
   @media screen and (min-width: 40em) {
-    /* line 374, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+    /* line 373, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
     .accordion-tabs-minimal li.tab-header-and-content .tab-content {
       border-top: 1px solid #DDD;
       float: left;
       left: 0;
       padding: 0.75em 15px; } }
 
-/* line 392, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 391, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 footer .footer-buttons {
   position: relative;
   top: auto;
@@ -1013,10 +1012,10 @@ footer .footer-buttons {
   height: auto;
   width: 350px;
   margin: 40px 0 40px  -175px; }
-/* line 398, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+/* line 397, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
 footer p {
   text-align: center; }
-  /* line 401, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
+  /* line 400, /Users/rachelcope/Documents/development/shoulda-matchers/source/stylesheets/landing/_index.scss */
   footer p a {
     color: #39bfc1; }
 
