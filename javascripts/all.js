@@ -99,43 +99,26 @@ Prism.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\w\W]*?\*\//g,lookbehind
 Prism.languages.ruby=Prism.languages.extend("clike",{comment:/#[^\r\n]*(\r?\n|$)/g,keyword:/\b(alias|and|BEGIN|begin|break|case|class|def|define_method|defined|do|each|else|elsif|END|end|ensure|false|for|if|in|module|new|next|nil|not|or|raise|redo|require|rescue|retry|return|self|super|then|throw|true|undef|unless|until|when|while|yield)\b/g,builtin:/\b(Array|Bignum|Binding|Class|Continuation|Dir|Exception|FalseClass|File|Stat|File|Fixnum|Fload|Hash|Integer|IO|MatchData|Method|Module|NilClass|Numeric|Object|Proc|Range|Regexp|String|Struct|TMS|Symbol|ThreadGroup|Thread|Time|TrueClass)\b/,constant:/\b[A-Z][a-zA-Z_0-9]*[?!]?\b/g}),Prism.languages.insertBefore("ruby","keyword",{regex:{pattern:/(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/g,lookbehind:!0},variable:/[@$]+\b[a-zA-Z_][a-zA-Z_0-9]*[?!]?\b/g,symbol:/:\b[a-zA-Z_][a-zA-Z_0-9]*[?!]?\b/g});;
 (function() {
   $(document).ready(function() {
-    var isTabActive, respondToTabBeingClicked, selectFirstTab, selectTab, switchContent, tabActiveClass, tabContentOpenClass, tabContentSelector, tabSelector, tabSetSelector, tabSets;
-    tabSetSelector = '.accordion-tabs-minimal';
-    tabSelector = '.tab-link';
-    tabContentSelector = '.tab-content';
-    tabActiveClass = 'is-active';
-    tabContentOpenClass = 'is-open';
-    tabSets = $(tabSetSelector);
-    selectFirstTab = function() {
-      var firstItem;
-      firstItem = $(this).children('li').first();
-      firstItem.find(tabSelector).addClass(tabActiveClass);
-      return firstItem.find(tabContentSelector).addClass(tabContentOpenClass).show();
-    };
-    isTabActive = function(tab) {
-      return tab.hasClass(tabActiveClass);
-    };
-    selectTab = function(tabSet, tab) {
-      tabSet.find(tabSelector).removeClass(tabActiveClass);
-      return tab.addClass(tabActiveClass);
-    };
-    switchContent = function(tabSet, content) {
-      tabSet.find(tabContentSelector).removeClass(tabContentOpenClass).hide();
-      return content.addClass(tabContentOpenClass).show();
-    };
-    respondToTabBeingClicked = function(event) {
-      var content, tab, tabSet;
-      event.preventDefault();
-      tab = $(this);
-      tabSet = tab.parents(tabSetSelector);
-      content = tab.next(tabContentSelector);
-      if (!isTabActive(tab)) {
-        selectTab(tabSet, tab);
-        return switchContent(tabSet, content);
+    var allAccordionTabs, allContentAreas, allSidebarTabs, allTabs, tabsContainer, whenTabClicked;
+    tabsContainer = $('.js-vertical-tabs-container');
+    allSidebarTabs = $('.js-vertical-tab');
+    allAccordionTabs = $('.js-vertical-tab-accordion-heading');
+    allTabs = $([]).add(allSidebarTabs).add(allAccordionTabs);
+    allContentAreas = $('.js-vertical-tab-content');
+    whenTabClicked = function(event) {
+      var selectedContentArea, selectedTabs, tabName;
+      if (!allAccordionTabs.is(':visible')) {
+        event.preventDefault();
       }
+      tabName = $(this).attr('href').slice(1);
+      selectedContentArea = $("#" + tabName + " .js-vertical-tab-content");
+      selectedTabs = $("[href='#" + tabName + "']");
+      allContentAreas.removeClass('is-active');
+      selectedContentArea.addClass('is-active');
+      allTabs.removeClass('is-active');
+      return selectedTabs.addClass('is-active');
     };
-    tabSets.each(selectFirstTab);
-    return tabSets.on('click', tabSelector, respondToTabBeingClicked);
+    return allTabs.on('click', whenTabClicked);
   });
 
 }).call(this);
