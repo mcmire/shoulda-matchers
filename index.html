@@ -36,7 +36,7 @@
           <div class='browser-button'></div>
           <div class='browser-button'></div>
           <div class='browser-button'></div>
-          <div class='emoji-poop'></div>
+          <div class='emoji-thumb-down'></div>
         </div>
         <div class='browser-background'>
           <pre><code class='language-ruby'>describe User do&#x000A;  it 'is not valid if its username is the same as another user within the same account' do&#x000A;    _existing_user = FactoryGirl.create(:user,&#x000A;      username: 'johnsmith',&#x000A;      account_id: 1&#x000A;    )&#x000A;    user = FactoryGirl.build(:user,&#x000A;      username: 'johnsmith',&#x000A;      account_id: 1&#x000A;    )&#x000A;    expect(user).not_to be_valid&#x000A;  end&#x000A;&#x000A;  it 'is valid if its username is the same as another user within the same account, but for different case' do&#x000A;    _existing_user = FactoryGirl.create(:user,&#x000A;      username: 'johnsmith',&#x000A;      account_id: 1&#x000A;    )&#x000A;    user = FactoryGirl.build(:user,&#x000A;      username: 'JohnSmith',&#x000A;      account_id: 1&#x000A;    )&#x000A;    expect(user).to be_valid&#x000A;  end&#x000A;end</code></pre>

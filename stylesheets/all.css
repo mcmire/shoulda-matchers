@@ -786,10 +786,10 @@ nav {
   margin: 0.5625em 0 0 0.5em; }
 
 /* line 156, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
-.emoji, .emoji-thumb, .emoji-poop {
+.emoji, .emoji-thumb, .emoji-thumb-down {
   position: absolute;
-  top: 1.375em;
-  right: -1.25em;
+  top: 1.5625em;
+  right: -0.3125em;
   z-index: 5; }
 
 /* line 161, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
@@ -806,17 +806,17 @@ nav {
     width: 5em; }
 
 /* line 172, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
-.emoji-poop {
-  height: 5.625em;
-  width: 5.625em;
+.emoji-thumb-down {
+  height: 4.375em;
+  width: 4.375em;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
-  background: url("/shoulda-matchers/images/emoji-poop.svg") no-repeat; }
+  background: url("/shoulda-matchers/images/emoji-thumb-down.svg") no-repeat; }
   /* line 178, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
-  .emoji-poop:hover {
-    height: 5.9375em;
-    width: 5.9375em; }
+  .emoji-thumb-down:hover {
+    height: 4.6875em;
+    width: 4.6875em; }
 
 /* line 183, /Users/elliot/code/thoughtbot/shoulda-matchers/source/stylesheets/landing/_index.scss */
 .animation {
